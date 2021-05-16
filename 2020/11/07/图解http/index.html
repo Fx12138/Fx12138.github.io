@@ -140,8 +140,8 @@ MathJax = {
       </div>
       <div class="markdown-body">
         <p><img src="http%E5%B0%81%E8%A3%85%E8%BF%87%E7%A8%8B.png" alt="http"></p>
-<h4 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h4><p><img src="TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="TCP三次握手"></p>
-<h4 id="各种协议与HTTP的关系"><a href="#各种协议与HTTP的关系" class="headerlink" title="各种协议与HTTP的关系"></a>各种协议与HTTP的关系</h4><p><img src="image-20201022135638710.png" alt="image-20201022135638710"></p>
+<h4 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h4><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="TCP三次握手"></p>
+<h4 id="各种协议与HTTP的关系"><a href="#各种协议与HTTP的关系" class="headerlink" title="各种协议与HTTP的关系"></a>各种协议与HTTP的关系</h4><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201022135638710.png" alt="image-20201022135638710"></p>
 <h4 id="URI和URL的区别"><a href="#URI和URL的区别" class="headerlink" title="URI和URL的区别"></a>URI和URL的区别</h4><p>​        统一资源标志符URI就是在某一规则下能把一个资源独一无二地标识出来。<br>​        拿人做例子，假设这个世界上所有人的名字都不能重复，那么名字就是URI的一个实例，通过名字这个字符串就可以标识出唯一的一个人。<br>​        现实当中名字当然是会重复的，所以身份证号才是URI，通过身份证号能让我们能且仅能确定一个人。<br>​        那统一资源定位符URL是什么呢。也拿人做例子然后跟HTTP的URL做类比，就可以有：动物住址协议://地球/中国/浙江省/杭州市/西湖区/某大学/14号宿舍楼/525号寝/张三.人</p>
 <p>​        可以看到，这个字符串同样标识出了唯一的一个人，起到了URI的作用，所以URL是URI的子集。URL是以描述人的位置来唯一确定一个人的。在上文我们用身份证号也可以唯一确定一个人。对于这个在杭州的张三，我们也可以用：身份证号：1234567来标识他。不论是用定位的方式还是用编号的方式，我们都可以唯一确定一个人，都是URl的一种实现，而<strong>URL就是用定位的方式实现的URI</strong>。</p>
 <p>​        回到Web上，假设所有的Html文档都有唯一的编号，记作html:xxxxx，xxxxx是一串数字，即Html文档的身份证号码，这个能唯一标识一个Html文档，那么这个号码就是一个URI。而URL则通过描述是哪个主机上哪个路径上的文件来唯一确定一个资源，也就是定位的方式来实现的URI。<br>​        对于现在网址我更倾向于叫它URL，毕竟它提供了资源的位置信息，如果有一天网址通过号码来标识变成了<a href="https://link.zhihu.com/?target=http://741236985.html">http://741236985.html</a>，那感觉叫成URI更为合适，不过这样子的话还得想办法找到这个资源咯…</p>
@@ -153,8 +153,8 @@ MathJax = {
 <p>OPTIONS(询问支持的方法)</p>
 <p>TRACE(追踪路径)：用来确认链接过程中发生的一系列操作</p>
 <p>CONNECT(要求用隧道协议连接代理)      CONNECT 代理服务器名:端口号 HTTP版本</p>
-<p><img src="image-20201024125744129.png" alt="image-20201024125744129"></p>
-<h4 id="请求报文和响应报文的结构"><a href="#请求报文和响应报文的结构" class="headerlink" title="请求报文和响应报文的结构"></a>请求报文和响应报文的结构</h4><p><img src="image-20201106225158985.png" alt="图"></p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201024125744129.png" alt="image-20201024125744129"></p>
+<h4 id="请求报文和响应报文的结构"><a href="#请求报文和响应报文的结构" class="headerlink" title="请求报文和响应报文的结构"></a>请求报文和响应报文的结构</h4><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201106225158985.png" alt="图"></p>
 <p>请求行</p>
 <p>包含用于请求的方法，请求url和HTTP版本</p>
 <p>状态行</p>
@@ -162,11 +162,11 @@ MathJax = {
 <p>首部字段</p>
 <p>包含表示请求和响应的各种条件和属性的各类首部</p>
 <p>一般有四种首部，分别是：通用首部、请求首部、响应首部和实体首部</p>
-<h4 id="HTTP是无状态协议，不对之前的请求和响应状态进行管理。于是添加可Cookie进行状态管理"><a href="#HTTP是无状态协议，不对之前的请求和响应状态进行管理。于是添加可Cookie进行状态管理" class="headerlink" title="HTTP是无状态协议，不对之前的请求和响应状态进行管理。于是添加可Cookie进行状态管理"></a>HTTP是无状态协议，不对之前的请求和响应状态进行管理。于是添加可Cookie进行状态管理</h4><p><img src="image-2020.png" alt="图"></p>
-<p><img src="image-20201024131944288.png" alt="image-20201024131944288"></p>
-<p><img src="image-20201024131944288.png" alt="da"></p>
+<h4 id="HTTP是无状态协议，不对之前的请求和响应状态进行管理。于是添加可Cookie进行状态管理"><a href="#HTTP是无状态协议，不对之前的请求和响应状态进行管理。于是添加可Cookie进行状态管理" class="headerlink" title="HTTP是无状态协议，不对之前的请求和响应状态进行管理。于是添加可Cookie进行状态管理"></a>HTTP是无状态协议，不对之前的请求和响应状态进行管理。于是添加可Cookie进行状态管理</h4><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-2020.png" alt="图"></p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201024131944288.png" alt="image-20201024131944288"></p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201024131944288.png" alt="da"></p>
 <p>Cookie会根据服务器端的响应报文内的一个叫做Set-Cookie的首部字段信息，通知客户端保存这个Cookie，当下次客户端再对服务端发送请求时，客户端会自动再请求报文中加入Cookie值然后发送出去。</p>
-<h4 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h4><p><img src="image-20201024142856776.png" alt="image-20201024142856776"></p>
+<h4 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h4><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201024142856776.png" alt="image-20201024142856776"></p>
 <h5 id="2xx"><a href="#2xx" class="headerlink" title="2xx"></a>2xx</h5><p>200 ok 表示请求在服务器端被正常处理了</p>
 <p>204 No Content:请求处理成功，但没有资源可以返回。一般在只需要客户端往服务器端发送信息，而服务器端不需要对客户端发送新的信息内容的情况下使用。</p>
 <p>206 Partial Content:该状态码表示客户端进行了范围请求，而服务器成功执行了这部分的GET请求。响应报文中包含由Content- Range指定范围的实体内容。</p>
@@ -189,17 +189,17 @@ MathJax = {
 <p>过程：</p>
 <p>①使用公开密钥加密方式安全地交换在稍后的共享密钥加密中要使用的密钥</p>
 <p>②确保交换的密钥是安全的前提下，使用共享密钥加密方式进行通信</p>
-<p><img src="image-20201026131022322.png" alt="image-20201026131022322"></p>
-<h5 id="HTTPS通信"><a href="#HTTPS通信" class="headerlink" title="HTTPS通信"></a>HTTPS通信</h5><p><img src="image-20201026135254930.png" alt="image-20201026135254930"></p>
-<p><img src="image-20201026135327753.png" alt="image-20201026135327753"></p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201026131022322.png" alt="image-20201026131022322"></p>
+<h5 id="HTTPS通信"><a href="#HTTPS通信" class="headerlink" title="HTTPS通信"></a>HTTPS通信</h5><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201026135254930.png" alt="image-20201026135254930"></p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201026135327753.png" alt="image-20201026135327753"></p>
 <h5 id="HTTPS缺点"><a href="#HTTPS缺点" class="headerlink" title="HTTPS缺点"></a>HTTPS缺点</h5><p>①因为与纯文本通信相比，加密通信会消耗更多的CPU及内存资源。如果每次通信都加密，会消耗相当多的资源，平摊到一台计算机上时，能够处理的请求数量必定也会随之减少。因此，如果是非敏感信息则使用HTTP通信，只有在包含个人信息等敏感数据时，才利用HTTPS加密通信。</p>
 <p>SSL的慢分两种。一种是指通信慢。另一种是指由于大量消耗CPU<br>及内存等资源，导致处理速度变慢。</p>
 <p>②除此之外，想要节约购买证书的开销也是原因之一。要进行HTTPS通信，证书是必不可少的。而使用的证书必须向认证机构(CA)购买。</p>
 <h4 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h4><p>Ajax ( Asynchronous JavaScript and XML，异步JavaScript与XML技术)是-一种有效利用JavaScript和DOM ( Document Object Model,文档对象模型)的操作，以达到局部Web页面替换加载的异步通信手段。和以前的同步通信相比，由于它只更新一部分页面，响应中传输的数据量会因此而减少，这一优点显而易见。</p>
 <p>而利用Ajax实时地从服务器获取内容，有可能会导致大量请求产生。另外，Ajax仍未解决HTTP协议本身存在的问题。</p>
-<p><img src="image-20201027102018309.png" alt="image-20201027102018309"></p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201027102018309.png" alt="image-20201027102018309"></p>
 <h4 id="Comet"><a href="#Comet" class="headerlink" title="Comet"></a>Comet</h4><p>通常，服务器端接收到请求，在处理完毕后就会立即返回响应，但为了实现推送功能，Comet 会先将响应置于挂起状态，当服务器端有内容更新时，再返回该响应。因此，服务器端一旦有更新，就可以立即反馈给客户端。<br>内容上虽然可以做到实时更新，但为了保留响应，一次连接的持续时间也变长了。期间，为了维持连接会消耗更多的资源。另外，Comet也仍未解决HTTP协议本身存在的问题。</p>
-<p><img src="image-20201027102150924.png" alt="image-20201027102150924"></p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201027102150924.png" alt="image-20201027102150924"></p>
 
       </div>
       

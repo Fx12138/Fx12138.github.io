@@ -146,13 +146,13 @@ MathJax = {
 <p>②. 选中系统变量中的“path”，编辑path值，新建输入mysql安装目录下的bin文件夹所在路径：D:\proApp\MySQL\bin，保存退出</p>
 <p><strong>注意：把上面的路径改为你自己电脑中的安装路径</strong></p>
 <p>但把这个做完后我以为就完成了，自信的在cmd中输入mysql -u root -p，结果报错：启动MySQL报错:ERROR 2003 (HY000): Can’t connect to MySQL server on ‘localhost’ (10061)</p>
-<img src="img/mysql4.jpg">
+<img src="/2020/01/02/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%90%8E%E6%81%A2%E5%A4%8DMySQL/mysql4.jpg">
 
 
 
-<p><img src="mysql4.jpg" alt="alt"></p>
+<p><img src="/2020/01/02/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%90%8E%E6%81%A2%E5%A4%8DMySQL/mysql4.jpg" alt="alt"></p>
 <h4 id="2-找到安装MySQL的文件夹中的my-ini文件"><a href="#2-找到安装MySQL的文件夹中的my-ini文件" class="headerlink" title="2.找到安装MySQL的文件夹中的my.ini文件"></a>2.找到安装MySQL的文件夹中的my.ini文件</h4><p>在[mysqld]下更改basedir和datadir。basedir改为MySQL安装的位置，datadir改为MySQL目录下的data文件夹，比如我的。</p>
-<p><img src="D:\proApp\Hexo\fx\source\img\mysql1.jpg"></p>
+<p><img src="/2020/01/02/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%90%8E%E6%81%A2%E5%A4%8DMySQL/proApp\Hexo\fx\source\img\mysql1.jpg"></p>
 <h4 id="3-管理员身份打开cmd安装mysql"><a href="#3-管理员身份打开cmd安装mysql" class="headerlink" title="3.管理员身份打开cmd安装mysql"></a>3.管理员身份打开cmd安装mysql</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld --install mysql</span><br></pre></td></tr></table></figure>
 
 <p>可能提示已经安装：The service already exists!，由于本机中已经安装了mysql服务，所以没关系，继续！</p>
@@ -164,11 +164,11 @@ MathJax = {
 
 <p>这应该每个人都很熟悉，但是别以为成功了，这时你输入密码会发现以前的密码已经失效，接下来就是重设密码。</p>
 <h4 id="5-设置权限认证跳过"><a href="#5-设置权限认证跳过" class="headerlink" title="5.设置权限认证跳过"></a>5.设置权限认证跳过</h4><p>还是在my.ini文件中的[mysqld]下加上 skip-grant-tables，这样就能跳过密码输入，不需要密码就能进入MySQL。</p>
-<p><img src="D:\proApp\Hexo\fx\source\img\mysql2.png"></p>
+<p><img src="/2020/01/02/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%90%8E%E6%81%A2%E5%A4%8DMySQL/proApp\Hexo\fx\source\img\mysql2.png"></p>
 <h4 id="6-重启MySQL"><a href="#6-重启MySQL" class="headerlink" title="6.重启MySQL"></a>6.重启MySQL</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net stop mysql</span><br><span class="line">net start mysql</span><br></pre></td></tr></table></figure>
 
 <p>如图</p>
-<p><img src="D:\proApp\Hexo\fx\source\img\mysql3.jpg"></p>
+<p><img src="/2020/01/02/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%90%8E%E6%81%A2%E5%A4%8DMySQL/proApp\Hexo\fx\source\img\mysql3.jpg"></p>
 <p>重启后， 以 mysql -u root -p 登陆<br>会发现我们可以不需要密码就可以登陆</p>
 <h4 id="7-重设密码"><a href="#7-重设密码" class="headerlink" title="7.重设密码"></a>7.重设密码</h4><h5 id="首先先选择-mysql-数据库"><a href="#首先先选择-mysql-数据库" class="headerlink" title="首先先选择 mysql 数据库"></a>首先先选择 mysql 数据库</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use mysql</span><br></pre></td></tr></table></figure>
 

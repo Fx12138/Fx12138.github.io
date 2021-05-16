@@ -11,6 +11,11 @@
   
   <title>
     
+      算法笔记1 
+      
+      
+      |
+    
      Hexo
   </title>
 
@@ -90,147 +95,136 @@
 
 
       <div class="flex-container">
-        <div class="container index">
-  <div class="post-list">
-    <!-- 遍历渲染文章 -->
-    
-      <div class="post-item" title="">
-        <div class="time-m-d">2021-05-16</div>
-        <div class="title">
-          <a href="/2021/05/16/%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81/">
-            
-              <span>untitled</span>
-            
-          </a>
-        </div>
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">算法笔记1</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2020-09-24 10:33:45
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
+                    <b>#</b> 算法
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
-    
-      <div class="post-item" title="Hello World">
-        <div class="time-m-d">2021-05-16</div>
-        <div class="title">
-          <a href="/2021/05/16/hello-world/">
-            
-              
-                <span>Hello World</span>
-              
-            
-          </a>
-        </div>
+      <div class="markdown-body">
+        <h3 id="投票算法"><a href="#投票算法" class="headerlink" title="投票算法"></a>投票算法</h3><p>​        在面试题中经常会出现这样一个题目，给一个数组，其中含有N个非负元素，让你求出数组中出现次数超过一半的数字。</p>
+<p>​        看到这个问题我们首先想到的可能是暴力的解法，那就是将数组排个序，输出中间的元素就行了，因为如果出现次数超过一半的话排完序后中间的那个元素肯定是我们需要求的值。</p>
+<p>​        这样做的话排序的时间复杂度一般来说是O(NlogN)，那么有没有时间复杂度为n的算法呢？</p>
+<p>​        投票算法。核心就是<strong>对拼消耗</strong>。</p>
+<p>​        玩一个诸侯争霸的游戏，假设你方人口超过总人口一半以上，并且能保证每个人口出去干仗都能一对一同归于尽。最后还有人活下来的国家就是胜利。那就大混战呗，最差所有人都联合起来对付你（对应你每次选择作为计数器的数都是众数），或者其他国家也会相互攻击（会选择其他数作为计数器的数），但是只要你们不要内斗，最后肯定你赢。最后能剩下的必定是自己人。（在某乎上看到的通俗解释）</p>
+<p>​        下面进行举例，找出数组中的主要元素，数组中占比超过一半的元素称之为主要元素。给定一个<strong>整数</strong>数组，找到它的主要元素。若没有，返回-1。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ans = nums[<span class="number">0</span>]; <span class="comment">//假设第一个数即为核心元素</span></span><br><span class="line">        <span class="keyword">int</span> account = <span class="number">1</span>;  <span class="comment">//设定一个计数器</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i]==ans)&#123;</span><br><span class="line">                account++; <span class="comment">//如果相等，计数器加一</span></span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                account--;   <span class="comment">//如果不相等，计数器减一</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(account == <span class="number">0</span>)&#123;   <span class="comment">//若计数器等于零，则从下一个数从新开始</span></span><br><span class="line">                ans = nums [i+<span class="number">1</span>];</span><br><span class="line">                i++;</span><br><span class="line">                account = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h3><p>1、位运算右移一位可代替除以2，左移一位可代替乘2。</p>
+<p>2、对n做右移运算时，一定要考虑到n为负数时的特殊情况。</p>
+<p>3、判断一个数的最后一位是不是1，只需与1做位与运算，若结果为1则最后一位是1，若结果为0则最后一位为0</p>
+<p>4、判断n的奇偶性可以将n和1做位与运算，若结果为1则n为奇数，若结果为0，则n为偶数。</p>
+
       </div>
-    
-      <div class="post-item" title="面试题">
-        <div class="time-m-d">2021-05-13</div>
-        <div class="title">
-          <a href="/2021/05/13/%E9%9D%A2%E8%AF%95%E9%A2%98/">
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
             
-              
-                <span>面试题</span>
-              
+              <a href="/2020/05/08/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B5%81%E7%A8%8B/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
             
-          </a>
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2020-09-24 10:33:45
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
+                        <b>#</b> 算法
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/11/07/%E5%9B%BE%E8%A7%A3http/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
         </div>
-      </div>
+      
+    </div>
     
-      <div class="post-item" title="js">
-        <div class="time-m-d">2021-05-07</div>
-        <div class="title">
-          <a href="/2021/05/07/js/">
-            
-              
-                <span>js</span>
-              
-            
-          </a>
-        </div>
-      </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%95%E7%A5%A8%E7%AE%97%E6%B3%95"><span class="toc-text">投票算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="toc-text">位运算</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="ES6">
-        <div class="time-m-d">2021-04-30</div>
-        <div class="title">
-          <a href="/2021/04/30/ES6/">
-            
-              
-                <span>ES6</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Android">
-        <div class="time-m-d">2021-04-16</div>
-        <div class="title">
-          <a href="/2021/04/16/Android/">
-            
-              
-                <span>Android</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="vue笔记">
-        <div class="time-m-d">2021-04-06</div>
-        <div class="title">
-          <a href="/2021/04/06/vue%E7%AC%94%E8%AE%B0/">
-            
-              
-                <span>vue笔记</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="剑指offer">
-        <div class="time-m-d">2021-04-02</div>
-        <div class="title">
-          <a href="/2021/04/02/%E5%89%91%E6%8C%87offer/">
-            
-              
-                <span>剑指offer</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="css">
-        <div class="time-m-d">2020-11-17</div>
-        <div class="title">
-          <a href="/2020/11/17/css/">
-            
-              
-                <span>css</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="小程序">
-        <div class="time-m-d">2020-11-16</div>
-        <div class="title">
-          <a href="/2020/11/16/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
-            
-              
-                <span>小程序</span>
-              
-            
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
       </div>
     
   </div>
-  <nav class="post-navigation">
-    
-    <span class="page-num">1 / 2</span>
-    
-      <a href="/page/2/"><i class="iconfont icon-angleright"></i></a>
-    
-  </nav>
-</div>
+
 
         <div class="footer">
   <div class="social">

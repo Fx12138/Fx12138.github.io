@@ -11,6 +11,11 @@
   
   <title>
     
+      项目部署到服务器流程 
+      
+      
+      |
+    
      Hexo
   </title>
 
@@ -90,147 +95,140 @@
 
 
       <div class="flex-container">
-        <div class="container index">
-  <div class="post-list">
-    <!-- 遍历渲染文章 -->
-    
-      <div class="post-item" title="">
-        <div class="time-m-d">2021-05-16</div>
-        <div class="title">
-          <a href="/2021/05/16/%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81/">
-            
-              <span>untitled</span>
-            
-          </a>
-        </div>
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">项目部署到服务器流程</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2020-05-08 20:41:36
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/%E6%9D%82/" title="杂">
+                    <b>#</b> 杂
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
-    
-      <div class="post-item" title="Hello World">
-        <div class="time-m-d">2021-05-16</div>
-        <div class="title">
-          <a href="/2021/05/16/hello-world/">
-            
-              
-                <span>Hello World</span>
-              
-            
-          </a>
-        </div>
+      <div class="markdown-body">
+        <h4 id="一-安装JDK"><a href="#一-安装JDK" class="headerlink" title="一 安装JDK"></a>一 安装JDK</h4><h5 id="1-下载64位版本的jdk"><a href="#1-下载64位版本的jdk" class="headerlink" title="1 下载64位版本的jdk"></a>1 下载64位版本的jdk</h5><p>jdk-8u171-linux-x64.tar.gz下载到本地,用xftp传到/usr/local/java中</p>
+<h5 id="2-解压"><a href="#2-解压" class="headerlink" title="2 解压"></a>2 解压</h5><p>tar -xzvf jdk-8u171-linux-x64.tar.gz</p>
+<h5 id="3-配置系统环境变量"><a href="#3-配置系统环境变量" class="headerlink" title="3 配置系统环境变量"></a>3 配置系统环境变量</h5><p>vim /etc/profile  进入对文件的编写，将下面的添加到文件的最后</p>
+<p>JAVA_HOME=/usr/local/java/jdk1.8<br>JRE_HOME=/usr/local/java/jdk1.8/jre<br>PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin<br>CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib<br>export JAVA_HOME JRE_HOME PATH CLASSPATH</p>
+<p>添加后按esc，输入  ：wq   保存并退出编辑。</p>
+<p>source /etc/profile   使配置生效</p>
+<h5 id="4-查看版本"><a href="#4-查看版本" class="headerlink" title="4 查看版本"></a>4 查看版本</h5><p>java -version    查看java版本</p>
+<p>成功！</p>
+<h4 id="二-安装tomcat"><a href="#二-安装tomcat" class="headerlink" title="二 安装tomcat"></a>二 安装tomcat</h4><h5 id="1-下载tomcat"><a href="#1-下载tomcat" class="headerlink" title="1 下载tomcat"></a>1 下载tomcat</h5><p><a target="_blank" rel="noopener" href="http://tomcat.apache.org/download-70.cgi">http://tomcat.apache.org/download-70.cgi</a><br>选择core下面的tar.gz包下载</p>
+<h5 id="2上传和安装"><a href="#2上传和安装" class="headerlink" title="2上传和安装"></a>2上传和安装</h5><p>用xftp传到/usr/local/tomcat中</p>
+<h5 id="3-解压"><a href="#3-解压" class="headerlink" title="3 解压"></a>3 解压</h5><p>tar -zxvf apache-tomcat-8.0.33.tar.gz     //解压</p>
+<p>cp -R apache-tomcat-8.0.33 /usr/local/tomcat    //移动和重命名</p>
+<h5 id="4-启动和测试"><a href="#4-启动和测试" class="headerlink" title="4 启动和测试"></a>4 启动和测试</h5><p>./startup.sh  //<strong>在tomcat的bin目录下执行此命令，显示下面的信息</strong></p>
+<p>Using CATALINA_BASE:   /usr/local/tomcat<br>Using CATALINA_HOME:   /usr/local/tomcat<br>Using CATALINA_TMPDIR: /usr/local/tomcat/temp<br>Using JRE_HOME:        /usr/java/jdk1.7.0_67<br>Using CLASSPATH:       /usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin/tomcat-juli.jar<br>Tomcat started.</p>
+<h5 id="5-设置自动启动"><a href="#5-设置自动启动" class="headerlink" title="5 设置自动启动"></a>5 设置自动启动</h5><p>设置tomcat开机自启</p>
+<p>1、进入编辑<br>vi /etc/rc.d/rc.local<br>2、打开后在最底部复制下面<br>export JDK_HOME=/usr/java/jdk1.6.0_41<br>export JAVA_HOME=/usr/java/jdk1.6.0_41<br>/uer/local/tomcat/bin/startup.sh<br>3、重启服务器，试试能不能访问。<br>Tips:<br>如果JDK和Tomcat安装的目录不跟上面的一样，请修改相应路径</p>
+
       </div>
-    
-      <div class="post-item" title="面试题">
-        <div class="time-m-d">2021-05-13</div>
-        <div class="title">
-          <a href="/2021/05/13/%E9%9D%A2%E8%AF%95%E9%A2%98/">
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
             
-              
-                <span>面试题</span>
-              
+              <a href="/2020/05/01/%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
             
-          </a>
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2020-05-08 20:41:36
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/%E6%9D%82/" title="杂">
+                        <b>#</b> 杂
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/09/24/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
         </div>
-      </div>
+      
+    </div>
     
-      <div class="post-item" title="js">
-        <div class="time-m-d">2021-05-07</div>
-        <div class="title">
-          <a href="/2021/05/07/js/">
-            
-              
-                <span>js</span>
-              
-            
-          </a>
-        </div>
-      </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80-%E5%AE%89%E8%A3%85JDK"><span class="toc-text">一 安装JDK</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E4%B8%8B%E8%BD%BD64%E4%BD%8D%E7%89%88%E6%9C%AC%E7%9A%84jdk"><span class="toc-text">1 下载64位版本的jdk</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E8%A7%A3%E5%8E%8B"><span class="toc-text">2 解压</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AE%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">3 配置系统环境变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC"><span class="toc-text">4 查看版本</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C-%E5%AE%89%E8%A3%85tomcat"><span class="toc-text">二 安装tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E4%B8%8B%E8%BD%BDtomcat"><span class="toc-text">1 下载tomcat</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E4%B8%8A%E4%BC%A0%E5%92%8C%E5%AE%89%E8%A3%85"><span class="toc-text">2上传和安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E8%A7%A3%E5%8E%8B"><span class="toc-text">3 解压</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%90%AF%E5%8A%A8%E5%92%8C%E6%B5%8B%E8%AF%95"><span class="toc-text">4 启动和测试</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8"><span class="toc-text">5 设置自动启动</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="ES6">
-        <div class="time-m-d">2021-04-30</div>
-        <div class="title">
-          <a href="/2021/04/30/ES6/">
-            
-              
-                <span>ES6</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Android">
-        <div class="time-m-d">2021-04-16</div>
-        <div class="title">
-          <a href="/2021/04/16/Android/">
-            
-              
-                <span>Android</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="vue笔记">
-        <div class="time-m-d">2021-04-06</div>
-        <div class="title">
-          <a href="/2021/04/06/vue%E7%AC%94%E8%AE%B0/">
-            
-              
-                <span>vue笔记</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="剑指offer">
-        <div class="time-m-d">2021-04-02</div>
-        <div class="title">
-          <a href="/2021/04/02/%E5%89%91%E6%8C%87offer/">
-            
-              
-                <span>剑指offer</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="css">
-        <div class="time-m-d">2020-11-17</div>
-        <div class="title">
-          <a href="/2020/11/17/css/">
-            
-              
-                <span>css</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="小程序">
-        <div class="time-m-d">2020-11-16</div>
-        <div class="title">
-          <a href="/2020/11/16/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
-            
-              
-                <span>小程序</span>
-              
-            
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
       </div>
     
   </div>
-  <nav class="post-navigation">
-    
-    <span class="page-num">1 / 2</span>
-    
-      <a href="/page/2/"><i class="iconfont icon-angleright"></i></a>
-    
-  </nav>
-</div>
+
 
         <div class="footer">
   <div class="social">

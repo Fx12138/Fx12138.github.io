@@ -11,6 +11,11 @@
   
   <title>
     
+      css 
+      
+      
+      |
+    
      Hexo
   </title>
 
@@ -90,147 +95,150 @@
 
 
       <div class="flex-container">
-        <div class="container index">
-  <div class="post-list">
-    <!-- 遍历渲染文章 -->
-    
-      <div class="post-item" title="">
-        <div class="time-m-d">2021-05-16</div>
-        <div class="title">
-          <a href="/2021/05/16/%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81/">
-            
-              <span>untitled</span>
-            
-          </a>
-        </div>
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">css</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2020-11-17 15:37:51
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    <b>#</b> 前端
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
-    
-      <div class="post-item" title="Hello World">
-        <div class="time-m-d">2021-05-16</div>
-        <div class="title">
-          <a href="/2021/05/16/hello-world/">
-            
-              
-                <span>Hello World</span>
-              
-            
-          </a>
-        </div>
+      <div class="markdown-body">
+        <h2 id="选择器的优先级"><a href="#选择器的优先级" class="headerlink" title="选择器的优先级"></a>选择器的优先级</h2><p>优先级的规则<br>    内联样式，优先级1000<br>    id选择器，优先级100<br>    类和伪类，优先级10<br>    元素选择器，优先级1<br>    通配*，优先级0<br>    继承的样式，没有优先级</p>
+<h2 id="长度单位"><a href="#长度单位" class="headerlink" title="长度单位"></a>长度单位</h2><p>长度单位</p>
+<h3 id="像素px"><a href="#像素px" class="headerlink" title="像素px"></a>像素px</h3><p>​        像素是我们在网页中使用的最多的一个单位，一个像素就相当于我们屏幕中的一个小点，我们的屏幕实际上就是由这些像素点构成的但是这些像素点，是不能直接看见。不同显示器一个像素的大小也不相同，显示效果越好越清晰，像素就越小，反之像素越大。</p>
+<h3 id="百分比"><a href="#百分比" class="headerlink" title="百分比%"></a>百分比%</h3><p>​        也可以将单位设置为一个百比的形式，这样浏览器将会根据其父元素的样式来计算该值。使用百分比的好处是，当父元素的属性值发生变化时，子元素也会按照比例发生改变在我们创建一个自适应的页面时，经常使用百分比作为单位</p>
+<h3 id="em"><a href="#em" class="headerlink" title="em"></a>em</h3><p>​    em和百分比类似，它是相对于当前元素的字体大小来计算的</p>
+<p>​    1em = 1font-size</p>
+<h2 id="垂直外边距的重叠"><a href="#垂直外边距的重叠" class="headerlink" title="垂直外边距的重叠"></a>垂直外边距的重叠</h2><p>在网页中相邻的垂直方向的外边距会发生外边距的重叠<br>所谓的外边距重叠指兄弟元素之间的相邻外边距会取最大值而不是取和<br>如果父子元素的垂直外边距相邻了，则子元素的外边距会设置给父元素</p>
+<h2 id="内联元素和块元素盒子模型"><a href="#内联元素和块元素盒子模型" class="headerlink" title="内联元素和块元素盒子模型"></a>内联元素和块元素盒子模型</h2><ul>
+<li><p>内联元素不能设置width和height</p>
+</li>
+<li><p>内联元素可以设置水平方向的内边距；也可以设置<strong>垂直方向的内边距</strong>，但是<strong>不会影响页面的布局</strong>，即若内联元素下方有其他元素，上方的内联元素内边距过大时会覆盖下方的元素。而块元素则会将下面的元素往下面挤。</p>
+</li>
+<li><p>内联元素可以设置边框，但是<strong>垂直的边框不会影响页面的布局</strong>。</p>
+</li>
+<li><p>内联元素<strong>不支持水平方向的外边距</strong>；<strong>垂直方向的外边距不会影响页面的布局</strong>。</p>
+</li>
+</ul>
+<h2 id="display"><a href="#display" class="headerlink" title="display"></a>display</h2><p>将一个内联元素变成块元素，通过display样式可以修改元素的类型<br>可选值:</p>
+<ul>
+<li>inline:可以将一个元素作为内联元素显示</li>
+<li>block:可以将一个元素设置块元素显示</li>
+<li>inline-block:将一个元素转换为行内块元素， 可以使一个元素既有行内元素的特点又有块元素的特点：既可以设置宽高，又不会独占一行</li>
+<li>none:不显示元素，并且元素不会在页面中继续占有位置</li>
+</ul>
+<h2 id="visibility：hidden和display：none的区别"><a href="#visibility：hidden和display：none的区别" class="headerlink" title="visibility：hidden和display：none的区别"></a>visibility：hidden和display：none的区别</h2><p>visibility<br>可以用来设置元素的隐藏和显示的状态<br>可选值:<br>visible默认值，元素默认会在页面显示<br>hidden元素会隐藏不显示<br><strong>使用visibility:hidden;隐藏的元素虽然不会在页面中显示，但是它的位置会依然保持</strong></p>
+<p><strong>display:none ;使用该方式隐藏的元素，不会在页面中显示，并且不再占据页面的位置</strong></p>
+
       </div>
-    
-      <div class="post-item" title="面试题">
-        <div class="time-m-d">2021-05-13</div>
-        <div class="title">
-          <a href="/2021/05/13/%E9%9D%A2%E8%AF%95%E9%A2%98/">
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
             
-              
-                <span>面试题</span>
-              
+              <a href="/2020/11/16/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
             
-          </a>
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2020-11-17 15:37:51
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        <b>#</b> 前端
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/04/02/%E5%89%91%E6%8C%87offer/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
         </div>
-      </div>
+      
+    </div>
     
-      <div class="post-item" title="js">
-        <div class="time-m-d">2021-05-07</div>
-        <div class="title">
-          <a href="/2021/05/07/js/">
-            
-              
-                <span>js</span>
-              
-            
-          </a>
-        </div>
-      </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%99%A8%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">选择器的优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%95%BF%E5%BA%A6%E5%8D%95%E4%BD%8D"><span class="toc-text">长度单位</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%83%8F%E7%B4%A0px"><span class="toc-text">像素px</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BE%E5%88%86%E6%AF%94"><span class="toc-text">百分比%</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#em"><span class="toc-text">em</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%82%E7%9B%B4%E5%A4%96%E8%BE%B9%E8%B7%9D%E7%9A%84%E9%87%8D%E5%8F%A0"><span class="toc-text">垂直外边距的重叠</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E8%81%94%E5%85%83%E7%B4%A0%E5%92%8C%E5%9D%97%E5%85%83%E7%B4%A0%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B"><span class="toc-text">内联元素和块元素盒子模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#display"><span class="toc-text">display</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#visibility%EF%BC%9Ahidden%E5%92%8Cdisplay%EF%BC%9Anone%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">visibility：hidden和display：none的区别</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="ES6">
-        <div class="time-m-d">2021-04-30</div>
-        <div class="title">
-          <a href="/2021/04/30/ES6/">
-            
-              
-                <span>ES6</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Android">
-        <div class="time-m-d">2021-04-16</div>
-        <div class="title">
-          <a href="/2021/04/16/Android/">
-            
-              
-                <span>Android</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="vue笔记">
-        <div class="time-m-d">2021-04-06</div>
-        <div class="title">
-          <a href="/2021/04/06/vue%E7%AC%94%E8%AE%B0/">
-            
-              
-                <span>vue笔记</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="剑指offer">
-        <div class="time-m-d">2021-04-02</div>
-        <div class="title">
-          <a href="/2021/04/02/%E5%89%91%E6%8C%87offer/">
-            
-              
-                <span>剑指offer</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="css">
-        <div class="time-m-d">2020-11-17</div>
-        <div class="title">
-          <a href="/2020/11/17/css/">
-            
-              
-                <span>css</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="小程序">
-        <div class="time-m-d">2020-11-16</div>
-        <div class="title">
-          <a href="/2020/11/16/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
-            
-              
-                <span>小程序</span>
-              
-            
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
       </div>
     
   </div>
-  <nav class="post-navigation">
-    
-    <span class="page-num">1 / 2</span>
-    
-      <a href="/page/2/"><i class="iconfont icon-angleright"></i></a>
-    
-  </nav>
-</div>
+
 
         <div class="footer">
   <div class="social">

@@ -11,6 +11,11 @@
   
   <title>
     
+      剑指offer 
+      
+      
+      |
+    
      Hexo
   </title>
 
@@ -90,147 +95,128 @@
 
 
       <div class="flex-container">
-        <div class="container index">
-  <div class="post-list">
-    <!-- 遍历渲染文章 -->
-    
-      <div class="post-item" title="">
-        <div class="time-m-d">2021-05-16</div>
-        <div class="title">
-          <a href="/2021/05/16/%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81/">
-            
-              <span>untitled</span>
-            
-          </a>
-        </div>
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">剑指offer</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2021-04-02 14:28:06
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
+                    <b>#</b> 算法
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
-    
-      <div class="post-item" title="Hello World">
-        <div class="time-m-d">2021-05-16</div>
-        <div class="title">
-          <a href="/2021/05/16/hello-world/">
-            
-              
-                <span>Hello World</span>
-              
-            
-          </a>
-        </div>
+      <div class="markdown-body">
+        <p>①举几个简单的具体例子让自己理解问题</p>
+<p>②试着用图形表示抽象的数据结构</p>
+<p>③试着把复杂的问题分解成若干的简单的子问题.(递归,分治法,动态规划)</p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>①数组中的数字如果不存在重复的话,那么正常排序后数字i应该在下标为i的地方,可以根据这个对数组中数字的位置进行交换,从而发现重复.(剑指 Offer 03 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof">数组中重复的数字</a> )</p>
+
       </div>
-    
-      <div class="post-item" title="面试题">
-        <div class="time-m-d">2021-05-13</div>
-        <div class="title">
-          <a href="/2021/05/13/%E9%9D%A2%E8%AF%95%E9%A2%98/">
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
             
-              
-                <span>面试题</span>
-              
+              <a href="/2020/11/17/css/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
             
-          </a>
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2021-04-02 14:28:06
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
+                        <b>#</b> 算法
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/04/06/vue%E7%AC%94%E8%AE%B0/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
         </div>
-      </div>
+      
+    </div>
     
-      <div class="post-item" title="js">
-        <div class="time-m-d">2021-05-07</div>
-        <div class="title">
-          <a href="/2021/05/07/js/">
-            
-              
-                <span>js</span>
-              
-            
-          </a>
-        </div>
-      </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-text">数组</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="ES6">
-        <div class="time-m-d">2021-04-30</div>
-        <div class="title">
-          <a href="/2021/04/30/ES6/">
-            
-              
-                <span>ES6</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Android">
-        <div class="time-m-d">2021-04-16</div>
-        <div class="title">
-          <a href="/2021/04/16/Android/">
-            
-              
-                <span>Android</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="vue笔记">
-        <div class="time-m-d">2021-04-06</div>
-        <div class="title">
-          <a href="/2021/04/06/vue%E7%AC%94%E8%AE%B0/">
-            
-              
-                <span>vue笔记</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="剑指offer">
-        <div class="time-m-d">2021-04-02</div>
-        <div class="title">
-          <a href="/2021/04/02/%E5%89%91%E6%8C%87offer/">
-            
-              
-                <span>剑指offer</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="css">
-        <div class="time-m-d">2020-11-17</div>
-        <div class="title">
-          <a href="/2020/11/17/css/">
-            
-              
-                <span>css</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="小程序">
-        <div class="time-m-d">2020-11-16</div>
-        <div class="title">
-          <a href="/2020/11/16/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
-            
-              
-                <span>小程序</span>
-              
-            
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
       </div>
     
   </div>
-  <nav class="post-navigation">
-    
-    <span class="page-num">1 / 2</span>
-    
-      <a href="/page/2/"><i class="iconfont icon-angleright"></i></a>
-    
-  </nav>
-</div>
+
 
         <div class="footer">
   <div class="social">

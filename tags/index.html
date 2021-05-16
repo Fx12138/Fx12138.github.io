@@ -11,7 +11,7 @@
   
   <title>
     
-      重装系统后恢复MySQL 
+      Tag 
       
       
       |
@@ -123,66 +123,16 @@ MathJax = {
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">重装系统后恢复MySQL</div>
+      <div class="post-title">tags</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime" title="Update time"></i>
-          2020-01-02 18:13:17
+          2021-05-16 22:46:51
         </span>
         
-              <span class="post-tags">
-                <i class="iconfont icon-tags" title="Tags"></i>
-                
-                <span class="span--tag">
-                  <a href="/tags/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E5%9D%91/" title="重装系统后的坑">
-                    <b>#</b> 重装系统后的坑
-                  </a>
-                </span>
-                
-              </span>
-          
       </div>
       <div class="markdown-body">
-        <p><strong>此方法只有在装MySQL时没有装到C盘中时适用</strong></p>
-<p>本人由于考研加之电脑太垃圾就重装了一下系统，很多东西都需要从新配置，所以遇到很多坑，比如接下来的MySQL！！！！！！！！</p>
-<h4 id="1-配置环境变量"><a href="#1-配置环境变量" class="headerlink" title="1.配置环境变量"></a>1.配置环境变量</h4><p>这个应该都知道</p>
-<p>①. 和其实环境变量的配置方法一样，我们打开环境变量配置窗口（组合键win+Pause -&gt; 更改设置 -&gt; 系统属性里选择“高级” -&gt; 环境变量）</p>
-<p>②. 选中系统变量中的“path”，编辑path值，新建输入mysql安装目录下的bin文件夹所在路径：D:\proApp\MySQL\bin，保存退出</p>
-<p><strong>注意：把上面的路径改为你自己电脑中的安装路径</strong></p>
-<p>但把这个做完后我以为就完成了，自信的在cmd中输入mysql -u root -p，结果报错：启动MySQL报错:ERROR 2003 (HY000): Can’t connect to MySQL server on ‘localhost’ (10061)</p>
-<img src="img/mysql4.jpg">
-
-
-
-<p><img src="mysql4.jpg" alt="alt"></p>
-<h4 id="2-找到安装MySQL的文件夹中的my-ini文件"><a href="#2-找到安装MySQL的文件夹中的my-ini文件" class="headerlink" title="2.找到安装MySQL的文件夹中的my.ini文件"></a>2.找到安装MySQL的文件夹中的my.ini文件</h4><p>在[mysqld]下更改basedir和datadir。basedir改为MySQL安装的位置，datadir改为MySQL目录下的data文件夹，比如我的。</p>
-<p><img src="D:\proApp\Hexo\fx\source\img\mysql1.jpg"></p>
-<h4 id="3-管理员身份打开cmd安装mysql"><a href="#3-管理员身份打开cmd安装mysql" class="headerlink" title="3.管理员身份打开cmd安装mysql"></a>3.管理员身份打开cmd安装mysql</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld --install mysql</span><br></pre></td></tr></table></figure>
-
-<p>可能提示已经安装：The service already exists!，由于本机中已经安装了mysql服务，所以没关系，继续！</p>
-<p>启动MySQL</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start mysql</span><br></pre></td></tr></table></figure>
-
-<p>这时应该已经能成功启动了，是不是很激动！</p>
-<h4 id="4-进入mysql"><a href="#4-进入mysql" class="headerlink" title="4.进入mysql"></a>4.进入mysql</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-
-<p>这应该每个人都很熟悉，但是别以为成功了，这时你输入密码会发现以前的密码已经失效，接下来就是重设密码。</p>
-<h4 id="5-设置权限认证跳过"><a href="#5-设置权限认证跳过" class="headerlink" title="5.设置权限认证跳过"></a>5.设置权限认证跳过</h4><p>还是在my.ini文件中的[mysqld]下加上 skip-grant-tables，这样就能跳过密码输入，不需要密码就能进入MySQL。</p>
-<p><img src="D:\proApp\Hexo\fx\source\img\mysql2.png"></p>
-<h4 id="6-重启MySQL"><a href="#6-重启MySQL" class="headerlink" title="6.重启MySQL"></a>6.重启MySQL</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net stop mysql</span><br><span class="line">net start mysql</span><br></pre></td></tr></table></figure>
-
-<p>如图</p>
-<p><img src="D:\proApp\Hexo\fx\source\img\mysql3.jpg"></p>
-<p>重启后， 以 mysql -u root -p 登陆<br>会发现我们可以不需要密码就可以登陆</p>
-<h4 id="7-重设密码"><a href="#7-重设密码" class="headerlink" title="7.重设密码"></a>7.重设密码</h4><h5 id="首先先选择-mysql-数据库"><a href="#首先先选择-mysql-数据库" class="headerlink" title="首先先选择 mysql 数据库"></a>首先先选择 mysql 数据库</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use mysql</span><br></pre></td></tr></table></figure>
-
-<h5 id="然后更新-password"><a href="#然后更新-password" class="headerlink" title="然后更新 password"></a>然后更新 password</h5><p>①.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update user set authentication_string = password ( &#x27;新密码&#x27; ) where user = &#x27;root&#x27;;</span><br></pre></td></tr></table></figure>
-
-<p>②.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update user  set Password=password(&#x27;新密码&#x27;) where user=&#x27;root&#x27;;</span><br></pre></td></tr></table></figure>
-
-<h4 id="8-在-my-ini-文件中去掉-加上的-skip-grant-tables，重启-mysql-服务，以新密码登陆就大功告成了！"><a href="#8-在-my-ini-文件中去掉-加上的-skip-grant-tables，重启-mysql-服务，以新密码登陆就大功告成了！" class="headerlink" title="8.在 my.ini 文件中去掉 加上的 skip-grant-tables，重启 mysql 服务，以新密码登陆就大功告成了！"></a>8.在 my.ini 文件中去掉 加上的 skip-grant-tables，重启 mysql 服务，以新密码登陆就大功告成了！</h4>
+        
       </div>
       
         <div class="prev-or-next">
@@ -192,48 +142,17 @@ MathJax = {
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime" title="Update time"></i>
-              2020-01-02 18:13:17
+              2021-05-16 22:46:51
             </span>
             
-                  <span class="post-tags">
-                    <i class="iconfont icon-tags" title="Tags"></i>
-                    
-                    <span class="span--tag">
-                      <a href="/tags/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E5%9D%91/" title="重装系统后的坑">
-                        <b>#</b> 重装系统后的坑
-                      </a>
-                    </span>
-                    
-                  </span>
-              
           </div>
           <div class="post-foot-prev">
-            
-              <a href="/2020/03/15/%E5%A4%8D%E8%AF%95%E7%AE%97%E6%B3%95/" target="_self">
-                <span>Next</span>
-                <i class="iconfont icon-chevronright"></i>
-              </a>
             
           </div>
         </div>
       
     </div>
     
-  <div id="btn-catalog" class="btn-catalog">
-    <i class="iconfont icon-catalog"></i>
-  </div>
-  <div class="post-catalog hidden" id="catalog">
-    <div class="title">Contents</div>
-    <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">1.配置环境变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%89%BE%E5%88%B0%E5%AE%89%E8%A3%85MySQL%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E7%9A%84my-ini%E6%96%87%E4%BB%B6"><span class="toc-text">2.找到安装MySQL的文件夹中的my.ini文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%AE%A1%E7%90%86%E5%91%98%E8%BA%AB%E4%BB%BD%E6%89%93%E5%BC%80cmd%E5%AE%89%E8%A3%85mysql"><span class="toc-text">3.管理员身份打开cmd安装mysql</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E8%BF%9B%E5%85%A5mysql"><span class="toc-text">4.进入mysql</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E8%AE%BE%E7%BD%AE%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81%E8%B7%B3%E8%BF%87"><span class="toc-text">5.设置权限认证跳过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E9%87%8D%E5%90%AFMySQL"><span class="toc-text">6.重启MySQL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E9%87%8D%E8%AE%BE%E5%AF%86%E7%A0%81"><span class="toc-text">7.重设密码</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A6%96%E5%85%88%E5%85%88%E9%80%89%E6%8B%A9-mysql-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">首先先选择 mysql 数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%84%B6%E5%90%8E%E6%9B%B4%E6%96%B0-password"><span class="toc-text">然后更新 password</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E5%9C%A8-my-ini-%E6%96%87%E4%BB%B6%E4%B8%AD%E5%8E%BB%E6%8E%89-%E5%8A%A0%E4%B8%8A%E7%9A%84-skip-grant-tables%EF%BC%8C%E9%87%8D%E5%90%AF-mysql-%E6%9C%8D%E5%8A%A1%EF%BC%8C%E4%BB%A5%E6%96%B0%E5%AF%86%E7%A0%81%E7%99%BB%E9%99%86%E5%B0%B1%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90%E4%BA%86%EF%BC%81"><span class="toc-text">8.在 my.ini 文件中去掉 加上的 skip-grant-tables，重启 mysql 服务，以新密码登陆就大功告成了！</span></a></li></ol>
-    </div>
-  </div>
-
-  
-<script src="/js/catalog.js"></script>
-
-
-
 
     
       <div class="comments-container">

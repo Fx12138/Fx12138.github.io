@@ -320,19 +320,13 @@ MathJax = {
 <p><code>v-if</code> 也是<strong>惰性的</strong>：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。</p>
 <p>相比之下，<code>v-show</code> 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。</p>
 <p><strong>一般来说，<code>v-if</code> 有更高的切换开销，而 <code>v-show</code> 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用 <code>v-show</code> 较好；如果在运行时条件很少改变，则使用 <code>v-if</code> 较好。</strong></p>
-<h2 id="钩子函数-生命周期"><a href="#钩子函数-生命周期" class="headerlink" title="钩子函数(生命周期)"></a>钩子函数(生命周期)</h2><p>创建阶段</p>
-<p>beforeCreate 初始化事件和初始化生命周期</p>
-<p>created    数据观测,属性,侦听器配置等</p>
-<p>beforeMount    模板编译到render</p>
-<p>render    生成虚拟dom,挂载</p>
-<p>mounted    (挂载后)异步请求,操作dom,定时器等(这时并不承诺子组件也会挂载到真实dom上)</p>
-<p>更新阶段(多次执行)</p>
-<p>beforeUpdate (依赖数据改变或$forceUpdate强制刷新执行这个钩子)移除已经添加的事件监听器等,万万不可更改依赖数据(如果更改就会造成死循环,因为一旦更改就会执行这个钩子函数)</p>
-<p>render    生成最新得虚拟dom</p>
-<p>updated    操作dom添加事件监听器,万万不可更改依赖数据(如果更改就会造成死循环,因为一旦更改就会执行这个钩子函数)</p>
-<p>销毁阶段</p>
-<p>beforeDestroy    移除已经添加得事件监听器,计时器等</p>
-<p>destroyed</p>
+<h2 id="钩子函数-生命周期"><a href="#钩子函数-生命周期" class="headerlink" title="钩子函数(生命周期)"></a>钩子函数(生命周期)</h2><p><code>beforeCreate()</code> 在实例创建之间执行，数据未加载状态</p>
+<p><code>created()</code> 在实例创建、数据加载后，能初始化数据，<code>dom</code>渲染之前执行</p>
+<p><code>beforeMount()</code> 虚拟<code>dom</code>已创建完成，在数据渲染前最后一次更改数据</p>
+<p><code>mounted()</code> 页面、数据渲染完成，真实<code>dom</code>挂载完成</p>
+<p><code>beforeUpadate()</code> 重新渲染之前触发</p>
+<p><code>updated()</code> 数据已经更改完成，<code>dom</code> 也重新 <code>render</code> 完成,更改数据会陷入死循环</p>
+<p><code>beforeDestory()</code> 和 <code>destoryed()</code> 前者是销毁前执行（实例仍然完全可用），后者则是销毁后执行</p>
 <h2 id="访问父组件实例"><a href="#访问父组件实例" class="headerlink" title="访问父组件实例"></a>访问父组件实例</h2><p>this.$parent</p>
 <p>可以通过这种方法取出父组件的数据或者方法</p>
 <h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><p><code>provide</code> 选项允许我们指定我们想要提供给后代组件的数据/方法。</p>
@@ -366,7 +360,7 @@ MathJax = {
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2021/04/06/%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81/" target="_self">
+              <a href="/2021/04/02/%E5%89%91%E6%8C%87offer/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -392,7 +386,7 @@ MathJax = {
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2021/04/16/Android/" target="_self">
+              <a href="/2021/04/06/%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>

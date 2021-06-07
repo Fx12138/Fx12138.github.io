@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="fx" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      HTTP权威指南 
+      
+      
+      |
+    
+     F blog
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/welcome.jfif">
+    <link rel="icon" href="/images/welcome.jfif">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/welcome.jfif" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">F</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">HTTP权威指南</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2021-06-03 22:14:28
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络">
+                    <b>#</b> 计算机网络
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="一-简述HTTP"><a href="#一-简述HTTP" class="headerlink" title="一.简述HTTP"></a>一.简述HTTP</h1><h2 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h2><p>客户端向服务器发起请求访问资源,服务器响应时,Web服务器会为所有的Http对象数据附加一个MIME类型.如下图</p>
+<img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210603221720458.png" alt="image-20210603221720458" style="zoom: 33%;">
+
+<p>URI 统一资源标识符(URL和URN是URI的两种类型)</p>
+<p>URL 统一资源定位符</p>
+<p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604113110181.png" alt="image-20210604113110181"></p>
+<p>​    标准格式包含三部分</p>
+<p>​        “方案://服务器位置/路径”</p>
+<p>​        (1)方案(scheme) 说明访问资源所使用的协议类型(比如http://)</p>
+<p>​        (2)第二部分是服务器的位置,因特网地址 (比如<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a>)</p>
+<p>​        (3)其余部分指定服务器上的某个资源,资源路径(比如/img.png)</p>
+<p>URN 统一资源名</p>
+<p>​        是作为特定内容的唯一名称使用的,与目的资源所在地无关.</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604093009602.png" alt="image-20210604093009602" style="zoom: 80%;">
+
+<h2 id="客户端发起服务器返回的过程"><a href="#客户端发起服务器返回的过程" class="headerlink" title="客户端发起服务器返回的过程"></a>客户端发起服务器返回的过程</h2><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604103916295.png" alt="image-20210604103916295" style="zoom: 80%;">
+
+<h2 id="HTTP版本"><a href="#HTTP版本" class="headerlink" title="HTTP版本"></a>HTTP版本</h2><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604105459302.png" alt="image-20210604105459302" style="zoom:67%;">
+
+<h2 id="常见的方案"><a href="#常见的方案" class="headerlink" title="常见的方案"></a>常见的方案</h2><p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604145015386.png" alt="image-20210604145015386" style="zoom:80%;"><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604145028826.png" alt="image-20210604145028826"></p>
+<p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604145028826.png" alt="image-20210604145028826"></p>
+<h1 id="二-HTTP报文"><a href="#二-HTTP报文" class="headerlink" title="二.HTTP报文"></a>二.HTTP报文</h1><p>术语:</p>
+<p>​    流入:请求报文流入源端服务器</p>
+<p>​    流出:报文从源端服务器流出到用户Agent代理(Agent代理是所有能代替用户发送请求的应用程序,比如web浏览器)</p>
+<p>​    上游 下游:所有的报文都会像河水一样流动,不管是请求报文还是响应报文,都会像下游流动.所有报文的发送者都在接收者的上游.</p>
+<img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604145820623.png" alt="image-20210604145820623" style="zoom: 67%;">
+
+<h2 id="报文的格式"><a href="#报文的格式" class="headerlink" title="报文的格式"></a>报文的格式</h2><p>任何报文都由三个部分组成:<strong>起始行</strong>(请求报文称为请求行,响应报文中称为响应行),<strong>首部</strong>,和<strong>主体</strong>部分如下图</p>
+<img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604150716208.png" alt="image-20210604150716208" style="zoom:80%;">
+
+<p>下面展示了请求报文和响应报文的组成,和一组假想的请求报文和响应报文作文参照</p>
+<img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604150429851.png" alt="image-20210604150429851" style="zoom: 80%;">
+
+<img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604150545573.png" alt="image-20210604150545573" style="zoom: 80%;">
+
+<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><p><strong>并不是每个服务器都实现了所有的方法,比如一台服务器要与HTTP1.1兼容,那么只要为其资源实现GET方法和HEAD方法就可以了</strong></p>
+<img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604151544099.png" alt="image-20210604151544099" style="zoom:80%;">
+
+<h3 id="HEAD方法"><a href="#HEAD方法" class="headerlink" title="HEAD方法"></a>HEAD方法</h3><p>HEAD方法在服务器响应中只返回首部,不会返回实体的主题部分,这就允许客户端在未获取实际资源的情况下,对资源的首部进行检查.比如可以:</p>
+<pre><code>- 在不获取资源的情况下了解资源的情况(比如判断其类型)
+- 通过查看响应中的状态码,看看某个对象是否存在
+- 通过查看首部,测试资源是否被修改了
+</code></pre>
+<h3 id="TRACE方法"><a href="#TRACE方法" class="headerlink" title="TRACE方法"></a>TRACE方法</h3><p>可恶端发起一个请求时,这个请求可能要穿过防火墙,代理,网关或其他一些应用程序.每个中间节点都可能会修改原始的HTTP请求.TRACE方法允许客户端在最终将请i去发送给服务器时,蓝看他办成了什么样子</p>
+<h3 id="OPTIONS方法"><a href="#OPTIONS方法" class="headerlink" title="OPTIONS方法"></a>OPTIONS方法</h3><p>OPTIONS方法请求web服务器告知其支持的各种功能,可以询问服务器通常支持哪些方法,或者对某些特殊资源支持哪些方法.下图显示了一个使用OPTIONS方法的请求</p>
+<img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604160823846.png" alt="image-20210604160823846" style="zoom:80%;">
+
+<h2 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h2><h3 id="100-199信息性状态码"><a href="#100-199信息性状态码" class="headerlink" title="100-199信息性状态码"></a>100-199信息性状态码</h3><p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604161531968.png" alt="image-20210604161531968"></p>
+<p>100 Continue目的时对这样的情况进行优化:HTTP客户端应用程序有一个尸体的主体部分想要发送给服务器,但是希望在发送之前查看一下服务器是否会接受这个实体.</p>
+<h3 id="200-299成功状态码"><a href="#200-299成功状态码" class="headerlink" title="200-299成功状态码"></a>200-299成功状态码</h3><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604161727326.png" alt="image-20210604161727326" style="zoom:80%;">
+
+<h3 id="300-399重定向状态码"><a href="#300-399重定向状态码" class="headerlink" title="300-399重定向状态码"></a>300-399重定向状态码</h3><p>重定向状态码要么告知客户端使用替代位置来访问他们所感兴趣的资源,要么就提供一个体态的响应而不是资源的内容.如果资源已经被移动,可以发送一个重定向状态码和一个可选的Location首部来告知客户端资源已被一走,以及现在可以在哪里找到它,这样浏览器可以在不打扰使用者的情况下,透明的转入新的位置.如下</p>
+<img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604163648167.png" alt="image-20210604163648167" style="zoom:80%;">
+
+<p>可以通过某些重定向状态码对本地的副本进行验证,确认是否源服务端上的资源被修改过,如下请求</p>
+<img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604164615015.png" alt="image-20210604164615015" style="zoom:80%;">
+
+<p>从下面列出所有的重定向状态码</p>
+<img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604163933794.png" alt="image-20210604163933794" style="zoom:80%;">
+
+<img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604163947803.png" alt="image-20210604163947803" style="zoom:80%;">
+
+<h3 id="400-499客户端错误状态码"><a href="#400-499客户端错误状态码" class="headerlink" title="400-499客户端错误状态码"></a>400-499客户端错误状态码</h3><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604165206275.png" alt="image-20210604165206275" style="zoom:80%;">
+
+<img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604165219898.png" alt="image-20210604165219898" style="zoom:80%;">
+
+<h3 id="500-599状态码"><a href="#500-599状态码" class="headerlink" title="500-599状态码"></a>500-599状态码</h3><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604165302940.png" alt="image-20210604165302940" style="zoom:80%;">
+
+<img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604165315445.png" alt="image-20210604165315445" style="zoom:80%;">
+
+<h2 id="HTTP首部"><a href="#HTTP首部" class="headerlink" title="HTTP首部"></a>HTTP首部</h2><p>HTTP规范定义了几种首部字段,应用程序亦可以随意发明自己所用的首部.分为以下几类</p>
+<h4 id="通用首部"><a href="#通用首部" class="headerlink" title="通用首部"></a>通用首部</h4><p>既可以出现在请求报文中,也可以出现在响应报文中</p>
+<p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604190213633.png" alt="image-20210604190213633"></p>
+<p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604190501850.png" alt="image-20210604190501850"></p>
+<h4 id="请求首部"><a href="#请求首部" class="headerlink" title="请求首部"></a>请求首部</h4><p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604190610991.png" alt="image-20210604190610991"></p>
+<h5 id="1-Accept首部"><a href="#1-Accept首部" class="headerlink" title="(1)Accept首部"></a>(1)Accept首部</h5><p>Accept首部为客户端提供了一种将其想要什么形式的内容告知服务器的方式.Accept首部会使连接的两端都收益,客户端会得到他们想要的内容,服务器就可以根据这些信息来决定发送的内容,不会浪费其时间和贷款来发送客户端无法使用的东西.</p>
+<img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604191311768.png" alt="image-20210604191311768" style="zoom: 200%;">
+
+<h5 id="2-条件请求首部"><a href="#2-条件请求首部" class="headerlink" title="(2)条件请求首部"></a>(2)条件请求首部</h5><p>有时客户端希望为其请求加上某些限制,就可以通过使用条件请求头部的方式,要求服务器在对请求进行响应之前,确保某个条件为真.</p>
+<p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604191619053.png" alt="image-20210604191619053"></p>
+<h5 id="3-安全请求首部"><a href="#3-安全请求首部" class="headerlink" title="(3)安全请求首部"></a>(3)安全请求首部</h5><p>质询/响应认证.这种机制要求客户端在获取特定的资源之前,先对自身进行认证,这样可以使事务安全一些.</p>
+<p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604192648331.png" alt="image-20210604192648331"></p>
+<h5 id="4-代理请求首部"><a href="#4-代理请求首部" class="headerlink" title="(4)代理请求首部"></a>(4)代理请求首部</h5><p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604192719914.png" alt="image-20210604192719914"></p>
+<h4 id="响应首部"><a href="#响应首部" class="headerlink" title="响应首部"></a>响应首部</h4><p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604192807882.png" alt="image-20210604192807882"></p>
+<h5 id="1-协商首部"><a href="#1-协商首部" class="headerlink" title="(1)协商首部"></a>(1)协商首部</h5><p>如果资源有多种表示方法,比如如果服务器上有某文档的法语和德语稿,HTTP1/1.1可以为服务器和客户端提供对资源进行协商的能力.</p>
+<p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604193018651.png" alt="image-20210604193018651"></p>
+<h5 id="2-安全响应首部"><a href="#2-安全响应首部" class="headerlink" title="(2)安全响应首部"></a>(2)安全响应首部</h5><p>前面提到的质询/响应机制的响应侧.</p>
+<p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604193927961.png" alt="image-20210604193927961"></p>
+<h4 id="实体首部"><a href="#实体首部" class="headerlink" title="实体首部"></a>实体首部</h4><p>描述实体的长度和内容,或者资源自身</p>
+<p>在请求和响应报文中都可能包含实体部分,所有这两中类型的报文都可能出现这些首部</p>
+<p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604194155520.png" alt="image-20210604194155520"></p>
+<h5 id="1-内容首部"><a href="#1-内容首部" class="headerlink" title="(1)内容首部"></a>(1)内容首部</h5><p>与实体内容有关的特定信息,说明了其类型尺寸以及处理它所需要的其他有用信息.比如web浏览器可以通过查看返回的内容类型,得知如何显示对象.</p>
+<p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604194345491.png" alt="image-20210604194345491"></p>
+<h5 id="2-实体缓存首部"><a href="#2-实体缓存首部" class="headerlink" title="(2)实体缓存首部"></a>(2)实体缓存首部</h5><p>通用的缓存首部说明了如何或什么时候进行缓存,实体的缓存首部提供了与被缓存实体有关的信息.比如验证已缓存的资源副本是否仍然有效所需的信息,以及更好的估计已缓存的资源合适失效所需的线索.</p>
+<p><img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source_posts\HTTP权威指南\image-20210604194619183.png" alt="image-20210604194619183"></p>
+<h4 id="扩展首部"><a href="#扩展首部" class="headerlink" title="扩展首部"></a>扩展首部</h4><h2 id="版本0-9的报文"><a href="#版本0-9的报文" class="headerlink" title="版本0.9的报文"></a>版本0.9的报文</h2><p>版本0.9请求中只包含方法和URL,响应中只包含实体,他没有版本信息,没有状态码或原因短语也没有首部</p>
+<img src="/2021/06/03/HTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/devApp\myblog\source\_posts\HTTP权威指南\image-20210604153729637.png" alt="image-20210604153729637" style="zoom:80%;">
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/05/13/%E9%9D%A2%E8%AF%95%E9%A2%98/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2021-06-03 22:14:28
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络">
+                        <b>#</b> 计算机网络
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80-%E7%AE%80%E8%BF%B0HTTP"><span class="toc-text">一.简述HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#URI"><span class="toc-text">URI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8F%91%E8%B5%B7%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%94%E5%9B%9E%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">客户端发起服务器返回的过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP%E7%89%88%E6%9C%AC"><span class="toc-text">HTTP版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%B9%E6%A1%88"><span class="toc-text">常见的方案</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C-HTTP%E6%8A%A5%E6%96%87"><span class="toc-text">二.HTTP报文</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A5%E6%96%87%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="toc-text">报文的格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-1"><span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HEAD%E6%96%B9%E6%B3%95"><span class="toc-text">HEAD方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TRACE%E6%96%B9%E6%B3%95"><span class="toc-text">TRACE方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OPTIONS%E6%96%B9%E6%B3%95"><span class="toc-text">OPTIONS方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-text">状态码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#100-199%E4%BF%A1%E6%81%AF%E6%80%A7%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-text">100-199信息性状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#200-299%E6%88%90%E5%8A%9F%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-text">200-299成功状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#300-399%E9%87%8D%E5%AE%9A%E5%90%91%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-text">300-399重定向状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#400-499%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%94%99%E8%AF%AF%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-text">400-499客户端错误状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#500-599%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-text">500-599状态码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP%E9%A6%96%E9%83%A8"><span class="toc-text">HTTP首部</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E9%A6%96%E9%83%A8"><span class="toc-text">通用首部</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E9%A6%96%E9%83%A8"><span class="toc-text">请求首部</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-Accept%E9%A6%96%E9%83%A8"><span class="toc-text">(1)Accept首部</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%9D%A1%E4%BB%B6%E8%AF%B7%E6%B1%82%E9%A6%96%E9%83%A8"><span class="toc-text">(2)条件请求首部</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%AE%89%E5%85%A8%E8%AF%B7%E6%B1%82%E9%A6%96%E9%83%A8"><span class="toc-text">(3)安全请求首部</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E4%BB%A3%E7%90%86%E8%AF%B7%E6%B1%82%E9%A6%96%E9%83%A8"><span class="toc-text">(4)代理请求首部</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E9%A6%96%E9%83%A8"><span class="toc-text">响应首部</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%8D%8F%E5%95%86%E9%A6%96%E9%83%A8"><span class="toc-text">(1)协商首部</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E9%A6%96%E9%83%A8"><span class="toc-text">(2)安全响应首部</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E4%BD%93%E9%A6%96%E9%83%A8"><span class="toc-text">实体首部</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%86%85%E5%AE%B9%E9%A6%96%E9%83%A8"><span class="toc-text">(1)内容首部</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%AE%9E%E4%BD%93%E7%BC%93%E5%AD%98%E9%A6%96%E9%83%A8"><span class="toc-text">(2)实体缓存首部</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E9%A6%96%E9%83%A8"><span class="toc-text">扩展首部</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%88%E6%9C%AC0-9%E7%9A%84%E6%8A%A5%E6%96%87"><span class="toc-text">版本0.9的报文</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Fx12138">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="facebook" href="">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="twitter" href="">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="weibo" href="">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/fx12138">Copyright © stupidbird 2021</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

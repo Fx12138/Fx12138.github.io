@@ -170,6 +170,8 @@ MathJax = {
 <p>(2)给外边距加boder</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;out&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;inner&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">			<span class="selector-class">.out</span>&#123;</span></span><br><span class="line"><span class="css">				<span class="attribute">height</span>: <span class="number">199px</span>;	<span class="comment">/*将父元素的高度减去boder的宽度*/</span></span></span><br><span class="line"><span class="css">				<span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">				<span class="attribute">background-color</span>: <span class="number">#00FFFF</span>;</span></span><br><span class="line"><span class="css">				<span class="attribute">border-top</span>: <span class="number">1px</span> <span class="number">#00FFFF</span> solid;</span></span><br><span class="line"><span class="css">			&#125;</span></span><br><span class="line"><span class="css">			<span class="selector-class">.inner</span>&#123;</span></span><br><span class="line"><span class="css">				<span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">				<span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">				<span class="attribute">background-color</span>: <span class="number">#AAAAAA</span>;</span></span><br><span class="line"><span class="css">				<span class="attribute">margin-top</span>: <span class="number">99px</span>;	<span class="comment">/*子元素外边距减去boder的宽度*/</span></span></span><br><span class="line"><span class="css">			&#125;</span></span><br><span class="line"><span class="css">		</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<p>(3)使用伪元素</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;out&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;inner&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">		<span class="selector-class">.out</span>&#123;</span></span><br><span class="line"><span class="css">			<span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">			<span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">			<span class="attribute">background-color</span>: <span class="number">#00FFFF</span>;</span></span><br><span class="line"><span class="css">		&#125;</span></span><br><span class="line"><span class="css">    	<span class="selector-class">.inner</span><span class="selector-pseudo">::before</span>&#123;	<span class="comment">/*伪元素*/</span></span></span><br><span class="line"><span class="css">        	<span class="attribute">content</span>:<span class="string">&#x27;&#x27;</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">display</span>:table;</span></span><br><span class="line"><span class="css">    	&#125;</span></span><br><span class="line"><span class="css">		<span class="selector-class">.inner</span>&#123;</span></span><br><span class="line"><span class="css">			<span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">			<span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">			<span class="attribute">background-color</span>: <span class="number">#AAAAAA</span>;</span></span><br><span class="line"><span class="css">		&#125;</span></span><br><span class="line"><span class="css">	</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="内联元素和块元素盒子模型"><a href="#内联元素和块元素盒子模型" class="headerlink" title="内联元素和块元素盒子模型"></a>内联元素和块元素盒子模型</h2><ul>
 <li><p>内联元素不能设置width和height</p>
 </li>
@@ -203,7 +205,7 @@ MathJax = {
 <h2 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h2><p>设置了浮动后,元素水平布局的等式不再适用</p>
 <p>浮动的特点:</p>
 <p>​    (1)元素设置了float后会脱离文档流,所以元素下面的还在文档流中的元素会自动向上移动</p>
-<p>​    (2)浮动元素会向父元素的左侧或右侧移动,默认不会从父元素中移出</p>
+<p>​    (2)浮动元素会向父元素的左侧或右侧移动,默认不会从<strong>父元素内容区中</strong>移出</p>
 <p>​    (3)浮动元素不会超过它前面的其他浮动元素,也不会覆盖其它浮动元素</p>
 <p>​    (4)如果浮动元素的上边是一个没有浮动的块元素,则浮动元素无法上移</p>
 <p>​    (5)当不设置浮动时,一个div会自动设置margin-right的值来使其内容区的宽度等于父元素的宽度</p>
@@ -216,6 +218,160 @@ MathJax = {
 <p>​    (2)脱离文档流后,块元素的宽度和高度默认被内容撑开</p>
 <p>​    行内元素</p>
 <p>​    行内元素脱离文档流后会变成块元素,特点和块元素一样</p>
+<h2 id="高度塌陷和BFC"><a href="#高度塌陷和BFC" class="headerlink" title="高度塌陷和BFC"></a>高度塌陷和BFC</h2><p>高度塌陷:想要使父元素的高度随着子元素的高度改变,即被子元素撑开,从而不设置父元素的具体高度.在这种情况下,子元素使用浮动属性,子元素会脱离文档流,导致无法撑起父元素的高度从而导致高度塌陷.父元素高度丢失之后会导致下面的元素下移,影响页面布局</p>
+<h3 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h3><p>block formatting context 块级格式化环境</p>
+<p>BFC是css中的一个隐含的属性,可以为一个元素开启BFC,该元素会变成一个独立的布局区域</p>
+<p>元素开启BFC后的特点:</p>
+<ul>
+<li>开启BFC后的元素不会被浮动元素覆盖</li>
+<li>开启BFC的元素子元素和父元素外边距不会重叠</li>
+<li>可以包含浮动的子元素</li>
+</ul>
+<p>开启BFC的方法:</p>
+<ul>
+<li><p>设置父元素为浮动(不推荐)</p>
+</li>
+<li><p>将父元素设置为行内块元素(不推荐)这种方法会使行宽不再自动扩大,而是子元素的宽度撑开的大小</p>
+</li>
+<li><p>将父元素的overflow设置为一个非visible的值</p>
+<p>这是常用的方式,父元素overflow:hidden开启</p>
+</li>
+</ul>
+<h3 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h3><p>如果我们不希望某个元素因为其他元素浮动的影响而改变位置,可以通过clear属性</p>
+<p>可选值:</p>
+<ul>
+<li>left 清楚左侧浮动元素对当前元素的影响</li>
+<li>right 清除右侧浮动元素对当前元素的影响</li>
+<li>both 清楚两侧中最大影响的那侧</li>
+</ul>
+<p>原理:设置清楚浮动以后,浏览器会自动为元素添加一个<strong>上外边距</strong>,使其位置不受影响</p>
+<h3 id="解决高度塌陷最终方案"><a href="#解决高度塌陷最终方案" class="headerlink" title="解决高度塌陷最终方案"></a>解决高度塌陷最终方案</h3><p>可以在父元素的最下面加一个空的div 标签,设置clear属性,从而撑起父元素,这种方法相当于用html解决css的问题,下面使用伪元素的方式以纯css方式解决.</p>
+<p><strong>使用伪元素选择器</strong>,对父元素使用伪元素选择器相当于在父元素的最后添加一个元素设置其样式.这个伪元素默认为行内元素.下面为示例,其中box1为父元素</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box1</span><span class="selector-pseudo">::after</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>:block;	<span class="comment">/*将伪元素转换为块元素*/</span></span><br><span class="line">	<span class="attribute">clear</span>:both;	<span class="comment">/*设置clear属性使其不受浮动元素影响,从而撑起父元素*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个既解决高度塌陷,又解决外边距重叠的方法,其中设置父元素的类为clearfix</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">::before</span>,</span><br><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">::after</span>&#123;</span><br><span class="line">	<span class="attribute">content</span>:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line">	<span class="attribute">display</span>:table;</span><br><span class="line">	<span class="attribute">clear</span>:both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="position"><a href="#position" class="headerlink" title="position"></a>position</h2><p>position可选值:</p>
+<pre><code>- static 默认值,元素是静止的,没有开启定位
+- relative 相对定位
+- absolute 绝对定位
+- fixed 固定定位
+- sticky 粘滞定位
+</code></pre>
+<p>对于开启的定位的元素,可以设置z-index设置元素的层级.如果都不设置z-index的话,则靠下的元素层级更高.</p>
+<p>祖先元素的层级再高也不会覆盖后代元素.</p>
+<h3 id="relative"><a href="#relative" class="headerlink" title="relative"></a>relative</h3><p>开启后设置偏移量只会影响自己的位置,不影响其他元素</p>
+<p>特点:</p>
+<ul>
+<li>开启后如果不设置偏移量,<strong>页面内得所有元素不会发生任何变化</strong></li>
+<li>相对定位参照与元素在文档流中得位置进行定位得,即<strong>相对于自己本身位置得左上角</strong></li>
+<li>相对定位会提升元素得层级,高于页面中其他元素.(即如果和其他元素重叠,会覆盖其他元素)</li>
+<li>相对定位不会脱离文档流,不会改变元素的性质,即块级元素还是块级元素,行内还是行内</li>
+</ul>
+<h3 id="absolute"><a href="#absolute" class="headerlink" title="absolute"></a>absolute</h3><p>特点</p>
+<ul>
+<li><p>开启绝对定位后,如果不设置偏移量,<strong>自身元素得位置不会发生变化</strong></p>
+</li>
+<li><p><strong>元素会从文档流中脱离</strong></p>
+</li>
+<li><p>绝对定位会改变元素的性质,块级元素变成行内元素,块得宽高被内容撑开</p>
+</li>
+<li><p>会使元素提升一个层级</p>
+</li>
+<li><p><strong>开启了绝对定位后整个div盒子的宽度要加上left和right</strong></p>
+<ul>
+<li><p>水平方向上,当发生过度约束时,如果9个值中没有auto,则会自动调整right,如果有auto的话,会自动调整auto的值</p>
+<p>可以设置auto的值:margin,width,left,right</p>
+</li>
+<li><p>垂直方向上,等式也必须要满足,这样也<strong>可以用上下外边距都设置为auto,top和bottom都设置为0的方式来使元素垂直居中.但是在非绝对定位时不可以.</strong></p>
+</li>
+</ul>
+</li>
+<li><p>绝对定位参照包含块进行定位,即<strong>相对于离他最近的开启了定位的祖先元素</strong>,如果所有的祖先元素都没有开启定位,则相对于根元素</p>
+<p>包含块:</p>
+<ul>
+<li><p>正常情况下</p>
+<p>包含块就是当前元素<strong>最近的祖先块元素</strong></p>
+</li>
+<li><p>绝对定位包含块</p>
+<p>包含块是离他最近的开启了定位的祖先元素</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="fixed"><a href="#fixed" class="headerlink" title="fixed"></a>fixed</h3><p>固定定位也是一种绝对定位,大部分特点都和绝对定位一样</p>
+<p>唯一不同的是固定定位永远参考与浏览器的视口进行定位(视口只有浏览器窗口大小,例如网页侧边的广告)</p>
+<h2 id="sticky"><a href="#sticky" class="headerlink" title="sticky"></a>sticky</h2><p>和relative相对定位和相似,不同的是粘滞定位可以在元素到达某个位置时将其固定</p>
+<h2 id="行高"><a href="#行高" class="headerlink" title="行高"></a>行高</h2><p>line-height</p>
+<p>行高指的是文字占有的实际高度,可以设置具体的大小(px em),也可以设置整数指定行高是字体大小的倍数,行高会在字体框的上下平均分配,也经常用来设置行间距</p>
+<h2 id="字体居中"><a href="#字体居中" class="headerlink" title="字体居中"></a>字体居中</h2><p>text-align 文字的水平对齐</p>
+<p>可选值:</p>
+<ul>
+<li>left</li>
+<li>right</li>
+<li>center 居中对齐</li>
+<li>justify 两端对齐</li>
+</ul>
+<p>vertical-align文字的垂直对齐方式</p>
+<p>可选值:</p>
+<ul>
+<li>baseline 默认值 基线对齐</li>
+<li>top </li>
+<li>bottom</li>
+<li>middle 居中对齐(和x的中线对齐</li>
+</ul>
+<h2 id="文字超出显示省略号"><a href="#文字超出显示省略号" class="headerlink" title="文字超出显示省略号"></a>文字超出显示省略号</h2><p>white-space 设置网页如何处理文字的空白区域</p>
+<p>可选值:</p>
+<ul>
+<li>normal 正常,即如果文字需要换行的时候,一个单词盛不下会换行</li>
+<li>nowrap 不换行,一行中显示所有文字,会自动撑开div的宽度</li>
+<li>pre 保留空白 即文字在html中是什么样式就显示什么样式,会保留空格和回车</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*文字超出显示省略号*/</span></span><br><span class="line"><span class="selector-class">.div1</span>&#123;</span><br><span class="line">	<span class="attribute">white-space</span>:nowrap;</span><br><span class="line">	<span class="attribute">overflow</span>:hidden;</span><br><span class="line">	text-flow:ellipsis;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="弹性盒flex"><a href="#弹性盒flex" class="headerlink" title="弹性盒flex"></a>弹性盒flex</h2><h3 id="弹性容器"><a href="#弹性容器" class="headerlink" title="弹性容器"></a>弹性容器</h3><p>​    display:flex;</p>
+<p>flex-direction 指定容器中弹性元素的排列方式,可选值:</p>
+<ul>
+<li>row 默认值,弹性元素在容器中水平排列(左向又),主轴自左向右</li>
+<li>row-reverse 水平排列,从右向左</li>
+<li>column 纵向排列(自上向下)</li>
+<li>column-reverse 纵向自下向上</li>
+</ul>
+<p>flex-wrap 设置弹性元素在容器横向装不下的时候是否自动换行</p>
+<ul>
+<li>nowrap 默认值 元素不会自动换行</li>
+<li>wrap 元素沿着辅轴方向自动换行</li>
+<li>wrap-reverse 元素沿着辅轴反方向换行</li>
+</ul>
+<p>justify-content 主轴上的元素如何排列,主轴空白空间的分布</p>
+<ul>
+<li>flex-start 元素沿着主轴的起边排列,即从左开始</li>
+<li>flex-end 元素沿着主轴终边排列</li>
+<li>center 元素居中排列</li>
+<li>space-around 容器中的空白分布到元素两侧(这样会使中间的元素空隙大一些,因为中间的元素空隙为左边元素分配到的加上右边元素分配到的)</li>
+<li>space-between 空白均匀分布到元素中间,两边不再有空白</li>
+<li>space-evenly 空白分布到元素单侧</li>
+</ul>
+<p>align-items 元素在辅轴上如何对齐</p>
+<ul>
+<li>stretch 默认值将元素的长度设置成相同的值,使其填满整个容器(每一行的高度相同,第一行和第二行不一定相同)</li>
+<li>flex-start 元素不会拉伸,沿着辅轴的垂直方向起边对齐</li>
+<li>flex-start 元素不会拉伸,沿着辅轴的垂直方向终边对齐</li>
+<li>center</li>
+</ul>
+<p>align-content 辅轴空白空间的分布</p>
+<ul>
+<li>center 所有元素都在中间,上下空白空间相等</li>
+</ul>
+<h3 id="弹性元素"><a href="#弹性元素" class="headerlink" title="弹性元素"></a>弹性元素</h3><p>flex-grow 当父元素有多余空间时,子元素如何伸展,父元素的剩余空间会按照比例进行分配,默认是0</p>
+<p>​    例如父元素宽度为 300,两个子元素宽度分别为100,此时父元素剩余100的宽度,为子元素分别设置flex-grow:1;和flex-grow:2;则父元素剩余的100宽度会按1:2的比例分配给两个子元素,使两个子元素盛满整个父元素</p>
+<p>flex-shrink 当父元素的空间不足以容纳所有的子元素时,如何对子元素进行收缩</p>
+<p>flex-basis 设置元素在主轴上的长度</p>
+<p>flex 前三个属性的缩写,顺序:增长 缩减 基础.</p>
+<p>align-self 用来覆盖当前弹性元素上的align-items,即不再受容器中的align-items属性约束,使用自己的设置的在辅轴上的对齐方式</p>
+<p>order 指定弹性元素的排列顺序,传入整数数值,数值越小越靠前</p>
+<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><h3 id="文字垂直居中"><a href="#文字垂直居中" class="headerlink" title="文字垂直居中"></a>文字垂直居中</h3><p>设置行高与外面包裹文字的元素高度相等,可以实现文字垂直居中的效果</p>
 
       </div>
       
@@ -264,7 +420,7 @@ MathJax = {
   <div class="post-catalog hidden" id="catalog">
     <div class="title">Contents</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%99%A8%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">选择器的优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%95%BF%E5%BA%A6%E5%8D%95%E4%BD%8D"><span class="toc-text">长度单位</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%83%8F%E7%B4%A0px"><span class="toc-text">像素px</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BE%E5%88%86%E6%AF%94"><span class="toc-text">百分比%</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#em"><span class="toc-text">em</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%82%E7%9B%B4%E5%A4%96%E8%BE%B9%E8%B7%9D%E7%9A%84%E9%87%8D%E5%8F%A0"><span class="toc-text">垂直外边距的重叠</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%84%E5%BC%9F%E5%A4%96%E8%BE%B9%E8%B7%9D%E6%8A%98%E5%8F%A0"><span class="toc-text">兄弟外边距折叠</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E5%AD%90%E5%A4%96%E8%BE%B9%E8%B7%9D%E6%8A%98%E5%8F%A0"><span class="toc-text">父子外边距折叠</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E8%81%94%E5%85%83%E7%B4%A0%E5%92%8C%E5%9D%97%E5%85%83%E7%B4%A0%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B"><span class="toc-text">内联元素和块元素盒子模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#display"><span class="toc-text">display</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#visibility%EF%BC%9Ahidden%E5%92%8Cdisplay%EF%BC%9Anone%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">visibility：hidden和display：none的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%AA%E5%BC%82%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="toc-text">怪异盒模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AE%E5%BB%93%E9%98%B4%E5%BD%B1%E5%92%8C%E5%9C%86%E8%A7%92"><span class="toc-text">轮廓阴影和圆角</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%AE%E5%8A%A8"><span class="toc-text">浮动</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%99%A8%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">选择器的优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%95%BF%E5%BA%A6%E5%8D%95%E4%BD%8D"><span class="toc-text">长度单位</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%83%8F%E7%B4%A0px"><span class="toc-text">像素px</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BE%E5%88%86%E6%AF%94"><span class="toc-text">百分比%</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#em"><span class="toc-text">em</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%82%E7%9B%B4%E5%A4%96%E8%BE%B9%E8%B7%9D%E7%9A%84%E9%87%8D%E5%8F%A0"><span class="toc-text">垂直外边距的重叠</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%84%E5%BC%9F%E5%A4%96%E8%BE%B9%E8%B7%9D%E6%8A%98%E5%8F%A0"><span class="toc-text">兄弟外边距折叠</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E5%AD%90%E5%A4%96%E8%BE%B9%E8%B7%9D%E6%8A%98%E5%8F%A0"><span class="toc-text">父子外边距折叠</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E8%81%94%E5%85%83%E7%B4%A0%E5%92%8C%E5%9D%97%E5%85%83%E7%B4%A0%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B"><span class="toc-text">内联元素和块元素盒子模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#display"><span class="toc-text">display</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#visibility%EF%BC%9Ahidden%E5%92%8Cdisplay%EF%BC%9Anone%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">visibility：hidden和display：none的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%AA%E5%BC%82%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="toc-text">怪异盒模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AE%E5%BB%93%E9%98%B4%E5%BD%B1%E5%92%8C%E5%9C%86%E8%A7%92"><span class="toc-text">轮廓阴影和圆角</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%AE%E5%8A%A8"><span class="toc-text">浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7%E5%92%8CBFC"><span class="toc-text">高度塌陷和BFC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BFC"><span class="toc-text">BFC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clear"><span class="toc-text">clear</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7%E6%9C%80%E7%BB%88%E6%96%B9%E6%A1%88"><span class="toc-text">解决高度塌陷最终方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#position"><span class="toc-text">position</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#relative"><span class="toc-text">relative</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#absolute"><span class="toc-text">absolute</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fixed"><span class="toc-text">fixed</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sticky"><span class="toc-text">sticky</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E9%AB%98"><span class="toc-text">行高</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E5%B1%85%E4%B8%AD"><span class="toc-text">字体居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E5%AD%97%E8%B6%85%E5%87%BA%E6%98%BE%E7%A4%BA%E7%9C%81%E7%95%A5%E5%8F%B7"><span class="toc-text">文字超出显示省略号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E7%9B%92flex"><span class="toc-text">弹性盒flex</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E5%AE%B9%E5%99%A8"><span class="toc-text">弹性容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E5%85%83%E7%B4%A0"><span class="toc-text">弹性元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E5%B7%A7"><span class="toc-text">技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E5%AD%97%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD"><span class="toc-text">文字垂直居中</span></a></li></ol></li></ol>
     </div>
   </div>
 

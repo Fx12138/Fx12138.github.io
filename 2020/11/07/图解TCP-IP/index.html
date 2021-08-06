@@ -1,23 +1,523 @@
-extends includes/layout.pug
+<!DOCTYPE html>
+<html lang="en">
 
-block content
-  article#post.article-entry
-    != page.content
-  // lincense
-  if(theme.copyright.enable === true && page.copyright !== false)
-    .license-wrapper
-      p 
-        span Author:  
-        a(href=config.url)= config.author
-      p 
-        span Link:  
-        a(href=page.permalink)= page.permalink
-      p 
-        span Copyright:  
-        span!= theme.copyright.license
-  include includes/partial/post-nav.pug
-  #comment
-    include includes/comment/livere.pug
-    include includes/comment/disqus.pug
-    include includes/comment/changyan.pug
-    include includes/comment/gitment.pug
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="fx" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      图解TCP/IP 
+      
+      
+      |
+    
+     F blog
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/welcome.jfif">
+    <link rel="icon" href="/images/welcome.jfif">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/welcome.jfif" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">F</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">图解TCP/IP</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2020-11-07 17:08:52
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络">
+                    <b>#</b> 计算机网络
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h4 id="分层参考模型"><a href="#分层参考模型" class="headerlink" title="分层参考模型"></a>分层参考模型</h4><p>ISO制定的OSI参考模型，分成了七层。</p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201031142356957.png" alt="da"></p>
+<p>在这一模型中，每个分层都接收由它下一层所提供的特定服务，并且负责为自己的上一层提供特定的服务。上下层之间进行交互时所遵循的约定叫做“接口”。同一层之间的交互所遵循的约定叫做“协议。</p>
+<h5 id="各层的功能"><a href="#各层的功能" class="headerlink" title="各层的功能"></a>各层的功能</h5><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201031144647886.png" alt="asda"></p>
+<h5 id="网络层和数据链路层的区别"><a href="#网络层和数据链路层的区别" class="headerlink" title="网络层和数据链路层的区别"></a>网络层和数据链路层的区别</h5><p>网络层与数据链路层都是基于目标地址将数据发送给接收端的，但是网络层负责将整个数据发送给最终目标地址，而数据链路层则只负责发送一个分段内的数据。</p>
+<h4 id="传输方式的分类"><a href="#传输方式的分类" class="headerlink" title="传输方式的分类"></a>传输方式的分类</h4><h5 id="1、面向有连接型和面向无连接型"><a href="#1、面向有连接型和面向无连接型" class="headerlink" title="1、面向有连接型和面向无连接型"></a>1、面向有连接型和面向无连接型</h5><p>面向无连接型包括以太网、UDP等协议。</p>
+<p>面向有连接型包括ATM、帧中继、TCP等协议。</p>
+<h5 id="2、电路交换和分组交换"><a href="#2、电路交换和分组交换" class="headerlink" title="2、电路交换和分组交换"></a>2、电路交换和分组交换</h5><p>在分组交换中，由<strong>分组交换机(路由器)<strong>连接通信线路。分组交换的大致处理过程是:发送端计算机将数据分组发送给路由器，路由器收到这些分组数据以后，</strong>缓存到自己的缓冲区</strong>，然后再转发给目标计算机。因此，分组交换也有另一个名称:蓄积交换。路由器接收到数据以后会按照顺序缓存到相应的队列当中，再以<strong>先进先出的顺序将它们逐一发送出去</strong>。</p>
+<h5 id="3、根据接收端数量分类"><a href="#3、根据接收端数量分类" class="headerlink" title="3、根据接收端数量分类"></a>3、根据接收端数量分类</h5><p>单播 广播 多播 任播</p>
+<h4 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h4><p>MAC地址和IP地址在标识一个通讯主体时虽然都具有唯一性，但是只有IP地址具有层次性。</p>
+<h4 id="网络的构成要素"><a href="#网络的构成要素" class="headerlink" title="网络的构成要素"></a>网络的构成要素</h4><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201103150203879.png" alt="image-20201103150203879"></p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201103150226220.png" alt="image-20201103150226220"></p>
+<h5 id="传输速率和吞吐量"><a href="#传输速率和吞吐量" class="headerlink" title="传输速率和吞吐量"></a>传输速率和吞吐量</h5><p>​        在数据传输的过程中，两个<strong>设备之间</strong>数据流动的物理速度称为<strong>传输速率</strong>。单位为bps (Bits Per Second,每秒比特数)。从严格意义上讲，<strong>各种传输媒介中信号的流动速度是恒定的。因此，即使数据链路的传输速率不相同，也不会出现传输的速度忽快忽慢的情况</strong>“。传输速率高也不是指单位数据流动的速度有多快，而是指单位时间内传输的数据量有多少。以我们生活中的道路交通为例，低速数据链路就如同车道较少无法让很多车同时通过的情况。与之相反，高速数据链路就相当于有多个车道，一次允许更多车辆行驶的道路。传输速率又称作带宽( Bandwidth)。带宽越大网络传输能力就越强。</p>
+<p>​        此外，<strong>主机之间</strong>实际的传输速率被称作<strong>吞吐量</strong>。其单位与带宽相同,都是bps (Bits Per Second)。<strong>吞吐量这个词不仅街量带宽，同时也衡量主机的CPU处理能力、网络的拥堵程度、报文中数据字段的占有份额(不含报文首部，只计算数据字段本身)等信息</strong>。</p>
+<h5 id="传输设备"><a href="#传输设备" class="headerlink" title="传输设备"></a>传输设备</h5><p>1、中继器：物理层</p>
+<p>①物理层面上延长网络的设备，但不能无限延长。负责对减弱的信号进行<strong>放大和发送</strong>。</p>
+<p>②只负责将电信号转换为光信号，因此<strong>不能在传输速率不同的媒介中转发</strong>。也<strong>不负责判断数据是否发生错误</strong>。</p>
+<p>③集线器可以看成多口中继器，每个端口都可以成为一个中继器。</p>
+<p>2、网桥（2层交换机）：数据链路层</p>
+<p>●网桥根据数据帧的内容转发数据给相邻的其他网络<br>●网桥<strong>没有连接网段个数的限制</strong><br>●网桥基本只用于连接相同类型的网络。但是有时也可以连接<strong>传输速率不同</strong>的网络。</p>
+<p>①数据链路的数据帧有一数据位叫做FCS，用以校验数据是否正确送达目的地。网桥通过检查这个域的值来<strong>丢弃损坏的数据</strong>。</p>
+<p>②网桥还能通过地址自学机制和过滤功能<strong>控制网络流量</strong>。</p>
+<p>③以太网等网络中经常使用的交换集线器(Hub”)，现在基本也属于网桥的一种。交换集线器中连接电缆的每个端口都能提供类似网桥的功能。</p>
+<p>④自学式网桥。</p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201103164819940.png" alt="image-20201103164819940"></p>
+<p>3、路由器（3层交换机）：网络层</p>
+<p>网桥是根据MAC地址进行处理，而路由器是根据IP地址进行处理</p>
+<p>4、网关</p>
+<p>网关是OSI参考模型中负责将从传输层到应用层的数据进行转换和转发的设备。它与4~7层交换机一样都是处理传输层及以上的数据，但是<strong>网关不仅转发数据还负责对数据进行转换</strong>，它通常会使用一个表示层或应用层网关，<strong>在两个不能进行直接通信的协议之间进行翻译，最终实现两者之间的通信</strong>。</p>
+<h4 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h4><h5 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h5><p>MAC地址长48比特</p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201106102737993.png" alt="image-20201106102737993"></p>
+<h5 id="共享介质型网络"><a href="#共享介质型网络" class="headerlink" title="共享介质型网络"></a>共享介质型网络</h5><p>在这种方式下，设备之间使用同一个载波信道进行发送和接收，为此基本上采用半双工通信方式，并对介质进行访问控制。</p>
+<p>共享介质型网络有两种介质访问控制方式：①争用方式②令牌传递方式</p>
+<h6 id="争用方式（CSMA载波监听多路访问）"><a href="#争用方式（CSMA载波监听多路访问）" class="headerlink" title="争用方式（CSMA载波监听多路访问）"></a>争用方式（CSMA载波监听多路访问）</h6><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201106103313606.png" alt="dasd"></p>
+<p>CSMA/CD是一种CSMA改良的方式，其工作原理如下</p>
+<ul>
+<li>如果载波信道上没有数据流动，则任何站都可以发送数据。</li>
+<li>检查是否会发生冲突。一旦发生冲突时，放弃发送数据，同时立即释放载波信道。</li>
+<li>放弃发送以后，随机延时一段时间，再重新争用介质，重新发送帧。</li>
+</ul>
+<h6 id="令牌传递方式"><a href="#令牌传递方式" class="headerlink" title="令牌传递方式"></a>令牌传递方式</h6><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201106104106797.png" alt="dawdw"></p>
+<p>优点：①不会有冲突②每个站都有通过平等循环获得令牌的机会，因此即使网络拥堵也不会导致性能下降。</p>
+<p>缺点：数据链路的利用率达不到100%。</p>
+<h5 id="非共享介质网络"><a href="#非共享介质网络" class="headerlink" title="非共享介质网络"></a>非共享介质网络</h5><p>每个站直连交换机，由交换机负责转发数据帧，全双工通信。</p>
+<p>缺点：一旦交换机发生故障，与之相连的所有计算机将无法通信。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/11/07/%E5%9B%BE%E8%A7%A3http/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2020-11-07 17:08:52
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络">
+                        <b>#</b> 计算机网络
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/11/16/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%B1%82%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="toc-text">分层参考模型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%84%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">各层的功能</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E5%92%8C%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">网络层和数据链路层的区别</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E6%96%B9%E5%BC%8F%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-text">传输方式的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E9%9D%A2%E5%90%91%E6%9C%89%E8%BF%9E%E6%8E%A5%E5%9E%8B%E5%92%8C%E9%9D%A2%E5%90%91%E6%97%A0%E8%BF%9E%E6%8E%A5%E5%9E%8B"><span class="toc-text">1、面向有连接型和面向无连接型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2%E5%92%8C%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="toc-text">2、电路交换和分组交换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E6%A0%B9%E6%8D%AE%E6%8E%A5%E6%94%B6%E7%AB%AF%E6%95%B0%E9%87%8F%E5%88%86%E7%B1%BB"><span class="toc-text">3、根据接收端数量分类</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80"><span class="toc-text">地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%9A%84%E6%9E%84%E6%88%90%E8%A6%81%E7%B4%A0"><span class="toc-text">网络的构成要素</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E9%80%9F%E7%8E%87%E5%92%8C%E5%90%9E%E5%90%90%E9%87%8F"><span class="toc-text">传输速率和吞吐量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E8%AE%BE%E5%A4%87"><span class="toc-text">传输设备</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-text">数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#MAC%E5%9C%B0%E5%9D%80"><span class="toc-text">MAC地址</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E4%BB%8B%E8%B4%A8%E5%9E%8B%E7%BD%91%E7%BB%9C"><span class="toc-text">共享介质型网络</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BA%89%E7%94%A8%E6%96%B9%E5%BC%8F%EF%BC%88CSMA%E8%BD%BD%E6%B3%A2%E7%9B%91%E5%90%AC%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE%EF%BC%89"><span class="toc-text">争用方式（CSMA载波监听多路访问）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BB%A4%E7%89%8C%E4%BC%A0%E9%80%92%E6%96%B9%E5%BC%8F"><span class="toc-text">令牌传递方式</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9D%9E%E5%85%B1%E4%BA%AB%E4%BB%8B%E8%B4%A8%E7%BD%91%E7%BB%9C"><span class="toc-text">非共享介质网络</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Fx12138">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="facebook" href="">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="twitter" href="">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="weibo" href="">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/fx12138">Copyright © stupidbird 2021</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

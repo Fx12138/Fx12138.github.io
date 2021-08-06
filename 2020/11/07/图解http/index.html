@@ -1,23 +1,539 @@
-extends includes/layout.pug
+<!DOCTYPE html>
+<html lang="en">
 
-block content
-  article#post.article-entry
-    != page.content
-  // lincense
-  if(theme.copyright.enable === true && page.copyright !== false)
-    .license-wrapper
-      p 
-        span Author:  
-        a(href=config.url)= config.author
-      p 
-        span Link:  
-        a(href=page.permalink)= page.permalink
-      p 
-        span Copyright:  
-        span!= theme.copyright.license
-  include includes/partial/post-nav.pug
-  #comment
-    include includes/comment/livere.pug
-    include includes/comment/disqus.pug
-    include includes/comment/changyan.pug
-    include includes/comment/gitment.pug
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="fx" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      图解http 
+      
+      
+      |
+    
+     F blog
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/welcome.jfif">
+    <link rel="icon" href="/images/welcome.jfif">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/welcome.jfif" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">F</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">图解http</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2020-11-07 17:06:56
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络">
+                    <b>#</b> 计算机网络
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p><img src="http%E5%B0%81%E8%A3%85%E8%BF%87%E7%A8%8B.png" alt="http"></p>
+<h4 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h4><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="TCP三次握手"></p>
+<h4 id="各种协议与HTTP的关系"><a href="#各种协议与HTTP的关系" class="headerlink" title="各种协议与HTTP的关系"></a>各种协议与HTTP的关系</h4><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201022135638710.png" alt="image-20201022135638710"></p>
+<h4 id="URI和URL的区别"><a href="#URI和URL的区别" class="headerlink" title="URI和URL的区别"></a>URI和URL的区别</h4><p>​        统一资源标志符URI就是在某一规则下能把一个资源独一无二地标识出来。<br>​        拿人做例子，假设这个世界上所有人的名字都不能重复，那么名字就是URI的一个实例，通过名字这个字符串就可以标识出唯一的一个人。<br>​        现实当中名字当然是会重复的，所以身份证号才是URI，通过身份证号能让我们能且仅能确定一个人。<br>​        那统一资源定位符URL是什么呢。也拿人做例子然后跟HTTP的URL做类比，就可以有：动物住址协议://地球/中国/浙江省/杭州市/西湖区/某大学/14号宿舍楼/525号寝/张三.人</p>
+<p>​        可以看到，这个字符串同样标识出了唯一的一个人，起到了URI的作用，所以URL是URI的子集。URL是以描述人的位置来唯一确定一个人的。在上文我们用身份证号也可以唯一确定一个人。对于这个在杭州的张三，我们也可以用：身份证号：1234567来标识他。不论是用定位的方式还是用编号的方式，我们都可以唯一确定一个人，都是URl的一种实现，而<strong>URL就是用定位的方式实现的URI</strong>。</p>
+<p>​        回到Web上，假设所有的Html文档都有唯一的编号，记作html:xxxxx，xxxxx是一串数字，即Html文档的身份证号码，这个能唯一标识一个Html文档，那么这个号码就是一个URI。而URL则通过描述是哪个主机上哪个路径上的文件来唯一确定一个资源，也就是定位的方式来实现的URI。<br>​        对于现在网址我更倾向于叫它URL，毕竟它提供了资源的位置信息，如果有一天网址通过号码来标识变成了<a href="https://link.zhihu.com/?target=http://741236985.html">http://741236985.html</a>，那感觉叫成URI更为合适，不过这样子的话还得想办法找到这个资源咯…</p>
+<h4 id="HTTP1-1请求方法"><a href="#HTTP1-1请求方法" class="headerlink" title="HTTP1.1请求方法"></a>HTTP1.1请求方法</h4><p>GET(获取资源)</p>
+<p>POST(传输实体主体)</p>
+<p>HEAD(获取报文头部)</p>
+<p>PUT(传输文件)</p>
+<p>DELETE(删除文件)</p>
+<p>OPTIONS(询问支持的方法)</p>
+<p>TRACE(追踪路径)：用来确认链接过程中发生的一系列操作</p>
+<p>CONNECT(要求用隧道协议连接代理)      CONNECT 代理服务器名:端口号 HTTP版本</p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201024125744129.png" alt="image-20201024125744129"></p>
+<h4 id="请求报文和响应报文的结构"><a href="#请求报文和响应报文的结构" class="headerlink" title="请求报文和响应报文的结构"></a>请求报文和响应报文的结构</h4><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201106225158985.png" alt="图"></p>
+<p>请求行</p>
+<p>包含用于请求的方法，请求url和HTTP版本</p>
+<p>状态行</p>
+<p>包含表明响应结果的状态码，原因短语和HTTP版本</p>
+<p>首部字段</p>
+<p>包含表示请求和响应的各种条件和属性的各类首部</p>
+<p>一般有四种首部，分别是：通用首部、请求首部、响应首部和实体首部</p>
+<h4 id="HTTP是无状态协议，不对之前的请求和响应状态进行管理。于是添加可Cookie进行状态管理"><a href="#HTTP是无状态协议，不对之前的请求和响应状态进行管理。于是添加可Cookie进行状态管理" class="headerlink" title="HTTP是无状态协议，不对之前的请求和响应状态进行管理。于是添加可Cookie进行状态管理"></a>HTTP是无状态协议，不对之前的请求和响应状态进行管理。于是添加可Cookie进行状态管理</h4><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-2020.png" alt="图"></p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201024131944288.png" alt="image-20201024131944288"></p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201024131944288.png" alt="da"></p>
+<p>Cookie会根据服务器端的响应报文内的一个叫做Set-Cookie的首部字段信息，通知客户端保存这个Cookie，当下次客户端再对服务端发送请求时，客户端会自动再请求报文中加入Cookie值然后发送出去。</p>
+<h4 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h4><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201024142856776.png" alt="image-20201024142856776"></p>
+<h5 id="2xx"><a href="#2xx" class="headerlink" title="2xx"></a>2xx</h5><p>200 ok 表示请求在服务器端被正常处理了</p>
+<p>204 No Content:请求处理成功，但没有资源可以返回。一般在只需要客户端往服务器端发送信息，而服务器端不需要对客户端发送新的信息内容的情况下使用。</p>
+<p>206 Partial Content:该状态码表示客户端进行了范围请求，而服务器成功执行了这部分的GET请求。响应报文中包含由Content- Range指定范围的实体内容。</p>
+<h5 id="3xx-重定向"><a href="#3xx-重定向" class="headerlink" title="3xx 重定向"></a>3xx 重定向</h5><p>3XX响应结果表明浏览器需要执行某些特殊的处理以正确处理请求。</p>
+<p>301 Moved Permanently ：永久性重定向，表示请求的资源已经被分配了新的URI，以后应使用资源现在所指的URI。</p>
+<p>302 Found：临时性重定向。该状态码表示请求的资源已被分配了新的URI,希望用户(本次)能使用新的URI访问。</p>
+<p>303 See Other:该状态码表示由于请求对应的资源存在着另一个URI,<strong>应使用GET方法</strong>定向获取请求的资源。<strong>303状态码和302 Found状态码有着相同的功能，但303状态码明确表示客户端应当采用GET方法获取资源，这点与302状态码有区别。</strong>比如，当使用POST方法访问CGI程序，其执行后的处理结果是希望客户端能以GET方法重定向到另-一个URI上去时，返回303状态码。虽然302 Found状态码也可以实现相同的功能，但这里使用303状态码是最理想的。</p>
+<p>304 Not Modified :该状态码表示客户端发送附带条件的请求”时，<strong>服务器端允许请求访问资源，但未满足条件的情况</strong>。304 状态码返回时，不包含任何响应的主体部分。304 虽然被划分在3XX类别中，但是和重定向没有关系。</p>
+<p>307 Temporary Redirect ：临时重定向。</p>
+<h5 id="4xx-客户端错误"><a href="#4xx-客户端错误" class="headerlink" title="4xx 客户端错误"></a>4xx 客户端错误</h5><p>400 Bad Request：表示请求报文中存在语法错误</p>
+<p>401 Unauthorized：该状态码表示发送的请求需要有通过HTTP认证(BASIC认证，DIGEST认证)的认证信息。另外若之前已进行过1次请求，则表示用户认证失败。</p>
+<p>403 Forbidden：表明请求资源的访问被服务器拒绝了，未获得文件系统的访问授权，访问权限出现某些问题(从未授权的发送源IP地址试图访问)等列举的情况都可能是发生403的原因。</p>
+<p>404 Not Found：服务器上无法找到请求的资源。</p>
+<h5 id="5xx-服务器错误"><a href="#5xx-服务器错误" class="headerlink" title="5xx 服务器错误"></a>5xx 服务器错误</h5><p>500 Internal Server Error：该状态码表明服务器端在执行请求时发生了错误。也有可能是Web应用存在的bug或某些临时的故障。</p>
+<p>503 Service Unavailable：该状态码表明服务器暂时处于超负载或正在进行停机维护，现在无法处理请求。如果事先得知解除以上状况需要的时间，最好写入Retry-After首部字段再返回给客户端。</p>
+<h4 id="HTTP和HTTPS"><a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h4><p>HTTP主要有这些不足，例举如下<br>●通信使用<strong>明文(不加密)</strong>,内容可能会被窃听<br>●不验证<strong>通信方的身份</strong>，因此有可能遭遇伪装<br>●无法证明<strong>报文的完整性</strong>，所以有可能已遭篡改</p>
+<p>HTTPS：把添加了加密处理和认证等机制的HTTP称为HTTPS。与SSL或TLS组合使用的HTTP被称为HTTPS ( HTTP Secure,超文本传输安全协议)或HTTP over SSL。即通过SSL( Secure Socket Layer,安全套接层)加密HTTP的通信内容。SSL不仅提供加密处理，还是用了一种证书的手段用于确定通信方。还能对报文进行完整性保护。</p>
+<p>HTTPS并非是应用层的一-种新协议。只是HTTP通信接口部分用SSL ( Secure Socket Layer )和TLS ( Transport Layer Security)协议代替而已。通常，HTTP直接和TCP通信。当使用SSL时，则演变成先和SSL通信，再由SSL和TCP通信了。简言之，所谓HTTPS,其实就是身披SSL协议这层外壳的HTTP。</p>
+<h5 id="HTTPS的加密机制"><a href="#HTTPS的加密机制" class="headerlink" title="HTTPS的加密机制"></a>HTTPS的加密机制</h5><p>HTTPS采用共享密钥加密和公开密钥加密两者并用的混合加密机制。</p>
+<p>过程：</p>
+<p>①使用公开密钥加密方式安全地交换在稍后的共享密钥加密中要使用的密钥</p>
+<p>②确保交换的密钥是安全的前提下，使用共享密钥加密方式进行通信</p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201026131022322.png" alt="image-20201026131022322"></p>
+<h5 id="HTTPS通信"><a href="#HTTPS通信" class="headerlink" title="HTTPS通信"></a>HTTPS通信</h5><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201026135254930.png" alt="image-20201026135254930"></p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201026135327753.png" alt="image-20201026135327753"></p>
+<h5 id="HTTPS缺点"><a href="#HTTPS缺点" class="headerlink" title="HTTPS缺点"></a>HTTPS缺点</h5><p>①因为与纯文本通信相比，加密通信会消耗更多的CPU及内存资源。如果每次通信都加密，会消耗相当多的资源，平摊到一台计算机上时，能够处理的请求数量必定也会随之减少。因此，如果是非敏感信息则使用HTTP通信，只有在包含个人信息等敏感数据时，才利用HTTPS加密通信。</p>
+<p>SSL的慢分两种。一种是指通信慢。另一种是指由于大量消耗CPU<br>及内存等资源，导致处理速度变慢。</p>
+<p>②除此之外，想要节约购买证书的开销也是原因之一。要进行HTTPS通信，证书是必不可少的。而使用的证书必须向认证机构(CA)购买。</p>
+<h4 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h4><p>Ajax ( Asynchronous JavaScript and XML，异步JavaScript与XML技术)是-一种有效利用JavaScript和DOM ( Document Object Model,文档对象模型)的操作，以达到局部Web页面替换加载的异步通信手段。和以前的同步通信相比，由于它只更新一部分页面，响应中传输的数据量会因此而减少，这一优点显而易见。</p>
+<p>而利用Ajax实时地从服务器获取内容，有可能会导致大量请求产生。另外，Ajax仍未解决HTTP协议本身存在的问题。</p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201027102018309.png" alt="image-20201027102018309"></p>
+<h4 id="Comet"><a href="#Comet" class="headerlink" title="Comet"></a>Comet</h4><p>通常，服务器端接收到请求，在处理完毕后就会立即返回响应，但为了实现推送功能，Comet 会先将响应置于挂起状态，当服务器端有内容更新时，再返回该响应。因此，服务器端一旦有更新，就可以立即反馈给客户端。<br>内容上虽然可以做到实时更新，但为了保留响应，一次连接的持续时间也变长了。期间，为了维持连接会消耗更多的资源。另外，Comet也仍未解决HTTP协议本身存在的问题。</p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3http/image-20201027102150924.png" alt="image-20201027102150924"></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/09/24/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2020-11-07 17:06:56
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络">
+                        <b>#</b> 计算机网络
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-text">TCP三次握手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E7%A7%8D%E5%8D%8F%E8%AE%AE%E4%B8%8EHTTP%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">各种协议与HTTP的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#URI%E5%92%8CURL%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">URI和URL的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP1-1%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95"><span class="toc-text">HTTP1.1请求方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-text">请求报文和响应报文的结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP%E6%98%AF%E6%97%A0%E7%8A%B6%E6%80%81%E5%8D%8F%E8%AE%AE%EF%BC%8C%E4%B8%8D%E5%AF%B9%E4%B9%8B%E5%89%8D%E7%9A%84%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94%E7%8A%B6%E6%80%81%E8%BF%9B%E8%A1%8C%E7%AE%A1%E7%90%86%E3%80%82%E4%BA%8E%E6%98%AF%E6%B7%BB%E5%8A%A0%E5%8F%AFCookie%E8%BF%9B%E8%A1%8C%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86"><span class="toc-text">HTTP是无状态协议，不对之前的请求和响应状态进行管理。于是添加可Cookie进行状态管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-text">状态码</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2xx"><span class="toc-text">2xx</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3xx-%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-text">3xx 重定向</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4xx-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%94%99%E8%AF%AF"><span class="toc-text">4xx 客户端错误</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5xx-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%94%99%E8%AF%AF"><span class="toc-text">5xx 服务器错误</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP%E5%92%8CHTTPS"><span class="toc-text">HTTP和HTTPS</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTPS%E7%9A%84%E5%8A%A0%E5%AF%86%E6%9C%BA%E5%88%B6"><span class="toc-text">HTTPS的加密机制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTPS%E9%80%9A%E4%BF%A1"><span class="toc-text">HTTPS通信</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTPS%E7%BC%BA%E7%82%B9"><span class="toc-text">HTTPS缺点</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ajax"><span class="toc-text">Ajax</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Comet"><span class="toc-text">Comet</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Fx12138">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="facebook" href="">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="twitter" href="">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="weibo" href="">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/fx12138">Copyright © stupidbird 2021</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="fx" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      webpack 
+      
+      
+      |
+    
+     F blog
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/welcome.jfif">
+    <link rel="icon" href="/images/welcome.jfif">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/welcome.jfif" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">F</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">webpack</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2021-11-19 10:11:21
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    <b>#</b> 前端
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="提取css成单独文件"><a href="#提取css成单独文件" class="headerlink" title="提取css成单独文件"></a>提取css成单独文件</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">        <span class="comment">//提取css单独打包</span></span><br><span class="line">        <span class="keyword">new</span> MiniCssExtractPlugin(&#123;</span><br><span class="line">            <span class="attr">filename</span>: <span class="string">&#x27;css/build.css&#x27;</span></span><br><span class="line">        &#125;)</span><br><span class="line">    ],</span><br><span class="line"><span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">                use: [</span><br><span class="line">                    <span class="comment">// &#x27;style-loader&#x27;, </span></span><br><span class="line">                    <span class="comment">//取代style-loader 作用:提取js中css成单独的文件</span></span><br><span class="line">                    MiniCssExtractPlugin.loader,</span><br><span class="line">                    <span class="comment">//将css文件整合到js文件中</span></span><br><span class="line">                    <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment">//css兼容性处理:postcss-loader postcss-preset-env</span></span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<h1 id="压缩css"><a href="#压缩css" class="headerlink" title="压缩css"></a>压缩css</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CssMinimizerWebpackPlugin = <span class="built_in">require</span>(<span class="string">&#x27;css-minimizer-webpack-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">minimizer</span>: [</span><br><span class="line">            <span class="keyword">new</span> CssMinimizerWebpackPlugin()</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<h1 id="babel-loader"><a href="#babel-loader" class="headerlink" title="babel-loader"></a>babel-loader</h1><p>将js文件中es6打包转为所有浏览器都能识别的es5</p>
+<p>安装</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install <span class="literal">-d</span> babel<span class="literal">-loader</span> @babel/core @babel/p<span class="built_in">reset-env</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>babel-loader 在webpack里应用babel解析es6的桥梁</li>
+<li>@babel/core babel核心模块</li>
+<li>@babel/preset-env babel预设,一组babel插件的集合</li>
+</ul>
+<p>初次之外 还需要regeneratorRuntime插件,这是webpack打包生成的全局辅助函数,由babel生成,用于兼容async/await语法</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#这个包中包含了regeneratorRuntime,运行时寻妖</span></span><br><span class="line">npm install @babel/runtime <span class="literal">-d</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#这个插件会在需要regeneratorRuntime的地方自动require导包,编译时需要</span></span><br><span class="line">npm install @babel/plugin<span class="literal">-transform</span><span class="literal">-runtime</span> <span class="literal">-d</span></span><br></pre></td></tr></table></figure>
+
+<p>最终在webpack.config.js中配置为</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">           <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">           exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">           use: &#123;</span><br><span class="line">               <span class="attr">loader</span>: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">               <span class="attr">options</span>: &#123;</span><br><span class="line">                   <span class="attr">presets</span>: [<span class="string">&#x27;@babel/preset-env&#x27;</span>],</span><br><span class="line">                   <span class="attr">plugins</span>: [</span><br><span class="line">                       [</span><br><span class="line">                           <span class="string">&#x27;@babel/plugin-transform-runtime&#x27;</span></span><br><span class="line">                       ]</span><br><span class="line">                   ]</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="代码分离"><a href="#代码分离" class="headerlink" title="代码分离"></a>代码分离</h1><p>用来获得更小的bundle,使bundle按需加载或者并行加载,常用的有三种方法</p>
+<h2 id="入口起点"><a href="#入口起点" class="headerlink" title="入口起点"></a>入口起点</h2><p>使用entry配置手动的分离代码</p>
+<p>缺点:如果是多个入口,那么每个入口中共享的文件会分别在每个包里重复去打包</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//入口文件</span></span><br><span class="line">    <span class="attr">entry</span>: &#123;</span><br><span class="line">        <span class="attr">index</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">        <span class="attr">another</span>: <span class="string">&#x27;./src/another.js&#x27;</span>	<span class="comment">//这是另一个单独的js文件单独打包</span></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;[name].bundle.js&#x27;</span>,  <span class="comment">//打包后文件名称</span></span><br><span class="line">        <span class="attr">path</span>: path.resolve(__dirname, <span class="string">&#x27;./dist&#x27;</span>),    <span class="comment">//打包后文件存储地址</span></span><br><span class="line">        <span class="attr">clean</span>: <span class="literal">true</span>, <span class="comment">//是否自动删除之前旧的打包文件</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">assetModuleFilename</span>: <span class="string">&#x27;image/[contenthash][ext]&#x27;</span>,    <span class="comment">//定义资源模块的导出位置</span></span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>这样会生成两个打包文件, index.bundle.js 和 another.bundle.js</p>
+<h2 id="防止重复"><a href="#防止重复" class="headerlink" title="防止重复"></a>防止重复</h2><p>使用Entry dependencies 或者 SplitChunksPlugin 去重和分离代码</p>
+<h3 id="Entry-dependencies"><a href="#Entry-dependencies" class="headerlink" title="Entry dependencies"></a>Entry dependencies</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//入口文件</span></span><br><span class="line">    <span class="attr">entry</span>: &#123;</span><br><span class="line">        <span class="attr">index</span>:&#123;</span><br><span class="line">            <span class="attr">import</span>:<span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">            <span class="attr">dependOn</span>:<span class="string">&#x27;shared&#x27;</span>	<span class="comment">//共享下面定义的重复模块,并生成一个shared.bundle.js</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">another</span>:&#123;</span><br><span class="line">            <span class="attr">import</span>:<span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">            <span class="attr">dependOn</span>:<span class="string">&#x27;shared&#x27;</span>	<span class="comment">//共享下面定义的重复模块,并生成一个shared.bundle.js</span></span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        <span class="attr">shared</span>:<span class="string">&#x27;less&#x27;</span>	<span class="comment">//这样上面两个打包时如果都用到了less模块就会共享</span></span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>比如两个js文件均引入了less模块:import less from ‘less’,如果普通的打包方式两个打包后的文件分别大小,分别为1.32M 和 1.2M.如下</p>
+<p><img src="/2021/11/19/webpack/devApp\myblog\source_posts\webpack\image-20211119155403269.png" alt="image-20211119155403269"></p>
+<p>如果改为这种防止重复的方法则共有三个打包文件,如下</p>
+<p><img src="/2021/11/19/webpack/devApp\myblog\source_posts\webpack\image-20211119155530856.png" alt="image-20211119155530856"></p>
+<p>其中shared.bundle.js是打包共享模块的打包文件,另外两个明显缩小</p>
+<h3 id="SplitChunksPlugin"><a href="#SplitChunksPlugin" class="headerlink" title="SplitChunksPlugin"></a>SplitChunksPlugin</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">entry: &#123;</span><br><span class="line">    <span class="attr">index</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">    <span class="attr">another</span>: <span class="string">&#x27;./src/another.js&#x27;</span>,</span><br><span class="line">&#125;,</span><br><span class="line"><span class="attr">optimization</span>: &#123;</span><br><span class="line">    <span class="attr">splitChunks</span>: &#123;</span><br><span class="line">        <span class="attr">chunks</span>: <span class="string">&#x27;all&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>这样会自动抽离公共模块生成额外两个打包文件</p>
+<h2 id="动态导入"><a href="#动态导入" class="headerlink" title="动态导入"></a>动态导入</h2><p>通过模块的内联函数调用来分离代码.使用了async提供的import的函数</p>
+<p>新建一个async-module.js文件,如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这样写的目的是为了让import帮助我们去抽离出一个单独的lodash文件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getComponent</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//import 返回的是一个promise</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">import</span>(<span class="string">&#x27;lodash&#x27;</span>).then(<span class="function">(<span class="params">&#123; <span class="keyword">default</span>: _ &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> element = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>)</span><br><span class="line">        element.innerHTML = _join([<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;webpack&quot;</span>], <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> element</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getComponent().then(<span class="function">(<span class="params">element</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">document</span>.appendChild(element)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>webpack.config.js如下,仅仅使用最简单的方式打包</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//入口文件</span></span><br><span class="line">    <span class="attr">entry</span>: &#123;</span><br><span class="line">        <span class="attr">index</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>在index.js中引入async-module.js</p>
+<p>这样打包后会单独分离出一个lodash的打包文件</p>
+<p><img src="/2021/11/19/webpack/devApp\myblog\source_posts\webpack\image-20211122094729606.png" alt="image-20211122094729606"></p>
+<p>动态导入和前面的静态方法可以一起使用</p>
+<h2 id="动态导入的应用"><a href="#动态导入的应用" class="headerlink" title="动态导入的应用"></a>动态导入的应用</h2><h3 id="懒加载"><a href="#懒加载" class="headerlink" title="懒加载"></a>懒加载</h3><p>又称为按需加载.懒加载是动态导入代码分离方法的一种应用</p>
+<p>因为有一些模块应用的很少,或者根本不会被引用.所以这些时候可以在需要的是在才对这些模块进行加载,从而得到优化</p>
+<p>新建一个math.js文件如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">sub</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x - y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在index.js中新增一个按钮,用来加载math.js并调用其中的方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> button = <span class="built_in">document</span>.createElement(<span class="string">&#x27;button&#x27;</span>)</span><br><span class="line">button.textContent = <span class="string">&quot;点击执行10+10&quot;</span></span><br><span class="line">button.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">import</span>(<span class="string">&#x27;./math&#x27;</span>).then(<span class="function">(<span class="params">&#123; add &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(add(<span class="number">10</span>, <span class="number">10</span>));</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//这样可以自定义生成的打包文件的名称,这样math文件打包出来的名字为math.bundle.js</span></span><br><span class="line"><span class="comment">//button.addEventListener(&#x27;click&#x27;, () =&gt; &#123;</span></span><br><span class="line"><span class="comment">//    import(/*webpackChunkName:&#x27;math&#x27;*/&#x27;./math&#x27;).then((&#123; add &#125;) =&gt; &#123;</span></span><br><span class="line"><span class="comment">//        console.log(add(10, 10));</span></span><br><span class="line"><span class="comment">//    &#125;)</span></span><br><span class="line"><span class="comment">//&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<p>这样打包后会生成一个新的单独的math的打包文件,其中包含了math.js中定义的两个方法,从而在需要这个包的的时候才会去加载</p>
+<p><img src="/2021/11/19/webpack/devApp\myblog\source_posts\webpack\image-20211122104318242.png" alt="image-20211122104318242"></p>
+<p>这时在浏览器中初启动时并不会请求加载math打包的相关文件</p>
+<p><img src="/2021/11/19/webpack/devApp\myblog\source_posts\webpack\image-20211122104521719.png" alt="image-20211122104521719"></p>
+<p>当点击按钮后</p>
+<p><img src="/2021/11/19/webpack/devApp\myblog\source_posts\webpack\image-20211122104640941.png" alt="image-20211122104640941"></p>
+<p>这时才会去请求加载math的打包文件</p>
+<h3 id="预获取和预加载"><a href="#预获取和预加载" class="headerlink" title="预获取和预加载"></a>预获取和预加载</h3><p>预获取</p>
+<p>在下一个页面即将用到的资源可以在父页面中进行预加载,他会在父页面所有其他资源加载完毕后,在浏览器网络空闲时进行下载.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这样可以自定义生成的打包文件的名称,这样math文件打包出来的名字为math.bundle.js</span></span><br><span class="line">button.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">import</span>(<span class="comment">/*webpackChunkName:&#x27;math&#x27;,webpackPrefetch:true*/</span><span class="string">&#x27;./math&#x27;</span>).then(<span class="function">(<span class="params">&#123; add &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(add(<span class="number">10</span>, <span class="number">10</span>));</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>预加载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//这样可以自定义生成的打包文件的名称,这样math文件打包出来的名字为math.bundle.js</span><br><span class="line">button.addEventListener(&#x27;click&#x27;, () =&gt; &#123;</span><br><span class="line">    import(/*webpackChunkName:&#x27;math&#x27;,webpackPreload:true*/&#x27;./math&#x27;).then((&#123; add &#125;) =&gt; &#123;</span><br><span class="line">        console.log(add(10, 10));</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在资源上添加预先加载的注释，你指明该模块需要立即被使用。<strong>异步chunk</strong>会和<strong>父级chunk</strong>并行加载。如果<strong>父级chunk</strong>先下载好，页面就已可显示了，同时等待<strong>异步chunk</strong>的下载。这能大幅提升性能。</p>
+<h1 id="拆分配置文件及合并"><a href="#拆分配置文件及合并" class="headerlink" title="拆分配置文件及合并"></a>拆分配置文件及合并</h1><p>新建config文件夹</p>
+<p>新建webpack.config.common.js这里面写开发环境和生产环境公共的配置</p>
+<p>不同的是:</p>
+<ul>
+<li>output中的filename:在开发环境中由于不需要浏览器的缓存功能,所以不需要每次更新打包文件都更改打包名称,所以在开发环境中固定打包名称,在生产环境中加入hash使每次更新打包文件都声称新的不同的名称,触发浏览器更新缓存</li>
+<li>output中的publicPath:在开发环境中只用于测试,无需设置公共路径.但是在生产环境中需要设置公共路径localhost:8080/</li>
+<li>devtool:在开发环境中需要堆代码进行调试,查找报错位置,需要devtool直接定位到错误位置</li>
+<li>devServer:在开发环境中要自动生成html文件并在修改代码时是页面自动更新,即npx webpack-dev-server</li>
+<li>mode:模式</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * loader: 1下载 2使用(配置loader)</span></span><br><span class="line"><span class="comment"> * plugins: 1下载 2引入 3使用</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> MiniCssExtractPlugin = <span class="built_in">require</span>(<span class="string">&#x27;mini-css-extract-plugin&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; node &#125; = <span class="built_in">require</span>(<span class="string">&#x27;webpack&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//入口文件</span></span><br><span class="line">    <span class="attr">entry</span>: &#123;</span><br><span class="line">        <span class="attr">index</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">        <span class="attr">another</span>: <span class="string">&#x27;./src/another.js&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="comment">//中间的contenthash是因为浏览器会有缓存功能,而每次更新打包后名字不变的话会浏览器会认为没有更新</span></span><br><span class="line">        <span class="comment">//从而浏览及会继续使用缓存中的文件,不会进行更新</span></span><br><span class="line">        <span class="comment">//使用contenthash会让每次打包的文件根据内容生成hash从而改变文件名</span></span><br><span class="line">        <span class="attr">path</span>: path.resolve(__dirname, <span class="string">&#x27;../dist&#x27;</span>),    <span class="comment">//打包后文件存储地址</span></span><br><span class="line">        <span class="attr">clean</span>: <span class="literal">true</span>, <span class="comment">//是否自动删除之前旧的打包文件</span></span><br><span class="line">        <span class="attr">assetModuleFilename</span>: <span class="string">&#x27;image/[contenthash][ext]&#x27;</span>,    <span class="comment">//定义资源模块的导出位置</span></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">//插件的配置</span></span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="comment">//自动打包生成html文件,并</span></span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">            <span class="attr">template</span>: <span class="string">&#x27;./index.html&#x27;</span>,   <span class="comment">//以此文件为模板从而引入入口文件打包后所有资源</span></span><br><span class="line">            <span class="attr">filename</span>: <span class="string">&#x27;app.html&#x27;</span>,</span><br><span class="line">            <span class="attr">inject</span>: <span class="string">&#x27;body&#x27;</span>  <span class="comment">//设置script在哪个位置插入</span></span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="keyword">new</span> MiniCssExtractPlugin()</span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">    <span class="comment">//loader的配置</span></span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [</span><br><span class="line">            <span class="comment">//处理图片资源</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.(png|jpg|gif)$/</span>,   <span class="comment">//匹配哪些文件(此处是处理后缀名为png的文件)</span></span><br><span class="line">                <span class="comment">//这个type共有三种可选</span></span><br><span class="line">                <span class="comment">//1.asset/resource是将图片地址转为打包的图片在打包后目录中的url</span></span><br><span class="line">                <span class="comment">//2.asset/inline是将图片地址转为base64处理的地址</span></span><br><span class="line">                <span class="comment">//3.asset/resource用于导出资源的源代码,一般用于text</span></span><br><span class="line">                type: <span class="string">&#x27;asset/resource&#x27;</span>,</span><br><span class="line">                <span class="attr">generator</span>: &#123;</span><br><span class="line">                    <span class="attr">filename</span>: <span class="string">&#x27;image/[contenthash].[ext]&#x27;</span>   <span class="comment">//定义打包后的图片路径,优先级高于上面output中assetModuleFilename</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="comment">//处理less样式资源</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,  <span class="comment">//打包样式资源</span></span><br><span class="line">                <span class="comment">//要使用多个loader做处理用use,使用单个loader就能处理的话用loader就行</span></span><br><span class="line">                use: [</span><br><span class="line">                    <span class="comment">//use数组中loader执行顺序:从右到左,从下到上 依次执行</span></span><br><span class="line">                    <span class="comment">//创建style标签,将js中的样式资源插入进去,添加到header中生效</span></span><br><span class="line">                    <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">                    <span class="comment">//将css文件变成commonjs模块加载js中,里面内容是样式字符串</span></span><br><span class="line">                    <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">                    <span class="comment">//将less文件编译成css文件</span></span><br><span class="line">                    <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,  <span class="comment">//打包样式资源</span></span><br><span class="line">                use: [</span><br><span class="line">                    <span class="comment">//use数组中loader执行顺序:从右到左,从下到上 依次执行</span></span><br><span class="line">                    <span class="comment">//创建style标签,将js中的样式资源插入进去,添加到header中生效</span></span><br><span class="line">                    <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">                    <span class="comment">//将css文件打包变成commonjs模块加载js中,里面内容是样式字符串</span></span><br><span class="line">                    <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.png$/</span>,   <span class="comment">//匹配哪些文件(此处是处理后缀名为png的文件)</span></span><br><span class="line">                type: <span class="string">&#x27;asset/resource&#x27;</span>,</span><br><span class="line">                <span class="attr">generator</span>: &#123;</span><br><span class="line">                    <span class="attr">filename</span>: <span class="string">&#x27;image/[contenthash][ext]&#x27;</span>   <span class="comment">//定义打包后的图片路径,优先级高于上面output中assetModuleFilename</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">                exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">                use: &#123;</span><br><span class="line">                    <span class="attr">loader</span>: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">                    <span class="attr">options</span>: &#123;</span><br><span class="line">                        <span class="attr">presets</span>: [<span class="string">&#x27;@babel/preset-env&#x27;</span>],</span><br><span class="line">                        <span class="attr">plugins</span>: [</span><br><span class="line">                            [</span><br><span class="line">                                <span class="string">&#x27;@babel/plugin-transform-runtime&#x27;</span></span><br><span class="line">                            ]</span><br><span class="line">                        ]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">splitChunks</span>: &#123;</span><br><span class="line">            <span class="comment">// chunks: &#x27;all&#x27;</span></span><br><span class="line">            <span class="comment">//缓存组,上面输出中使每个文件打包后名称都进行更新</span></span><br><span class="line">            <span class="comment">//但是想某些单独抽离出去的模块并不会被修改,第三方库,比如lodash</span></span><br><span class="line">            <span class="comment">//这种情况下希望浏览器只加载一次,以后都用缓存的中这些模块</span></span><br><span class="line">            <span class="comment">//在这里配置缓存组</span></span><br><span class="line">            <span class="attr">cacheGroups</span>: &#123;</span><br><span class="line">                <span class="attr">vendors</span>: &#123;</span><br><span class="line">                    <span class="attr">test</span>: <span class="string">&#x27;/[\\/]node_modules[\\/]/&#x27;</span>,</span><br><span class="line">                    <span class="attr">name</span>: <span class="string">&#x27;vendors&#x27;</span>,</span><br><span class="line">                    <span class="attr">chunks</span>: <span class="string">&#x27;all&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>新建webpack.config.dev.js 这里配置开发环境中需要的特有配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;js/[name].js&#x27;</span>,  <span class="comment">//打包后文件名称</span></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="attr">devtool</span>: <span class="string">&#x27;inline-source-map&#x27;</span>,   <span class="comment">//开发时报错直接定位到报错的位置</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//自动化 自动编译 自动打开浏览器 自动刷洗浏览器</span></span><br><span class="line">    <span class="comment">//特点 只会在内存中打包,不回有任何输出</span></span><br><span class="line">    <span class="comment">//启动指令:npx webpack-dev-server</span></span><br><span class="line">    <span class="attr">devServer</span>: &#123;</span><br><span class="line">        <span class="comment">//启动gzip压缩</span></span><br><span class="line">        <span class="attr">compress</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="comment">//端口号</span></span><br><span class="line">        <span class="attr">port</span>: <span class="number">8080</span>,</span><br><span class="line">        <span class="attr">static</span>: <span class="string">&#x27;./dist&#x27;</span>,</span><br><span class="line">        <span class="attr">open</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>新建webpack.config.pro.js 这里配置生产环境中需要的特有配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="comment">//中间的contenthash是因为浏览器会有缓存功能,而每次更新打包后名字不变的话会浏览器会认为没有更新</span></span><br><span class="line">        <span class="comment">//从而浏览及会继续使用缓存中的文件,不会进行更新</span></span><br><span class="line">        <span class="comment">//使用contenthash会让每次打包的文件根据内容生成hash从而改变文件名</span></span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;js/[name].[contenthash].js&#x27;</span>,  <span class="comment">//打包后文件名称</span></span><br><span class="line">        <span class="attr">publicPath</span>: <span class="string">&#x27;localhost:8080/&#x27;</span>,   <span class="comment">//公共路径</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;production&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下载webpack-merge包用于合并配置</p>
+<p>新建webpack.config.js文件,在其中对命令进行判断,从而决定怎么合并</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; merge &#125; = <span class="built_in">require</span>(<span class="string">&#x27;webpack-merge&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> commonConfig = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.config.common&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> productionConfig = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.config.pro&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> developmentConfig = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.config.dev&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function">(<span class="params">env</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="keyword">case</span> env.development:</span><br><span class="line">            <span class="keyword">return</span> merge(commonConfig, developmentConfig)</span><br><span class="line">        <span class="keyword">case</span> env.production:</span><br><span class="line">            <span class="keyword">return</span> merge(commonConfig, productionConfig)</span><br><span class="line">        <span class="attr">default</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;没有匹配到env环境&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在package.json中</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;start&quot;</span>: <span class="string">&quot;npx webpack server -c ./config/webpack.config.js --env development&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;build&quot;</span>: <span class="string">&quot;npx webpack -c ./config/webpack.config.js --env production&quot;</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<h1 id="source-map"><a href="#source-map" class="headerlink" title="source-map"></a>source-map</h1><p>webpack内置source-map,由于浏览器加载的是打包好的bundle.js文件,所以在报错定位时查看到的也是bundle文件.上面也已经用到了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">devtool: <span class="string">&#x27;inline-source-map&#x27;</span>,   <span class="comment">//开发时报错直接定位到报错的位置</span></span><br></pre></td></tr></table></figure>
+
+<p>source-map有好多种可选值,当不设置的时候默认为eval</p>
+<ul>
+<li>eval    将每一个module封装到eval里包裹 起来执行,并且会在末尾加注释//@sourceURL</li>
+<li>source-map 生成source-map 的打包文件</li>
+</ul>
+<h1 id="devServer"><a href="#devServer" class="headerlink" title="devServer"></a>devServer</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自动化 自动编译 自动打开浏览器 自动刷洗浏览器</span></span><br><span class="line">   <span class="comment">//特点 只会在内存中打包,不回有任何输出</span></span><br><span class="line">   <span class="comment">//启动指令:npx webpack-dev-server</span></span><br><span class="line">   <span class="attr">devServer</span>: &#123;</span><br><span class="line">       <span class="attr">static</span>: path.resolve(__dirname, <span class="string">&#x27;../dist&#x27;</span>),</span><br><span class="line">       <span class="comment">//启动gzip压缩(使打包文件从服务器传到浏览器是经过压缩的,提高速度)</span></span><br><span class="line">       <span class="attr">compress</span>: <span class="literal">true</span>,</span><br><span class="line">       <span class="comment">//端口号</span></span><br><span class="line">       <span class="attr">port</span>: <span class="number">8080</span>,</span><br><span class="line">       <span class="attr">open</span>: <span class="literal">true</span>,</span><br><span class="line"></span><br><span class="line">       <span class="comment">//添加响应头</span></span><br><span class="line">       <span class="attr">headers</span>: &#123;</span><br><span class="line">           <span class="string">&#x27;X-Access-Token&#x27;</span>: <span class="string">&#x27;abc123&#x27;</span></span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//配置代理</span></span><br><span class="line">       <span class="attr">proxy</span>: &#123;</span><br><span class="line">           <span class="string">&#x27;/api&#x27;</span>: <span class="string">&#x27;http://localhost:9000&#x27;</span></span><br><span class="line">       &#125;,</span><br><span class="line">       <span class="comment">//当我们的应用是个SPA(单页面应用),当路由到/some时,此时刷新页面可能会报错</span></span><br><span class="line">       <span class="attr">historyApiFallback</span>:<span class="literal">true</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="优化开发环境"><a href="#优化开发环境" class="headerlink" title="优化开发环境"></a>优化开发环境</h1><h2 id="优化打包构建速度"><a href="#优化打包构建速度" class="headerlink" title="优化打包构建速度"></a>优化打包构建速度</h2><h3 id="oneOf"><a href="#oneOf" class="headerlink" title="oneOf"></a>oneOf</h3><p>每个文件都会被rules中的所有loader匹配处理,使用oneOf则在oneOf中的loader只会匹配一个,提高构建速度.但是注意不能有两个配置处理同一类型的文件.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//loader的配置</span></span><br><span class="line">        <span class="attr">module</span>: &#123;</span><br><span class="line">            <span class="attr">rules</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">oneOf</span>: [</span><br><span class="line">                        <span class="comment">//处理图片资源</span></span><br><span class="line">                        &#123;</span><br><span class="line">                            <span class="attr">test</span>: <span class="regexp">/\.(png|jpg|gif)$/</span>,   <span class="comment">//匹配哪些文件(此处是处理后缀名为png的文件)</span></span><br><span class="line">                            <span class="comment">//这个type共有三种可选</span></span><br><span class="line">                            <span class="comment">//1.asset/resource是将图片地址转为打包的图片在打包后目录中的url</span></span><br><span class="line">                            <span class="comment">//2.asset/inline是将图片地址转为base64处理的地址</span></span><br><span class="line">                            <span class="comment">//3.asset/resource用于导出资源的源代码,一般用于text</span></span><br><span class="line">                            type: <span class="string">&#x27;asset/resource&#x27;</span>,</span><br><span class="line">                            <span class="attr">generator</span>: &#123;</span><br><span class="line">                                <span class="attr">filename</span>: <span class="string">&#x27;image/[contenthash].[ext]&#x27;</span>   <span class="comment">//定义打包后的图片路径,优先级高于上面output中assetModuleFilename</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        <span class="comment">//处理less样式资源</span></span><br><span class="line">                        &#123;</span><br><span class="line">                            <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,  <span class="comment">//打包样式资源</span></span><br><span class="line">                            <span class="comment">//要使用多个loader做处理用use,使用单个loader就能处理的话用loader就行</span></span><br><span class="line">                            use: [</span><br><span class="line">                                <span class="comment">//use数组中loader执行顺序:从右到左,从下到上 依次执行</span></span><br><span class="line">                                <span class="comment">//创建style标签,将js中的样式资源插入进去,添加到header中生效</span></span><br><span class="line">                                <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">                                <span class="comment">//将css文件变成commonjs模块加载js中,里面内容是样式字符串</span></span><br><span class="line">                                <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">                                <span class="comment">//将less文件编译成css文件</span></span><br><span class="line">                                <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">                            ]</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,  <span class="comment">//打包样式资源</span></span><br><span class="line">                            use: [</span><br><span class="line">                                <span class="comment">//use数组中loader执行顺序:从右到左,从下到上 依次执行</span></span><br><span class="line">                                <span class="comment">//创建style标签,将js中的样式资源插入进去,添加到header中生效</span></span><br><span class="line">                                <span class="comment">// &#x27;style-loader&#x27;,</span></span><br><span class="line">                                <span class="comment">//取代style-loader 作用:提取js中css成单独的文件</span></span><br><span class="line">                                MiniCssExtractPlugin.loader,</span><br><span class="line">                                <span class="comment">//将css文件打包变成commonjs模块加载js中,里面内容是样式字符串</span></span><br><span class="line">                                <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">                            ],</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            <span class="attr">test</span>: <span class="regexp">/\.png$/</span>,   <span class="comment">//匹配哪些文件(此处是处理后缀名为png的文件)</span></span><br><span class="line">                            type: <span class="string">&#x27;asset/resource&#x27;</span>,</span><br><span class="line">                            <span class="attr">generator</span>: &#123;</span><br><span class="line">                                <span class="attr">filename</span>: <span class="string">&#x27;image/[contenthash][ext]&#x27;</span>   <span class="comment">//定义打包后的图片路径,优先级高于上面output中assetModuleFilename</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">                            exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">                            use: &#123;</span><br><span class="line">                                <span class="attr">loader</span>: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">                                <span class="attr">options</span>: &#123;</span><br><span class="line">                                    <span class="attr">presets</span>: [<span class="string">&#x27;@babel/preset-env&#x27;</span>],</span><br><span class="line">                                    <span class="attr">plugins</span>: [</span><br><span class="line">                                        [</span><br><span class="line">                                            <span class="string">&#x27;@babel/plugin-transform-runtime&#x27;</span></span><br><span class="line">                                        ]</span><br><span class="line">                                    ]</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br></pre></td></tr></table></figure>
+
+<h1 id="tree-shaking"><a href="#tree-shaking" class="headerlink" title="tree shaking"></a>tree shaking</h1><p>去除无用代码,即使引用了包但是没有使用也会自动去除.但是不能百分百的tree shaking</p>
+<p>前提:必须使用ES6模块化,开启production环境</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mode:<span class="string">&#x27;production&#x27;</span>,</span><br><span class="line"><span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">usedExports</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="sideEffects"><a href="#sideEffects" class="headerlink" title="sideEffects"></a>sideEffects</h2><p>有些引入的包虽然没使用但是有用,而有些不是,使用sideEffects可以告诉webpack哪些包是必要的不能tree shaking.</p>
+<p>在package.json中设置sideEffects,共有三个可选值</p>
+<ul>
+<li>true 我的所有代码都是有用的,不能随意去除</li>
+<li>false 我所有的包都是没有用的,那么一些引入的包,但是代码中并没有使用的话就会被去除(比如引入的css)</li>
+<li>[] 可以使用一个数组定义哪些有用,不能删除(如 sideEffects:[“*.css”] )</li>
+</ul>
+<h1 id="模块热替换-HMR-与热加载"><a href="#模块热替换-HMR-与热加载" class="headerlink" title="模块热替换(HMR)与热加载"></a>模块热替换(HMR)与热加载</h1><h2 id="模块热替换"><a href="#模块热替换" class="headerlink" title="模块热替换"></a>模块热替换</h2><p>模块热替换会在应用程序运行过程中,替换,添加或删除模块,而<strong>无需重新加载整个页面</strong>.开启方式只需在devServer下配置hot:true即可.</p>
+<p>比如当更改css文件的某一个背景颜色时,不开启热替换的话需要刷新页面才能显示新的页面.但是如果开启了热替换的话则无需刷新页面直接自动更新.</p>
+<p>不过js文件即使开启了热替换也不能进行自动替换,仍会刷新界面才能展示新的效果.这时需要手动进行判断并配置</p>
+<p>比如input.js如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">&#x27;#box&#x27;</span>).innerHTML = <span class="string">&#x27;&lt;input type=&quot;text&quot; value=&quot;input1&quot;/&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>在入口文件中引入input.js,进行如下配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">module</span>.hot) &#123;</span><br><span class="line">    <span class="built_in">module</span>.hot.accept(<span class="string">&#x27;./input.js&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样如果在input.js中改变value的值的话,就能进行自动热替换了.vue中已经自动帮助我们做好了</p>
+<h2 id="热加载"><a href="#热加载" class="headerlink" title="热加载"></a>热加载</h2><p>文件更新时自动刷新服务和页面.新版的webpack-dev-server默认已经开启了热加载的功能,他对应的参数是devServer.liveReload,默认为true.注意:如果想要关掉他,要将liveReload设置为false的同时,也要关闭hot.</p>
+<h1 id="模块解析-resolve"><a href="#模块解析-resolve" class="headerlink" title="模块解析(resolve)"></a>模块解析(resolve)</h1><p>在resolve中设置alias可以设置别名.extensions可以在当前路径中存在文件名相同,扩展名不同的文件,按照extensions配置的顺序优先解析</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>,</span><br><span class="line">    <span class="attr">entry</span>: <span class="string">&#x27;./src/app.js&#x27;</span>,</span><br><span class="line">    </span><br><span class="line">    <span class="attr">resolve</span>: &#123;</span><br><span class="line">        <span class="comment">//设置路径别名</span></span><br><span class="line">        <span class="attr">alias</span>: &#123;</span><br><span class="line">            <span class="string">&#x27;@&#x27;</span>: path.resolve(__dirname, <span class="string">&#x27;./src&#x27;</span>)</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//如果在当前路径中存在文件名相同,扩展名不同的文件</span></span><br><span class="line">        <span class="comment">//按照下面配置的顺序优先解析</span></span><br><span class="line">        <span class="attr">extensions</span>:[<span class="string">&#x27;.json&#x27;</span>,<span class="string">&#x27;.js&#x27;</span>,<span class="string">&#x27;.vue&#x27;</span>]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">                use: [<span class="string">&#x27;style-loader&#x27;</span>, <span class="string">&#x27;css-loader&#x27;</span>]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">            <span class="attr">template</span>: <span class="string">&#x27;./index.html&#x27;</span></span><br><span class="line">        &#125;)</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">devServer</span>: &#123;</span><br><span class="line">        <span class="attr">hot</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="externals"><a href="#externals" class="headerlink" title="externals"></a>externals</h1><p><code>externals</code> 配置选项提供了「从输出的 bundle 中排除依赖」的方法。</p>
+<h1 id="多页面"><a href="#多页面" class="headerlink" title="多页面"></a>多页面</h1><h2 id="entry配置"><a href="#entry配置" class="headerlink" title="entry配置"></a>entry配置</h2><p>将部分不相关的js文件打包成一个文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">entry: &#123;</span><br><span class="line">       <span class="attr">main</span>: [<span class="string">&#x27;./src/js/app.js&#x27;</span>, <span class="string">&#x27;./src/js/app2.js&#x27;</span>],</span><br><span class="line">       <span class="attr">another</span>: <span class="string">&#x27;./src/js/another.js&#x27;</span></span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>这样’./src/js/app.js’, ‘./src/js/app2.js’会打包到一个main.js中,而./src/js/another.js会在另一个中.</p>
+<h2 id="HtmlWebpackPlugin"><a href="#HtmlWebpackPlugin" class="headerlink" title="HtmlWebpackPlugin"></a>HtmlWebpackPlugin</h2><p>HtmlWebpackPlugin中可以配置当前页面可以载入哪些chunk.这样打包好的html中只引入了main.js打包文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">            <span class="attr">template</span>: <span class="string">&#x27;./index.html&#x27;</span>,</span><br><span class="line">            <span class="attr">inject</span>:<span class="string">&#x27;body&#x27;</span>,</span><br><span class="line">            <span class="comment">//根据上面入口中的配置选择需要载入的文件</span></span><br><span class="line">            <span class="attr">chunks</span>:[<span class="string">&#x27;main&#x27;</span>]</span><br><span class="line">        &#125;)</span><br><span class="line">    ],</span><br></pre></td></tr></table></figure>
+
+<h2 id="多页面环境搭建"><a href="#多页面环境搭建" class="headerlink" title="多页面环境搭建"></a>多页面环境搭建</h2><p>主要是配置两个htmlwebpackplugin</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">            <span class="attr">template</span>: <span class="string">&#x27;./index.html&#x27;</span>,</span><br><span class="line">            <span class="attr">inject</span>: <span class="string">&#x27;body&#x27;</span>,</span><br><span class="line">            <span class="attr">filename</span>: <span class="string">&#x27;chanel1/index.html&#x27;</span>,</span><br><span class="line">            <span class="comment">//根据上面入口中的配置选择需要载入的文件</span></span><br><span class="line">            <span class="attr">chunks</span>: [<span class="string">&#x27;main&#x27;</span>]</span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">            <span class="attr">template</span>: <span class="string">&#x27;./index2.html&#x27;</span>,</span><br><span class="line">            <span class="attr">inject</span>: <span class="string">&#x27;body&#x27;</span>,</span><br><span class="line">            <span class="attr">filename</span>: <span class="string">&#x27;chanel2/index2.html&#x27;</span>,</span><br><span class="line">            <span class="comment">//根据上面入口中的配置选择需要载入的文件</span></span><br><span class="line">            <span class="attr">chunks</span>: [<span class="string">&#x27;another&#x27;</span>]</span><br><span class="line">        &#125;),</span><br><span class="line">    ],</span><br></pre></td></tr></table></figure>
+
+<h1 id="渐进式网络应用程序-PWA"><a href="#渐进式网络应用程序-PWA" class="headerlink" title="渐进式网络应用程序(PWA)"></a>渐进式网络应用程序(PWA)</h1><p>共两步</p>
+<h2 id="添加Workbox"><a href="#添加Workbox" class="headerlink" title="添加Workbox"></a>添加Workbox</h2><p>npm install workbox-webpack-plugin -d    安装workbox</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> WorkboxPlugin = <span class="built_in">require</span>(<span class="string">&#x27;workbox-webpack-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="attr">plugins</span>: [</span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">            <span class="attr">template</span>: <span class="string">&#x27;./index.html&#x27;</span>,</span><br><span class="line">            <span class="attr">inject</span>: <span class="string">&#x27;body&#x27;</span>,</span><br><span class="line">            <span class="attr">filename</span>: <span class="string">&#x27;index.html&#x27;</span>,</span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="keyword">new</span> WorkboxPlugin.GenerateSW(&#123;</span><br><span class="line">            <span class="attr">clientsClaim</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="attr">skipWaiting</span>: <span class="literal">true</span></span><br><span class="line">        &#125;)</span><br><span class="line">    ],</span><br></pre></td></tr></table></figure>
+
+<h2 id="在浏览器中注册Service-Worker"><a href="#在浏览器中注册Service-Worker" class="headerlink" title="在浏览器中注册Service-Worker"></a>在浏览器中注册Service-Worker</h2><p>在入口文件中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">&#x27;serviceWorker&#x27;</span> <span class="keyword">in</span> navigator) &#123;</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">&#x27;load&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        navigator.serviceWorker.register(<span class="string">&#x27;/service-worker.js&#x27;</span>)</span><br><span class="line">            .then(<span class="function"><span class="params">registration</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">&#x27;注册成功&#x27;</span>, registration);</span><br><span class="line">            &#125;)</span><br><span class="line">            .catch(<span class="function"><span class="params">registrationError</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">&#x27;注册失败&#x27;</span>, registrationError);</span><br><span class="line"></span><br><span class="line">            &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>经过这两步之后,就能实现即使服务器挂掉,静态页面仍能显示.</p>
+<h1 id="dll"><a href="#dll" class="headerlink" title="dll"></a>dll</h1>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/10/12/js%E6%80%BB%E7%BB%93/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2021-11-19 10:11:21
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        <b>#</b> 前端
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2022/01/04/jsDOM%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%90%E5%8F%96css%E6%88%90%E5%8D%95%E7%8B%AC%E6%96%87%E4%BB%B6"><span class="toc-text">提取css成单独文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9css"><span class="toc-text">压缩css</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#babel-loader"><span class="toc-text">babel-loader</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E7%A6%BB"><span class="toc-text">代码分离</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A5%E5%8F%A3%E8%B5%B7%E7%82%B9"><span class="toc-text">入口起点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%B2%E6%AD%A2%E9%87%8D%E5%A4%8D"><span class="toc-text">防止重复</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Entry-dependencies"><span class="toc-text">Entry dependencies</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SplitChunksPlugin"><span class="toc-text">SplitChunksPlugin</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%AF%BC%E5%85%A5"><span class="toc-text">动态导入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%AF%BC%E5%85%A5%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">动态导入的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%87%92%E5%8A%A0%E8%BD%BD"><span class="toc-text">懒加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%8A%A0%E8%BD%BD"><span class="toc-text">预获取和预加载</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%86%E5%88%86%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%8F%8A%E5%90%88%E5%B9%B6"><span class="toc-text">拆分配置文件及合并</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#source-map"><span class="toc-text">source-map</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#devServer"><span class="toc-text">devServer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-text">优化开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E6%89%93%E5%8C%85%E6%9E%84%E5%BB%BA%E9%80%9F%E5%BA%A6"><span class="toc-text">优化打包构建速度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#oneOf"><span class="toc-text">oneOf</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tree-shaking"><span class="toc-text">tree shaking</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#sideEffects"><span class="toc-text">sideEffects</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E7%83%AD%E6%9B%BF%E6%8D%A2-HMR-%E4%B8%8E%E7%83%AD%E5%8A%A0%E8%BD%BD"><span class="toc-text">模块热替换(HMR)与热加载</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E7%83%AD%E6%9B%BF%E6%8D%A2"><span class="toc-text">模块热替换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%83%AD%E5%8A%A0%E8%BD%BD"><span class="toc-text">热加载</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E8%A7%A3%E6%9E%90-resolve"><span class="toc-text">模块解析(resolve)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#externals"><span class="toc-text">externals</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%9A%E9%A1%B5%E9%9D%A2"><span class="toc-text">多页面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#entry%E9%85%8D%E7%BD%AE"><span class="toc-text">entry配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HtmlWebpackPlugin"><span class="toc-text">HtmlWebpackPlugin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E9%A1%B5%E9%9D%A2%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-text">多页面环境搭建</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B8%90%E8%BF%9B%E5%BC%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F-PWA"><span class="toc-text">渐进式网络应用程序(PWA)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0Workbox"><span class="toc-text">添加Workbox</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E6%B3%A8%E5%86%8CService-Worker"><span class="toc-text">在浏览器中注册Service-Worker</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dll"><span class="toc-text">dll</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Fx12138">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="facebook" href="">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="twitter" href="">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="weibo" href="">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/fx12138">Copyright © stupidbird 2021</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

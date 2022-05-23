@@ -139,21 +139,21 @@ MathJax = {
           
       </div>
       <div class="markdown-body">
-        <h4 id="分层参考模型"><a href="#分层参考模型" class="headerlink" title="分层参考模型"></a>分层参考模型</h4><p>ISO制定的OSI参考模型，分成了七层。</p>
-<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201031142356957.png" alt="da"></p>
+        <h1 id="分层参考模型"><a href="#分层参考模型" class="headerlink" title="分层参考模型"></a>分层参考模型</h1><p>ISO制定的OSI参考模型，分成了七层。</p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source_posts\图解TCP-IP\image-20201031142356957.png" alt="da"></p>
 <p>在这一模型中，每个分层都接收由它下一层所提供的特定服务，并且负责为自己的上一层提供特定的服务。上下层之间进行交互时所遵循的约定叫做“接口”。同一层之间的交互所遵循的约定叫做“协议。</p>
-<h5 id="各层的功能"><a href="#各层的功能" class="headerlink" title="各层的功能"></a>各层的功能</h5><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201031144647886.png" alt="asda"></p>
-<h5 id="网络层和数据链路层的区别"><a href="#网络层和数据链路层的区别" class="headerlink" title="网络层和数据链路层的区别"></a>网络层和数据链路层的区别</h5><p>网络层与数据链路层都是基于目标地址将数据发送给接收端的，但是网络层负责将整个数据发送给最终目标地址，而数据链路层则只负责发送一个分段内的数据。</p>
-<h4 id="传输方式的分类"><a href="#传输方式的分类" class="headerlink" title="传输方式的分类"></a>传输方式的分类</h4><h5 id="1、面向有连接型和面向无连接型"><a href="#1、面向有连接型和面向无连接型" class="headerlink" title="1、面向有连接型和面向无连接型"></a>1、面向有连接型和面向无连接型</h5><p>面向无连接型包括以太网、UDP等协议。</p>
+<h2 id="各层的功能"><a href="#各层的功能" class="headerlink" title="各层的功能"></a>各层的功能</h2><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source_posts\图解TCP-IP\image-20201031144647886.png" alt="asda"></p>
+<h2 id="网络层和数据链路层的区别"><a href="#网络层和数据链路层的区别" class="headerlink" title="网络层和数据链路层的区别"></a>网络层和数据链路层的区别</h2><p>网络层与数据链路层都是基于目标地址将数据发送给接收端的，但是网络层负责将整个数据发送给最终目标地址，而数据链路层则只负责发送一个分段内的数据。</p>
+<h1 id="传输方式的分类"><a href="#传输方式的分类" class="headerlink" title="传输方式的分类"></a>传输方式的分类</h1><h2 id="1、面向有连接型和面向无连接型"><a href="#1、面向有连接型和面向无连接型" class="headerlink" title="1、面向有连接型和面向无连接型"></a>1、面向有连接型和面向无连接型</h2><p>面向无连接型包括以太网、UDP等协议。</p>
 <p>面向有连接型包括ATM、帧中继、TCP等协议。</p>
-<h5 id="2、电路交换和分组交换"><a href="#2、电路交换和分组交换" class="headerlink" title="2、电路交换和分组交换"></a>2、电路交换和分组交换</h5><p>在分组交换中，由<strong>分组交换机(路由器)<strong>连接通信线路。分组交换的大致处理过程是:发送端计算机将数据分组发送给路由器，路由器收到这些分组数据以后，</strong>缓存到自己的缓冲区</strong>，然后再转发给目标计算机。因此，分组交换也有另一个名称:蓄积交换。路由器接收到数据以后会按照顺序缓存到相应的队列当中，再以<strong>先进先出的顺序将它们逐一发送出去</strong>。</p>
-<h5 id="3、根据接收端数量分类"><a href="#3、根据接收端数量分类" class="headerlink" title="3、根据接收端数量分类"></a>3、根据接收端数量分类</h5><p>单播 广播 多播 任播</p>
-<h4 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h4><p>MAC地址和IP地址在标识一个通讯主体时虽然都具有唯一性，但是只有IP地址具有层次性。</p>
-<h4 id="网络的构成要素"><a href="#网络的构成要素" class="headerlink" title="网络的构成要素"></a>网络的构成要素</h4><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201103150203879.png" alt="image-20201103150203879"></p>
-<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201103150226220.png" alt="image-20201103150226220"></p>
-<h5 id="传输速率和吞吐量"><a href="#传输速率和吞吐量" class="headerlink" title="传输速率和吞吐量"></a>传输速率和吞吐量</h5><p>​        在数据传输的过程中，两个<strong>设备之间</strong>数据流动的物理速度称为<strong>传输速率</strong>。单位为bps (Bits Per Second,每秒比特数)。从严格意义上讲，<strong>各种传输媒介中信号的流动速度是恒定的。因此，即使数据链路的传输速率不相同，也不会出现传输的速度忽快忽慢的情况</strong>“。传输速率高也不是指单位数据流动的速度有多快，而是指单位时间内传输的数据量有多少。以我们生活中的道路交通为例，低速数据链路就如同车道较少无法让很多车同时通过的情况。与之相反，高速数据链路就相当于有多个车道，一次允许更多车辆行驶的道路。传输速率又称作带宽( Bandwidth)。带宽越大网络传输能力就越强。</p>
+<h2 id="2、电路交换和分组交换"><a href="#2、电路交换和分组交换" class="headerlink" title="2、电路交换和分组交换"></a>2、电路交换和分组交换</h2><p>在分组交换中，由<strong>分组交换机(路由器)<strong>连接通信线路。分组交换的大致处理过程是:发送端计算机将数据分组发送给路由器，路由器收到这些分组数据以后，</strong>缓存到自己的缓冲区</strong>，然后再转发给目标计算机。因此，分组交换也有另一个名称:蓄积交换。路由器接收到数据以后会按照顺序缓存到相应的队列当中，再以<strong>先进先出的顺序将它们逐一发送出去</strong>。</p>
+<h2 id="3、根据接收端数量分类"><a href="#3、根据接收端数量分类" class="headerlink" title="3、根据接收端数量分类"></a>3、根据接收端数量分类</h2><p>单播 广播 多播 任播</p>
+<h1 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h1><p>MAC地址和IP地址在标识一个通讯主体时虽然都具有唯一性，但是只有IP地址具有层次性。</p>
+<h1 id="网络的构成要素"><a href="#网络的构成要素" class="headerlink" title="网络的构成要素"></a>网络的构成要素</h1><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source_posts\图解TCP-IP\image-20201103150203879.png" alt="image-20201103150203879"></p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source_posts\图解TCP-IP\image-20201103150226220.png" alt="image-20201103150226220"></p>
+<h2 id="传输速率和吞吐量"><a href="#传输速率和吞吐量" class="headerlink" title="传输速率和吞吐量"></a>传输速率和吞吐量</h2><p>​        在数据传输的过程中，两个<strong>设备之间</strong>数据流动的物理速度称为<strong>传输速率</strong>。单位为bps (Bits Per Second,每秒比特数)。从严格意义上讲，<strong>各种传输媒介中信号的流动速度是恒定的。因此，即使数据链路的传输速率不相同，也不会出现传输的速度忽快忽慢的情况</strong>“。传输速率高也不是指单位数据流动的速度有多快，而是指单位时间内传输的数据量有多少。以我们生活中的道路交通为例，低速数据链路就如同车道较少无法让很多车同时通过的情况。与之相反，高速数据链路就相当于有多个车道，一次允许更多车辆行驶的道路。传输速率又称作带宽( Bandwidth)。带宽越大网络传输能力就越强。</p>
 <p>​        此外，<strong>主机之间</strong>实际的传输速率被称作<strong>吞吐量</strong>。其单位与带宽相同,都是bps (Bits Per Second)。<strong>吞吐量这个词不仅街量带宽，同时也衡量主机的CPU处理能力、网络的拥堵程度、报文中数据字段的占有份额(不含报文首部，只计算数据字段本身)等信息</strong>。</p>
-<h5 id="传输设备"><a href="#传输设备" class="headerlink" title="传输设备"></a>传输设备</h5><p>1、中继器：物理层</p>
+<h2 id="传输设备"><a href="#传输设备" class="headerlink" title="传输设备"></a>传输设备</h2><p>1、中继器：物理层</p>
 <p>①物理层面上延长网络的设备，但不能无限延长。负责对减弱的信号进行<strong>放大和发送</strong>。</p>
 <p>②只负责将电信号转换为光信号，因此<strong>不能在传输速率不同的媒介中转发</strong>。也<strong>不负责判断数据是否发生错误</strong>。</p>
 <p>③集线器可以看成多口中继器，每个端口都可以成为一个中继器。</p>
@@ -163,28 +163,140 @@ MathJax = {
 <p>②网桥还能通过地址自学机制和过滤功能<strong>控制网络流量</strong>。</p>
 <p>③以太网等网络中经常使用的交换集线器(Hub”)，现在基本也属于网桥的一种。交换集线器中连接电缆的每个端口都能提供类似网桥的功能。</p>
 <p>④自学式网桥。</p>
-<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201103164819940.png" alt="image-20201103164819940"></p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source_posts\图解TCP-IP\image-20201103164819940.png" alt="image-20201103164819940"></p>
 <p>3、路由器（3层交换机）：网络层</p>
 <p>网桥是根据MAC地址进行处理，而路由器是根据IP地址进行处理</p>
 <p>4、网关</p>
 <p>网关是OSI参考模型中负责将从传输层到应用层的数据进行转换和转发的设备。它与4~7层交换机一样都是处理传输层及以上的数据，但是<strong>网关不仅转发数据还负责对数据进行转换</strong>，它通常会使用一个表示层或应用层网关，<strong>在两个不能进行直接通信的协议之间进行翻译，最终实现两者之间的通信</strong>。</p>
-<h4 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h4><h5 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h5><p>MAC地址长48比特</p>
-<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201106102737993.png" alt="image-20201106102737993"></p>
-<h5 id="共享介质型网络"><a href="#共享介质型网络" class="headerlink" title="共享介质型网络"></a>共享介质型网络</h5><p>在这种方式下，设备之间使用同一个载波信道进行发送和接收，为此基本上采用半双工通信方式，并对介质进行访问控制。</p>
+<h1 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h1><h2 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h2><p>MAC地址长48比特</p>
+<p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source_posts\图解TCP-IP\image-20201106102737993.png" alt="image-20201106102737993"></p>
+<h2 id="共享介质型网络"><a href="#共享介质型网络" class="headerlink" title="共享介质型网络"></a>共享介质型网络</h2><p>在这种方式下，设备之间使用同一个载波信道进行发送和接收，为此基本上采用半双工通信方式，并对介质进行访问控制。</p>
 <p>共享介质型网络有两种介质访问控制方式：①争用方式②令牌传递方式</p>
-<h6 id="争用方式（CSMA载波监听多路访问）"><a href="#争用方式（CSMA载波监听多路访问）" class="headerlink" title="争用方式（CSMA载波监听多路访问）"></a>争用方式（CSMA载波监听多路访问）</h6><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201106103313606.png" alt="dasd"></p>
+<h3 id="争用方式（CSMA载波监听多路访问）"><a href="#争用方式（CSMA载波监听多路访问）" class="headerlink" title="争用方式（CSMA载波监听多路访问）"></a>争用方式（CSMA载波监听多路访问）</h3><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source_posts\图解TCP-IP\image-20201106103313606.png" alt="dasd"></p>
 <p>CSMA/CD是一种CSMA改良的方式，其工作原理如下</p>
 <ul>
 <li>如果载波信道上没有数据流动，则任何站都可以发送数据。</li>
 <li>检查是否会发生冲突。一旦发生冲突时，放弃发送数据，同时立即释放载波信道。</li>
 <li>放弃发送以后，随机延时一段时间，再重新争用介质，重新发送帧。</li>
 </ul>
-<h6 id="令牌传递方式"><a href="#令牌传递方式" class="headerlink" title="令牌传递方式"></a>令牌传递方式</h6><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/image-20201106104106797.png" alt="dawdw"></p>
+<h3 id="令牌传递方式"><a href="#令牌传递方式" class="headerlink" title="令牌传递方式"></a>令牌传递方式</h3><p><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source_posts\图解TCP-IP\image-20201106104106797.png" alt="dawdw"></p>
 <p>优点：①不会有冲突②每个站都有通过平等循环获得令牌的机会，因此即使网络拥堵也不会导致性能下降。</p>
 <p>缺点：数据链路的利用率达不到100%。</p>
-<h5 id="非共享介质网络"><a href="#非共享介质网络" class="headerlink" title="非共享介质网络"></a>非共享介质网络</h5><p>每个站直连交换机，由交换机负责转发数据帧，全双工通信。</p>
+<h2 id="非共享介质网络"><a href="#非共享介质网络" class="headerlink" title="非共享介质网络"></a>非共享介质网络</h2><p>每个站直连交换机，由交换机负责转发数据帧，全双工通信。</p>
 <p>缺点：一旦交换机发生故障，与之相连的所有计算机将无法通信。</p>
+<h1 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h1><h2 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h2><p>网络层的主要作用是“实现终端节点之间的通信”。这种终端节点之间的通信也叫“点对点( end-to-end)通信”。(节点是主机和路由器的统称)</p>
+<p>IP是跨越网络传送数据包,使整个互联网都能收到数据的协议,使用IP地址作为主机的标识.</p>
+<p>虽然IP也是分组交换的一种协议,但是<strong>它不具有重发机制,即使分组数据包未能到达对端主机也不会重发.因此属于非可靠性传输协议</strong>.</p>
+<h3 id="网络层和数据链路层区别"><a href="#网络层和数据链路层区别" class="headerlink" title="网络层和数据链路层区别"></a>网络层和数据链路层区别</h3><p>仔细分析一下机票和火车票，不难发现，每张票只能够在某一限定区间内移动。此处的“区间内”就如同通信网络上的数据链路。而这个区间内的出发地点.和目的地点就如同某一个数据链路的源地址和目标地址等首部信息”。整个全程的行程表的作用就相当于网络层。</p>
+<h3 id="IP基础知识"><a href="#IP基础知识" class="headerlink" title="IP基础知识"></a>IP基础知识</h3><p>IP大致分为三大作用模块，它们是<strong>IP寻址</strong>、<strong>路由</strong>（最终节点为止的转发)以及<strong>IP分包与组包</strong>。</p>
+<h4 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h4><p>MAC地址是用来识别同一链路中不同计算机的一种识别码</p>
+<p>IP地址用于在连接到网络中的所有主机中识别出进行通信的目标地址</p>
+<h4 id="IP为什么采用面向无连接"><a href="#IP为什么采用面向无连接" class="headerlink" title="IP为什么采用面向无连接"></a>IP为什么采用面向无连接</h4><p>主要有两点原因:一是为了简化，二是为了提速。面向连接比起面向无连接处理相对复杂。甚至管理每个连接本身就是一个相当繁琐的事情。此外，每次通信之前都要事先建立连接，又会降低处理速度。需要有连接时，可以委托上一层提供此项服务。因此，IP为了实现简单化与高速化采用面向无连接的方式。</p>
+<h4 id="路由控制"><a href="#路由控制" class="headerlink" title="路由控制"></a>路由控制</h4><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211227154848944.png" alt="image-20211227154848944" style="zoom:67%;">
 
+<p>数据链路实现某一区间内的通信,及两个直接相连的主机或路由器间的通信.而IP实现直接至最终目标地址的通信.</p>
+<h3 id="IP地址基础知识"><a href="#IP地址基础知识" class="headerlink" title="IP地址基础知识"></a>IP地址基础知识</h3><p>IP地址由<strong>网络标识</strong>和<strong>主机标识</strong>两部分组成</p>
+<h4 id="多播和广播"><a href="#多播和广播" class="headerlink" title="多播和广播"></a>多播和广播</h4><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211230095457645.png" alt="image-20211230095457645" style="zoom: 67%;">
+
+<p>路由器不转发广播的包,但是可以复制多播的包.</p>
+<h3 id="路由控制-1"><a href="#路由控制-1" class="headerlink" title="路由控制"></a>路由控制</h3><p>下图是发送IP包的实例</p>
+<img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211230103655364.png" alt="image-20211230103655364" style="zoom:67%;">
+
+<h3 id="报文的分片与重组"><a href="#报文的分片与重组" class="headerlink" title="报文的分片与重组"></a>报文的分片与重组</h3><p>任何一台主机都有必要对IP分片（ IP Fragmentation)进行相应的处理。分片往往在网络上遇到比较大的报文无法一下子发送出去时才会进行处理。</p>
+<p>由于以太网的默认MTU是1500字节，因此4342字节的IP数据报无法在一个帧当中发送完成。这时，路由器将此IP数据报划分成了3个分片进行发送。而这种分片处理只要路由器认为有必要，会周而复始地进行”。</p>
+<p><strong>经过分片之后的P数据报在被重组的时候，只能由目标主机进行。路由器虽然做分片但不会进行重组。</strong></p>
+<h3 id="路径MTU发现"><a href="#路径MTU发现" class="headerlink" title="路径MTU发现"></a>路径MTU发现</h3><p>所谓路径MTU (Path MTU)是指从发送端主机到接收端主机之间不需要分片时最大MTU的大小。<strong>即路径中存在的所有数据链路中最小的MTU</strong>。而路径MTU发现从发送主机按照路径MTU的大小将数据报分片后进行发送。进行路径MTU发现，就可以避免在中途的路由器上进行分片处理.</p>
+<h3 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h3><h4 id="IPv6的特点"><a href="#IPv6的特点" class="headerlink" title="IPv6的特点"></a>IPv6的特点</h4><ul>
+<li>IPv4的地址长度为4个8位字节,即32比特.而IPv6的地址长度则是128比特,一般携程8个16位字节.</li>
+</ul>
+<img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211230132817732.png" alt="image-20211230132817732" style="zoom:67%;">
+
+
+
+<p><strong>IPv6的分片处理旨在作为起点的发送端主机上运行,路由器不参与分片.因此IPv6中”路径MTU发现”功能必不可少</strong></p>
+<h2 id="IP相关协议"><a href="#IP相关协议" class="headerlink" title="IP相关协议"></a>IP相关协议</h2><h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h3><h4 id="DNS查询"><a href="#DNS查询" class="headerlink" title="DNS查询"></a>DNS查询</h4><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211230165719225.png" alt="image-20211230165719225" style="zoom:67%;">
+
+<h3 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h3><p>从分组数据包的IP地址中解析出物理地址(MAC地址)的一种协议</p>
+<p>ARP是一种解决地址问题的协议。以目标IP地址为线索，用来定位下一个应该接收数据分包的网络设备对应的MAC地址。如果目标主机不在同一个链路上时，可以通过ARP查找下一跳路由器的MAC地址。不过ARP只适用于IPv4.</p>
+<p>过程:主机A为了获得主机B的MAC地址，起初要通过广播发送一个ARP请求包。这个包中包含了想要了解其MAC地址的主机I地址。也就是说，ARP请求包中已经包含了主机B的IP地址172.20.1.2。由于广播的包可以被同一个链路上所有的主机或路由器接收，因此ARP的请求包也就会被这同一个链路上所有的主机和路由器进行解析。如果ARP请求包中的目标I地址与自己的IP地址一致，那么这个节点就将自己的MAC地址塞人ARP响应包返回给主机A。</p>
+<h4 id="IP和MAC地址缺一不可"><a href="#IP和MAC地址缺一不可" class="headerlink" title="IP和MAC地址缺一不可"></a>IP和MAC地址缺一不可</h4><p>如图所示，主机A想要发送IP数据报给主机B时必须得经过路由器C。即使知道了主机B的MAC地址，由于路由器C会隔断两个网络，还是无法实现直接从主机A发送数据报给主机B。此时，主机A必须得先将数据报发送给路由器C的MAC地址C1。</p>
+<img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211231140405938.png" alt="image-20211231140405938" style="zoom:80%;">
+
+<p>此外，假定MAC地址就用广播地址，那么路由器D也将会收到该广播消息。于是路由器D又将该消息转发给路由器C，导致数据包被重复发送两次。<br>在以太网上发送IP包时，“下次要经由哪个路由器发送数据报”这一信息非常重要。而这里的“下一个路由器”就是相应的 MAC地址。</p>
+<h3 id="ICMP"><a href="#ICMP" class="headerlink" title="ICMP"></a>ICMP</h3><p>ICMP的主要功能包括，确认IP包是否成功送达目标地址，通知在发送过程当中IP包被废弃的具体原因，改善网络设置等。有了这些功能以后，就可以获得网络是否正常、设置是否有误以及设备有何异常等信息，从而便于进行网络上的问题诊断。</p>
+<h3 id="DHCP"><a href="#DHCP" class="headerlink" title="DHCP"></a>DHCP</h3><p>有了DHCP，实现自动设置IP地址、统一管理IP地址分配，计算机只要连接到网络,就可以进行TCP/IP通信。也就是说，DHCP让即插即用”变得可能。而 DHCP不仅在IPv4中，在IPv6中也可以使用。</p>
+<h3 id="IP隧道"><a href="#IP隧道" class="headerlink" title="IP隧道"></a>IP隧道</h3><p>在一个如图所示的网络环境里，网络A、B使用IPv6，如果处于中间位置的网络C支持使用IPv4的话，网络A与网络B之间将无法直接进行通信。为了让它们之间正常通信，这时必须得采用IP隧道的功能。</p>
+<img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20220104093929815.png" alt="image-20220104093929815" style="zoom:50%;">
+
+<p>IP隧道中可以将那些从网络A发过来的IPv6的包统和为一个数据，再为之追加一个IPv4的首部以后转发给网络C。</p>
+<p>一般情况下，紧接着IP首部的是TCP 或UDP的首部。然而，现在的应用当中“IP首部的后面还是IP首部”或者“IP首部的后面是IPv6的首部”等情况与日俱增。这种在网络层的首部后面继续追加网络层首部的通信方法就叫做“IP隧道”。</p>
+<h1 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h1><h2 id="TCP和UDP区分"><a href="#TCP和UDP区分" class="headerlink" title="TCP和UDP区分"></a>TCP和UDP区分</h2><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211221102623825.png" alt="image-20211221102623825" style="zoom: 33%;">
+
+<h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211221102757217.png" alt="image-20211221102757217" style="zoom:33%;">
+
+<p>TCP/IP或UDP/IP通信中通常采用5个信息来识别一个通信。它们是<strong>“源IP地址”、“目标IP地址”、“协议号”、“源端口号”、“目标端口号”</strong>。只要其中某一项不同，则被认为是其他通信。</p>
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><p>tcp首部最少20个字节，TCP首部有20个字节的固定数据，用来存放报文传输过程所需的信息。</p>
+<p><code>UDP</code>报头包括4个字段，每个字段占用2个字节</p>
+<p>TCP通过<strong>检验和</strong>、<strong>序列号</strong>、<strong>确认应答</strong>、<strong>重发控制</strong>、<strong>连接管理</strong>以及<strong>窗口控制</strong>等机制实现可靠性传输。</p>
+<h3 id="通过序列号和确认应答提高可靠性"><a href="#通过序列号和确认应答提高可靠性" class="headerlink" title="通过序列号和确认应答提高可靠性"></a>通过序列号和确认应答提高可靠性</h3><p>上述这些确认应答处理、重发控制以及重复控制等功能都可以通过序列号实现。序列号是按顺序给发送数据的每一个字节(8位字节）都标上号码的编号。接收端查询接收数据TCP首部中的序列号和数据的长度，将自己下一步应该接收的序号作为确认应答返送回去。就这样，通过序列号和确认应答号，TCP可以实现可靠传输。</p>
+<img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211223102350624.png" alt="image-20211223102350624" style="zoom: 67%;">
+
+<h3 id="重发超时如何确定"><a href="#重发超时如何确定" class="headerlink" title="重发超时如何确定"></a>重发超时如何确定</h3><p>重发超时是指在重发数据之前，等待确认应答到来的那个特定时间间隔。如果超过了这个时间仍未收到确认应答，发送端将进行数据重发。</p>
+<p>情况发生何种变化，都必须保持这一特性。为此，它在每次发包时都会计算往返时间及其偏差’。将这个往返时间和偏差相加重发超时的时间，就是比这个总和稍大一点的时间,如下图</p>
+<img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211223104036166.png" alt="image-20211223104036166" style="zoom:67%;">
+
+<p>在BSD的Unix 以及Windows系统中，超时都以0.5秒为单位进行控制，因此重发超时都是0.5秒的整数倍’。不过，由于最初的数据包还不知道往返时间，所以其重发超时一般设置为6秒左右。</p>
+<p>数据被重发之后若还是收不到确认应答，则进行再次发送。此时，等待确认应答的时间将会以2倍、4倍的指数函数延长。</p>
+<p>此外，数据也不会被无限、反复地重发。达到一定重发次数之后，如果仍没有任何确认应答返回，就会判断为网络或对端主机发生了异常，强制关闭连接。并且通知应用通信异常强行终止。</p>
+<h3 id="连接管理"><a href="#连接管理" class="headerlink" title="连接管理"></a>连接管理</h3><img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211223104643218.png" alt="image-20211223104643218" style="zoom:67%;">
+
+<h3 id="利用窗口控制提高速度"><a href="#利用窗口控制提高速度" class="headerlink" title="利用窗口控制提高速度"></a>利用窗口控制提高速度</h3><p><strong>窗口大小就是指无需等待确认应答而可以继续发送数据的最大值</strong>。下图中,窗口大小为4个段</p>
+<img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211223112941083.png" alt="image-20211223112941083" style="zoom: 67%;">
+
+<p>如图所示，发送数据中高亮圈起的部分正是前面所提到的窗口。在这个窗口内的数据即便没有收到确认应答也可以发送出去。此外，从该窗口中能看到的数据因其某种数据已在传输中丢失，所以发送端才能收到确认应答，这种情况也需进行重发。为此，<strong>发送端主机在等到确认应答返回之前，必须在缓冲区中保留这部分数据</strong>。</p>
+<p><strong>在滑动窗口以外的部分包括尚未发送的数据以及已经确认对端已收到的数据</strong>。当数据发出后若如期收到确认应答就可以不用再进行重发，此时数据就可以从缓存区清除。</p>
+<p>收到确认应答的情况下，将窗口滑动到确认应答中的序列号的位置。这样可以顺序地将多个段同时发送提高通信性能。这种机制也被称为滑动窗口控制。</p>
+<img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211223135446077.png" alt="image-20211223135446077" style="zoom:67%;">
+
+<h3 id="窗口控制与重发控制"><a href="#窗口控制与重发控制" class="headerlink" title="窗口控制与重发控制"></a>窗口控制与重发控制</h3><ul>
+<li>确认应答未能及时返回</li>
+</ul>
+<p>首先，我们先考虑确认应答未能返回的情况。在这种情况下，数据已经到达对端，是不需要再进行重发的。然而，在没有使用窗口控制的时候，没有收到确认应答的数据都会被重发。而使用了窗口控制，就如图所示，某些确认应答即便丢失也无需重发。</p>
+<img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211223140236249.png" alt="image-20211223140236249" style="zoom:67%;">
+
+<p>如上图所示,即使接收端已经接收到了1-1000的数据,并且发送了确认应答1001,但是确认应答在传输的过程中由于种种原因未能到达发送端.这时会继续发送1001-2000数据,接收端收到后会发送确认应答2001,这个如果能成功发送的话则发送端就知道2001前面的数据均成功发送.</p>
+<ul>
+<li>报文丢失的情况</li>
+</ul>
+<p>如图所示。当某一报文段丢失后，发送端会一直收到序号为1001的确认应答，这个确认应答好像在提醒发送端“我想接收的是从1001开始的数据”。因此，在窗口比较大，又出现报文段丢失的情况下，同一个序号的确认应答将会被重复不断地返回。而<strong>发送端主机如果连续3次收到同一个确认应答</strong>，就会将其所对应的数据进行重发。这种机制比之前提到的超时管理更加高效，因此也被称作高速重发控制。(之所以连续收到3次而不是两次的理由是内为、即使数据段的序号被替换两次也不会触发重发机制。)</p>
+<img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211223140933294.png" alt="image-20211223140933294" style="zoom:50%;">
+
+<h3 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h3><p>发送端根据自己的实际情况发送数据。但是，接收端可能收到的是一个毫无关系的数据包又可能会在处理其他问题上花费一些时间。因此在为这个数据包做其他处理时会耗费一些时间，甚至在高负荷的情况下无法接收任何数据。如此一来，如果接收端将本应该接收的数据丢弃的话，就又会触发重发机制，从而导致网络流量的无端浪费。</p>
+<p>为了防止这种现象的发生，TCP提供一种机制可以让发送端根据接收端的实际接收能力控制发送的数据量。这就是所谓的流控制。它的具体操作是，接收端主机向发送端主机通知自己可以接收数据的大小，于是发送端会发送不超过这个限度的数据。该大小限度就被称作窗口大小。在前面所介绍的<strong>窗口大小的值就是由接收端主机决定的</strong>。.<strong>TCP首部中，专门有一个字段用来通知窗口大小</strong>。接收主机将自己可以接收的缓冲区大小放入这个字段中通知给发送端。</p>
+<img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20211223143220983.png" alt="image-20211223143220983" style="zoom:67%;">
+
+<p>如图所示，当接收端收到从3001号开始的数据段后其缓冲区即满，不得不暂时停止接收数据。之后，在收到发送窗口更新通知后通信才得以继续进行。如果这个窗口的更新通知在传送途中丢失，可能会导致无法继续通信。为避免此类问题的发生，发送端主机会时不时的发送一个叫做窗口探测的数据段，此数据段仅含一个字节以获取最新的窗口大小信息。</p>
+<h3 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h3><p>一般来说，计算机网络都处在一个共享的环境。因此也有可能会因为其他主机之间的通信使得网络拥堵。在网络出现拥堵时，如果突然发送一个较大量的数据，极有可能会导致整个网络的瘫痪。</p>
+<p>TCP为了防止该问题的出现，在通信一开始时就会通过一个叫做<strong>慢启动</strong>的算法得出的数值，对发送数据量进行控制。</p>
+<p>首先，为了在发送端调节所要发送数据的量，定义了一个叫做“拥塞窗口”的概念。于是在慢启动的时候，将这个拥塞窗口的大小设置为1个数据段( 1MSS)’发送数据，之后每收到一次确认应答（ ACK)，拥塞窗口的值就加1。在发送数据包时，将拥塞窗口的大小与接收端主机通知的窗口大小做比较，然后按照它们当中较小那个值，发送比其还要小的数据量。</p>
+<h3 id="提高网络利用率的规范"><a href="#提高网络利用率的规范" class="headerlink" title="提高网络利用率的规范"></a>提高网络利用率的规范</h3><ul>
+<li>Nagle算法</li>
+</ul>
+<p>该算法是指发送端即使还有应该发送的数据，但如果这部分数据很少的话，则进行延迟发送的一种处理机制。具体来说，就是仅在下列任意一种条件下才能发送数据。如果两个条件都不满足，那么暂时等待一段时间以后再进行数据发送。</p>
+<p>①已发送的数据都已经收到确认应答时    ②可以发送最大段长度(MSS)的数据时</p>
+<ul>
+<li>延迟确认应答</li>
+</ul>
+<p>每个段的接收者收到完好的段时都会向发送者回送小的确认分组,如果发送者没有在指定的窗口时间内收到确认信息,发送者就认为分组已经被破坏并重发数据.</p>
+<p>由于确认报文很小,所以tcp允许在发往相同方向的输出数据分组中对其进行”捎带”.为了增加确认报文找到同向传输数据分组的可能性,很多tcp栈都实现了一种”延迟确认”算法,延迟确认算法会在一个特定的窗口时间内将输出的确认存放在缓冲区中,以寻找能够捎带它的输出数据分组,如果在那个时段内没有输出数据分组,就将确认信息放在单独的分组中传送.</p>
+<ul>
+<li>捎带应答</li>
+</ul>
+<h2 id="UDP首部"><a href="#UDP首部" class="headerlink" title="UDP首部"></a>UDP首部</h2><h1 id="路由协议"><a href="#路由协议" class="headerlink" title="路由协议"></a>路由协议</h1><p>自治系统（路由选择域)内部动态路由采用的协议是域内路由协议，即 IGP。而自治系统之间的路由控制采用的是域间路由协议，即 EGP。</p>
+<h3 id="路由算法"><a href="#路由算法" class="headerlink" title="路由算法"></a>路由算法</h3><p>路由控制有各种各样的算法，其中最具代表性的有两种，是<strong>距离向量</strong>(Distance-Vector)算法和<strong>链路状态</strong>(Link-State)算法。</p>
+<img src="/2020/11/07/%E5%9B%BE%E8%A7%A3TCP-IP/devApp\myblog\source\_posts\图解TCP-IP\image-20220104131150918.png" alt="image-20220104131150918" style="zoom:50%;">
+
+<h3 id="RIP"><a href="#RIP" class="headerlink" title="RIP"></a>RIP</h3>
       </div>
       
         <div class="prev-or-next">
@@ -232,7 +344,7 @@ MathJax = {
   <div class="post-catalog hidden" id="catalog">
     <div class="title">Contents</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%B1%82%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="toc-text">分层参考模型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%84%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">各层的功能</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E5%92%8C%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">网络层和数据链路层的区别</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E6%96%B9%E5%BC%8F%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-text">传输方式的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E9%9D%A2%E5%90%91%E6%9C%89%E8%BF%9E%E6%8E%A5%E5%9E%8B%E5%92%8C%E9%9D%A2%E5%90%91%E6%97%A0%E8%BF%9E%E6%8E%A5%E5%9E%8B"><span class="toc-text">1、面向有连接型和面向无连接型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2%E5%92%8C%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="toc-text">2、电路交换和分组交换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E6%A0%B9%E6%8D%AE%E6%8E%A5%E6%94%B6%E7%AB%AF%E6%95%B0%E9%87%8F%E5%88%86%E7%B1%BB"><span class="toc-text">3、根据接收端数量分类</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80"><span class="toc-text">地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%9A%84%E6%9E%84%E6%88%90%E8%A6%81%E7%B4%A0"><span class="toc-text">网络的构成要素</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E9%80%9F%E7%8E%87%E5%92%8C%E5%90%9E%E5%90%90%E9%87%8F"><span class="toc-text">传输速率和吞吐量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E8%AE%BE%E5%A4%87"><span class="toc-text">传输设备</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-text">数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#MAC%E5%9C%B0%E5%9D%80"><span class="toc-text">MAC地址</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E4%BB%8B%E8%B4%A8%E5%9E%8B%E7%BD%91%E7%BB%9C"><span class="toc-text">共享介质型网络</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BA%89%E7%94%A8%E6%96%B9%E5%BC%8F%EF%BC%88CSMA%E8%BD%BD%E6%B3%A2%E7%9B%91%E5%90%AC%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE%EF%BC%89"><span class="toc-text">争用方式（CSMA载波监听多路访问）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BB%A4%E7%89%8C%E4%BC%A0%E9%80%92%E6%96%B9%E5%BC%8F"><span class="toc-text">令牌传递方式</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9D%9E%E5%85%B1%E4%BA%AB%E4%BB%8B%E8%B4%A8%E7%BD%91%E7%BB%9C"><span class="toc-text">非共享介质网络</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E5%B1%82%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="toc-text">分层参考模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%84%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">各层的功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E5%92%8C%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">网络层和数据链路层的区别</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E6%96%B9%E5%BC%8F%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-text">传输方式的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E9%9D%A2%E5%90%91%E6%9C%89%E8%BF%9E%E6%8E%A5%E5%9E%8B%E5%92%8C%E9%9D%A2%E5%90%91%E6%97%A0%E8%BF%9E%E6%8E%A5%E5%9E%8B"><span class="toc-text">1、面向有连接型和面向无连接型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2%E5%92%8C%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="toc-text">2、电路交换和分组交换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E6%A0%B9%E6%8D%AE%E6%8E%A5%E6%94%B6%E7%AB%AF%E6%95%B0%E9%87%8F%E5%88%86%E7%B1%BB"><span class="toc-text">3、根据接收端数量分类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80"><span class="toc-text">地址</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%9A%84%E6%9E%84%E6%88%90%E8%A6%81%E7%B4%A0"><span class="toc-text">网络的构成要素</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E9%80%9F%E7%8E%87%E5%92%8C%E5%90%9E%E5%90%90%E9%87%8F"><span class="toc-text">传输速率和吞吐量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E8%AE%BE%E5%A4%87"><span class="toc-text">传输设备</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-text">数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MAC%E5%9C%B0%E5%9D%80"><span class="toc-text">MAC地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E4%BB%8B%E8%B4%A8%E5%9E%8B%E7%BD%91%E7%BB%9C"><span class="toc-text">共享介质型网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%89%E7%94%A8%E6%96%B9%E5%BC%8F%EF%BC%88CSMA%E8%BD%BD%E6%B3%A2%E7%9B%91%E5%90%AC%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE%EF%BC%89"><span class="toc-text">争用方式（CSMA载波监听多路访问）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A4%E7%89%8C%E4%BC%A0%E9%80%92%E6%96%B9%E5%BC%8F"><span class="toc-text">令牌传递方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E5%85%B1%E4%BA%AB%E4%BB%8B%E8%B4%A8%E7%BD%91%E7%BB%9C"><span class="toc-text">非共享介质网络</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-text">网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IP"><span class="toc-text">IP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E5%92%8C%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8C%BA%E5%88%AB"><span class="toc-text">网络层和数据链路层区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-text">IP基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IP%E5%9C%B0%E5%9D%80"><span class="toc-text">IP地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IP%E4%B8%BA%E4%BB%80%E4%B9%88%E9%87%87%E7%94%A8%E9%9D%A2%E5%90%91%E6%97%A0%E8%BF%9E%E6%8E%A5"><span class="toc-text">IP为什么采用面向无连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E6%8E%A7%E5%88%B6"><span class="toc-text">路由控制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E5%9C%B0%E5%9D%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-text">IP地址基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E6%92%AD%E5%92%8C%E5%B9%BF%E6%92%AD"><span class="toc-text">多播和广播</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E6%8E%A7%E5%88%B6-1"><span class="toc-text">路由控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%A5%E6%96%87%E7%9A%84%E5%88%86%E7%89%87%E4%B8%8E%E9%87%8D%E7%BB%84"><span class="toc-text">报文的分片与重组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84MTU%E5%8F%91%E7%8E%B0"><span class="toc-text">路径MTU发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6"><span class="toc-text">IPv6</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IPv6%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-text">IPv6的特点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP%E7%9B%B8%E5%85%B3%E5%8D%8F%E8%AE%AE"><span class="toc-text">IP相关协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS"><span class="toc-text">DNS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS%E6%9F%A5%E8%AF%A2"><span class="toc-text">DNS查询</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARP"><span class="toc-text">ARP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IP%E5%92%8CMAC%E5%9C%B0%E5%9D%80%E7%BC%BA%E4%B8%80%E4%B8%8D%E5%8F%AF"><span class="toc-text">IP和MAC地址缺一不可</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ICMP"><span class="toc-text">ICMP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DHCP"><span class="toc-text">DHCP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E9%9A%A7%E9%81%93"><span class="toc-text">IP隧道</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-text">传输层</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E5%92%8CUDP%E5%8C%BA%E5%88%86"><span class="toc-text">TCP和UDP区分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="toc-text">端口号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP"><span class="toc-text">TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E5%BA%8F%E5%88%97%E5%8F%B7%E5%92%8C%E7%A1%AE%E8%AE%A4%E5%BA%94%E7%AD%94%E6%8F%90%E9%AB%98%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="toc-text">通过序列号和确认应答提高可靠性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%8F%91%E8%B6%85%E6%97%B6%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A"><span class="toc-text">重发超时如何确定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86"><span class="toc-text">连接管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E7%AA%97%E5%8F%A3%E6%8E%A7%E5%88%B6%E6%8F%90%E9%AB%98%E9%80%9F%E5%BA%A6"><span class="toc-text">利用窗口控制提高速度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E6%8E%A7%E5%88%B6%E4%B8%8E%E9%87%8D%E5%8F%91%E6%8E%A7%E5%88%B6"><span class="toc-text">窗口控制与重发控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-text">流量控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-text">拥塞控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E9%AB%98%E7%BD%91%E7%BB%9C%E5%88%A9%E7%94%A8%E7%8E%87%E7%9A%84%E8%A7%84%E8%8C%83"><span class="toc-text">提高网络利用率的规范</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP%E9%A6%96%E9%83%A8"><span class="toc-text">UDP首部</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE"><span class="toc-text">路由协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="toc-text">路由算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RIP"><span class="toc-text">RIP</span></a></li></ol></li></ol></li></ol>
     </div>
   </div>
 

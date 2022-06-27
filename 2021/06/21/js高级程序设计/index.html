@@ -200,7 +200,7 @@ MathJax = {
 <li>每次进入一个新的执行环境,都会创建一个用于搜索变量和函数的作用域链</li>
 <li>变量的执行环境有助于确定应该何时释放内存</li>
 </ul>
-<h2 id="作用域链增强"><a href="#作用域链增强" class="headerlink" title="作用域链增强"></a>作用域链增强</h2><p>虽然执行上下文主要有全局上下文和函数上下文两种（eval()调用内部存在第三种上下文），但有 其他方式来增强作用域链。某些语句会导致在作用域链前端临时添加一个上下文，这个上下文在代码执 行后会被删除。通常在两种情况下会出现这个现象，即代码执行到下面任意一种情况时：</p>
+<h2 id="作用域链增强"><a href="#作用域链增强" class="headerlink" title="作用域链增强"></a>作用域链增强</h2><p>虽然执行上下文主要有全局上下文和函数上下文两种（eval()调用内部存在第三种上下文），但有 其他方式来增强作用域链。某些语句会导致在作用域链前端临时添加一个上下文，这个上下文在代码执行后会被删除。通常在两种情况下会出现这个现象，即代码执行到下面任意一种情况时：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> try/catch 语句的 catch 块</span><br><span class="line"> with 语句</span><br></pre></td></tr></table></figure>
 
 <p>这两种情况下，都会在作用域链前端添加一个变量对象。对 with 语句来说，会向作用域链前端添 加指定的对象；对 catch 语句而言，则会创建一个新的变量对象，这个变量对象会包含要抛出的错误 对象的声明。看下面例子:</p>
@@ -584,8 +584,14 @@ MathJax = {
 <p>这个 HTTP 响应会设置一个名为”name”，值为”value”的 cookie。名和值在发送时都会经过 URL 编码。浏览器会存储这些会话信息，并在之后的每个请求中都会通过 HTTP 头部 cookie 再将它们发回服 务器，比如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /index.jsl HTTP/1.1</span><br><span class="line">Cookie: name=value</span><br><span class="line">Other-header: other-header-value </span><br></pre></td></tr></table></figure>
 
-<h3 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h3><p>cookie 是与特定域绑定的。设置 cookie 后，它会与请求一起发送到创建它的域。这个限制能保证 cookie 中存储的信息只对被认可的接收者开放，不被其他域访问。</p>
-<p>浏览器也会限制 cookie 的大小。大多数浏览器对 cookie 的限制是不超过 4096 字节，上下可以有一 个字节的误差。为跨浏览器兼容，最好保证 cookie 的大小不超过 4095 字节。这个大小限制适用于一个 域的所有 cookie，而不是单个 cookie。</p>
+<h3 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h3><ul>
+<li><p>cookie 是与特定域绑定的。设置 cookie 后，它会与请求一起发送到创建它的域。不管域名下面的某一个地址需不需要这个 Cookie ，请求都会携带上完整的 Cookie，这样随着请求数的增多，其实会造成巨大的性能浪费的，因为请求携带了很多不必要的内容。这个限制能保证 cookie 中存储的信息只对被认可的接收者开放，不被其他域访问。</p>
+</li>
+<li><p>浏览器也会限制 cookie 的大小。大多数浏览器对 cookie 的限制是不超过 4096 字节，上下可以有一 个字节的误差。为跨浏览器兼容，最好保证 cookie 的大小不超过 4095 字节。这个大小限制适用于一个 域的所有 cookie，而不是单个 cookie。</p>
+</li>
+<li><p> 由于 <strong>Cookie 以纯文本的形式在浏览器和服务器中传递</strong>，很容易被非法用户截获，然后进行一系列的篡改，在 Cookie 的有效期内重新发送给服务器，这是相当危险的。</p>
+</li>
+</ul>
 <h3 id="有效期"><a href="#有效期" class="headerlink" title="有效期"></a>有效期</h3><p>默认情况下， 浏览器会话结束后会删除所有 cookie。不过，也可以设置删除 cookie 的时间,用于指定删除 cookie 的具体时间。这样即使关闭 浏览器 cookie 也会保留在用户机器上。把过期时间设置为过去的时间会立即删除 cookie。</p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>因为<strong>所有 cookie 都会作为请求头部由浏览器发送给服务器，所以在 cookie 中保存大量信息可能会影 响特定域浏览器请求的性能。保存的 cookie 越大，请求完成的时间就越长</strong>。即使浏览器对 cookie 大小有 限制，最好还是尽可能只通过 cookie 保存必要信息，以避免性能问题。</p>
 <p><strong>Cookie数据会带到请求头的cookie字段里面，每次同主域名的请求中，都会传递数据，增加了网络请求的数据量，并且造成主域的污染。同时，cookie在不同浏览器上数量和大小都有限制</strong></p>
@@ -606,7 +612,7 @@ MathJax = {
 
 <h3 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h3><p>两种存储方法的区别在于，<strong>存储在 localStorage 中的数据会保留到通过 JavaScript 删除或者用户清除浏览器缓存。localStorage 数据不受页面刷新影响，也不会因关闭窗口、标签页或重新启动浏览 器而丢失。</strong></p>
 <h2 id="IndexedDB"><a href="#IndexedDB" class="headerlink" title="IndexedDB"></a>IndexedDB</h2><p>Indexed Database API 简称 IndexedDB，是浏览器中<strong>存储结构化数据</strong>的一个方案。</p>
-<p>IndexedDB 的设计几乎完全是异步的。为此，大多数操作以请求的形式执行，这些请求会异步执行， 产生成功的结果或错误。绝大多数 IndexedDB 操作要求添加 onerror 和 onsuccess 事件处理程序来确 定输出。</p>
+<p>IndexedDB 的设计几乎完全是<strong>异步</strong>的。为此，大多数操作以请求的形式执行，这些请求会异步执行， 产生成功的结果或错误。绝大多数 IndexedDB 操作要求添加 onerror 和 onsuccess 事件处理程序来确 定输出。</p>
 <h3 id="使用-2"><a href="#使用-2" class="headerlink" title="使用"></a>使用</h3><p>使用 IndexedDB 数据库的第一步是调用 indexedDB.open()方法，并给它传入一个要打开的数据 库名称。如果给定名称的数据库已存在，则会发送一个打开它的请求；如果不存在，则会发送创建并打 开这个数据库的请求。这个方法会返回 IDBRequest 的实例，可以在这个实例上添加 onerror 和 onsuccess 事件处理程序。举例如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> db, </span><br><span class="line"> request, </span><br><span class="line"> version = <span class="number">1</span>; </span><br><span class="line">request = indexedDB.open(<span class="string">&quot;admin&quot;</span>, version); </span><br><span class="line">request.onerror = <span class="function">(<span class="params">event</span>) =&gt;</span> </span><br><span class="line"> alert(<span class="string">`Failed to open: <span class="subst">$&#123;event.target.errorCode&#125;</span>`</span>); </span><br><span class="line">request.onsuccess = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123; </span><br><span class="line"> db = event.target.result; </span><br><span class="line">&#125;; </span><br></pre></td></tr></table></figure>
 

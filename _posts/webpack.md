@@ -1,159 +1,517 @@
----
-title: webpack
-date: 2021-11-19 10:11:21
-tags: 前端
----
+# 核心概念
 
-# 提取css成单独文件
+四个核心概念:入口(entry) 	输出(output) 	loader	插件(plugins) 
+
+## loader
+
+*loader* 让 webpack 能够去处理那些非 JavaScript 文件（webpack 自身只理解 JavaScript）。loader 可以将所有类型的文件转换为 webpack 能够处理的有效[模块](https://www.webpackjs.com/concepts/modules)，然后你就可以利用 webpack 的打包能力，对它们进行处理。
+
+本质上，webpack loader 将所有类型的文件，转换为应用程序的依赖图（和最终的 bundle）可以直接引用的模块。
+
+在更高层面，在 webpack 的配置中 **loader** 有两个目标：
+
+1. `test` 属性，用于标识出应该被对应的 loader 进行转换的某个或某些文件。
+2. `use` 属性，表示进行转换时，应该使用哪个 loader。
+
+## plugins
+
+loader 被用于转换某些类型的模块，而插件则可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，一直到重新定义环境中的变量。[插件接口](https://www.webpackjs.com/api/plugins)功能极其强大，可以用来处理各种各样的任务。
+
+想要使用一个插件，你只需要 `require()` 它，然后把它添加到 `plugins` 数组中。多数插件可以通过选项(option)自定义。你也可以在一个配置文件中因为不同目的而多次使用同一个插件，这时需要通过使用 `new` 操作符来创建它的一个实例。
+
+# 资源模块
+
+- asset/resource 发送一个单独的文件并导出 URL。resource类型打包后，会在dist下面生成对应的静态资源文件。从而需要一次请求得到图片
+- asset/inline 导出一个资源的 data URI。比如svg格式导出为base64的格式。inline类型打包后，dist下不会生成对应的静态资源文件。导出的base64直接放在src中所以不用发请求了,但是图片越大,生成的base64体积会相对于原图片变得更大,因此适用于图片体积较小的情况
+- asset/source 导出资源的源代码。比如实现的功能为在网页上渲染txt文件中的内容。source类型打包后，dist下不会生成对应的静态资源文件。
+- asset 在导出一个 data URI 和发送一个单独的文件之间自动选择。在resource和inline中自动选择；默认选择方式如果文件大于8k，选择resource的类型；如果文件小于8k，选择inline的类型。也可以通过parser下的dataUrlCondition来修改这个默认规则
+
+## Resource资源
 
 ```js
-plugins: [
-        //提取css单独打包
-        new MiniCssExtractPlugin({
-            filename: 'css/build.css'
-        })
-    ],
-module: {
-        rules: [
-            {
-                test: /\.css$/,
-                use: [
-                    // 'style-loader', 
-                    //取代style-loader 作用:提取js中css成单独的文件
-                    MiniCssExtractPlugin.loader,
-                    //将css文件整合到js文件中
-                    'css-loader'
-
-                    //css兼容性处理:postcss-loader postcss-preset-env
-                ]
-            }
-        ]
-    },
+  module: {
+    rules: [
+      {
+        test: /\.png$/, //匹配的文件名
+        type: 'asset/resource'  //使用的模式
+      }
+    ]
+  },
 ```
 
-# 压缩css
+可以自定义打包后的位置和文件名,在output中进行配置
 
 ```js
-const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, './dist'),
+    clean: true,  //用于自动清理上次打包的文件
+    assetModuleFilename: 'images/[contenthash][ext]'	//自定义资源模块打包的位置和文件名
+  },
+```
+
+也可以在loader里为一个文件单独设置打包后的位置和文件名,使用generator,当assetModuleFilename和generator同时存在时,generator优先级高
+
+```js
+  module: {
+    rules: [
+      {
+        test: /\.png$/, //匹配的文件名
+        type: 'asset/resource',  //使用的模式
+        generator: {
+          filename: 'images/test.png' //自定义资源模块打包的位置和文件名
+        }
+      }
+    ]
+  },
+```
+
+# loader
+
+## 处理css资源
+
+
+
+需要css-loader 和 style-loader 两个loader,其中css-loader是用来打包css文件,而style-loader用于将效果在页面中展示
+
+```js
+{
+  test: /\.css$/,
+  use: ['style-loader', 'css-loader']
+}
+```
+
+less文件需要在这两个loader后面加一个less-loader
+
+## babel
+
+主要用于将ES6语法编写的代码转换为向后兼容的js语法,以便能够运行在当前和旧版本的浏览器或其他环境中.新建babel.config.js文件
+
+主要配置是预设presets,简单理解就是一组babel插件扩展babel的功能
+
+```powershell
+npm install babel-loader babel-core babel-preset-env -d
+```
+
+可以直接在webpack.config.js中进行配置
+
+```js
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/, //排除node_modules中的文件不处理
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      }
+```
+
+也可以新建babel.config.js文件进行配置,方便以后的修改
+
+```js
+module.exports = {
+  //智能预设 能够编译ES6的语法
+  presets: ['@babel/preset-env']
+}
+```
+
+# 开发环境
+
+在根目录下新建config文件夹,在config文件夹中创建webpack.dev.js和webpack.prod.js分别为开发环境和生产环境的配置
+
+在package.json中配置启动命令
+
+```json
+ "scripts": {
+    "start": "npm run dev",
+    "dev": "webpack serve --config ./config/webpack.dev.js",
+    "build": "webpack --config ./config/webpack.prod.js"
+  },
+```
+
+## HtmlWebpackPlugin
+
+作用:生成index.html自动引入打包好的资源
+
+```js
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, '../public/index.html'),  //根据哪个模板
+    })
+  ],
+```
+
+## source map
+
+作用:在开发环境中,代码报错时需要准确的定位到报错位置,但是默认生成的bundle中已经将代码进行压缩,并不能正确的进行定位,使用source map可以实现
+
+```js
+  devtool: 'inline-source-map',
+```
+
+## webpack-dev-server
+
+即使有了上面的watch可以在保存时进行自动打包,但是用户每次还需要刷新一下浏览器才能显示更新后的内容,使用webpack-dev-server可以解决这个问题,它具有live reloading即实时加载页面的功能
+
+其实他没有真正的输出任何物理文件,而是把输出的bundle文件放到了内存里
+
+```js
+  devServer: {
+    host: 'localhost',
+    port: '3000',
+    open: true
+  },
+```
+
+```powershell
+npx webpack serve
+```
+
+# 生产环境
+
+在生产环境中不需要devServer
+
+## HtmlWebpackPlugin
+
+作用:生成index.html自动引入打包好的资源
+
+```js
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, '../public/index.html'),  //根据哪个模板
+    })
+  ],
+```
+
+## 抽离和压缩css
+
+使用mini-css-extract-plugin将css抽离成单独的文件并使用link标签引入.因为要引入并不需要用style-loader将style标签写在head中,所以需要将style-loader换成MiniCssExtractPlugin.loader
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+module: {
+    rules: [
+      {
+        test: /(\.css|less)$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
+      }
+    ]
+  },
+
+plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'style/[contenthash].css'	//自定义打包后文件的位置和名称
+    })
+  ],
+```
+
+这个时候已经能够成功抽离css文件,但是打包后的css文件没有进行压缩,这时候要用到css-minimizer-webpack-plugin,这个plugin比较特殊,他不在plugin中进行配置,而是在optimization优化中进行配置,并且需要在生产模式下
+
+```js
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+
+mode: 'production',
 
 optimization: {
-        minimizer: [
-            new CssMinimizerWebpackPlugin()
+    minimizer: [
+      new CssMinimizerPlugin()
+    ]
+  }
+```
+
+## 样式兼容性处理
+
+```powershell
+npm install postcss-loader postcss postcss-preset-env -d
+```
+
+然后进行配置,注意这个loader的配置要写在css-loader的后面并且在less-loader的前面
+
+```js
+{
+        test: /(\.less)$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', {
+          loader: "postcss-loader",
+          options: {
+            postcssOptions: {
+              plugins: [
+                [
+                  "postcss-preset-env",
+                  {
+                    // Options
+                  },
+                ],
+              ],
+            },
+          },
+        },, 'less-loader']
+      },
+```
+
+需要在package.json中配置浏览器要兼容的版本,比如
+
+```json
+  "browserslist": [
+    "ie >= 8"
+  ]
+```
+
+# 高级
+
+高级配置就是进行webpack优化,让代码再编译/运行时性能更好
+
+## 提升打包构建速度
+
+### HMR
+
+HMR全称HotModuleReplacement 热模块替换,提高开发环境中项目的打包速度
+
+开发时修改了其中一个模块的代码,但是webpack默认会将所有模块全部重新打包编译,速度很慢.所以需要做到当我们修改某个模块的代码,就只对这个模块代码进行重新打包编译,其他模块不变提高打包速度
+
+在webpack5中样式默认开启热模块替换,但是js不行,默认情况下修改js代码依然会重新对所有模块进行编译
+
+在index.js中对需要进行热模块替换的js引入进行配置
+
+```js
+if(module.hot){
+  //判断是否支持热模块替换功能
+  module.accept("./helloWorld")
+}
+```
+
+这样配置后,当helloWorld.js文件发生变化后,只会对这个文件进行单独的重新编译,其他文件不会
+
+开发项目时使用vue-loader或react-hot-loader会自动进行热模块替换,无需手动配置
+
+### OneOf
+
+开发模式和生产模式都可以
+
+在编译打包时,遇到非js文件会在loader中由上到下依次寻找能够处理这个文件的loader,一直到结束.使用OneOf可以实现在寻找的过程中一旦命中,就不再向后寻找,直接使用
+
+使用方法:只需在rules和匹配规则中间加一层oneOf包裹
+
+```js
+module: {
+    rules: [
+      {
+        oneOf: [
+          {
+            test: /\.png$/, //匹配的文件名
+            type: 'asset/resource',  //使用的模式
+            generator: {
+              filename: 'images/test.png' //自定义资源模块打包的位置和文件名
+            }
+          },
+          {
+            test: /(\.css)$/,
+            use: ["style-loader", 'css-loader']
+          },
+          {
+            test: /(\.css|less)$/,
+            use: ["style-loader", 'css-loader', 'less-loader']
+          },
+          {
+            test: /\.js$/,
+            exclude: /(node_modules|bower_components)/, //排除node_modules中的文件不处理
+            loader: 'babel-loader',
+            // options: {
+            //   presets: ['@babel/preset-env']
+            // }
+          }
         ]
+      }
+    ]
+  },
+```
+
+### include/exclude
+
+我们使用的第三方库或插件,比如vue-router echarts 这些文件都下载到了node_modules中了,而这些文件不需要再次进行编译,所以需要排除这里面的文件
+
+主要是针对js文件,如babel和eslint
+
+```js
+{
+  test: /\.js$/,
+  exclude: /(node_modules|bower_components)/, //排除node_modules中的文件不处理
+  include:path.resolve(__diename,"../src")//只处理src目录下的文件
+  loader: 'babel-loader',
+  // options: {
+   //   presets: ['@babel/preset-env']
+  // }
+}
+```
+
+### chche
+
+开发模式和生产模式,每次打包时都要经过Eslint检查和Babel编译,速度比较慢
+
+可以缓存之前的Eslint检查和babel编译结果,这样第二次打包时只会打包后来修改的,之前的会使用缓存,从而提高打包速度
+
+```js
+{
+  test: /\.js$/,
+  exclude: /(node_modules|bower_components)/, //排除node_modules中的文件不处理
+  loader: 'babel-loader',
+  options: {
+    // presets: ['@babel/preset-env'],
+    cacheDirectory:true,  //开启babel缓存
+    cacheCompression:false  //关闭缓存文件压缩
+  }
+}
+```
+
+### 多进程打包
+
+想要提升打包速度,主要是提升js打包速度.因为js打包主要是采用Eslint babel terser(webpack内置的对js进行压缩)这些工具进行处理打包,所以我们要提升他们的运行速度,我们可以开启多进程同时处理js文件.**注意**请在特别耗时的操作中进行,因为每个进程启动就有大约600ms左右的时间
+
+使用时需要先判断cpu核数,因为启动进程的最大数就是cpu的核数
+
+```js
+const os = require('os')
+//获取cpu核数
+const threads = os.cpus().length;
+```
+
+babel开启多进程打包
+
+```powershell
+npm install thread-loader -d
+```
+
+```js
+{
+  test: /\.js$/,
+  exclude: /(node_modules|bower_components)/, //排除node_modules中的文件不处理
+  use: [
+    {
+      loader: 'thread-loader', //开启多进程
+      options: {
+        works: threads //进程的数量
+      }
     },
+    {
+      loader: 'babel-loader',
+      options: {
+        // presets: ['@babel/preset-env'],
+        cacheDirectory: true,  //开启babel缓存
+        cacheCompression: false  //关闭缓存文件压缩
+      }
+    }
+  ]
+}
 ```
 
-# babel-loader
+terser开启多进程打包
 
-将js文件中es6打包转为所有浏览器都能识别的es5
-
-安装
-
-```powershell
-npm install -d babel-loader @babel/core @babel/preset-env
+```js
+const TerserWebpackPlugin = require('terser-webpack-plugin')
 ```
 
-- babel-loader 在webpack里应用babel解析es6的桥梁
-- @babel/core babel核心模块
-- @babel/preset-env babel预设,一组babel插件的集合
+```js
+  optimization: {
+    //压缩的操作
+    minimizer: [
+      //压缩css文件
+      new CssMinimizerPlugin(),
+      //压缩js
+      new TerserWebpackPlugin({
+        parallel: threads   //开启terser多进程打包和进程数量
+      })
+    ]
+  },
+```
 
-初次之外 还需要regeneratorRuntime插件,这是webpack打包生成的全局辅助函数,由babel生成,用于兼容async/await语法
+## 减少代码体积
+
+### Tree Shaking
+
+开发时定义了一些工具函数库,或者引用第三方工具函数库或组件库.如果没有特殊处理的话打包时就会引入整个库,但是实际上我们可能只用上极小部分的功能
+
+TreeShaking它依赖ESModule会自动移除没有使用的代码,webpack已经默认开启,无需做其他配置
+
+### 减少Babel生成文件体积
+
+开发和生产中,babel为编译的每个文件都插入了辅助代码,使代码体积过大
+
+@babel/plugin-transform-runtime 仅用了babel自动对每个文件的runtime注入,而是引入@babel/plugin-transform-runtime并且是所有辅助代码从这里引用
 
 ```powershell
-#这个包中包含了regeneratorRuntime,运行时寻妖
-npm install @babel/runtime -d
-
-#这个插件会在需要regeneratorRuntime的地方自动require导包,编译时需要
 npm install @babel/plugin-transform-runtime -d
 ```
 
-最终在webpack.config.js中配置为
-
 ```js
-		   {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env'],
-                        plugins: [
-                            [
-                                '@babel/plugin-transform-runtime'
-                            ]
-                        ]
-                    }
-                }
-            }
+{
+  loader: 'babel-loader',
+  options: {
+    // presets: ['@babel/preset-env'],
+    cacheDirectory: true,  //开启babel缓存
+    cacheCompression: false,  //关闭缓存文件压缩
+    plugins:["@babel/plugin-transform-runtime"] //减少体积
+  }
+}
 ```
 
-# 代码分离
+### 压缩图片
 
-用来获得更小的bundle,使bundle按需加载或者并行加载,常用的有三种方法
+对图片进行压缩,如果项目中都是在线链接那么就不需要了,只有本地项目静态图片才需要进行压缩.使用image-minimizer-webpack-plugin
 
-## 入口起点
-
-使用entry配置手动的分离代码
-
-缺点:如果是多个入口,那么每个入口中共享的文件会分别在每个包里重复去打包
-
-```js
-//入口文件
-    entry: {
-        index: './src/index.js',
-        another: './src/another.js'	//这是另一个单独的js文件单独打包
-    },
-
-    output: {
-        filename: '[name].bundle.js',  //打包后文件名称
-        path: path.resolve(__dirname, './dist'),    //打包后文件存储地址
-        clean: true, //是否自动删除之前旧的打包文件
-
-        assetModuleFilename: 'image/[contenthash][ext]',    //定义资源模块的导出位置
-    },
+```powershell
+npm install image-minimizer-webpack-plugin imagemin -d
 ```
 
-这样会生成两个打包文件, index.bundle.js 和 another.bundle.js
+压缩分为无损压缩和有损压缩两种模式
 
-## 防止重复
-
-使用Entry dependencies 或者 SplitChunksPlugin 去重和分离代码
-
-### Entry dependencies
+无损压缩
 
 ```js
-//入口文件
-    entry: {
-        index:{
-            import:'./src/index.js',
-            dependOn:'shared'	//共享下面定义的重复模块,并生成一个shared.bundle.js
-        },
-        another:{
-            import:'./src/index.js',
-            dependOn:'shared'	//共享下面定义的重复模块,并生成一个shared.bundle.js
-        },
-
-        shared:'less'	//这样上面两个打包时如果都用到了less模块就会共享
-    },
+npm install imagemin-gifsicle imagemin-jpegtran imagemin-optipng imagemin-svgo -dev
 ```
 
-比如两个js文件均引入了less模块:import less from 'less',如果普通的打包方式两个打包后的文件分别大小,分别为1.32M 和 1.2M.如下
-
-![image-20211119155403269](D:\devApp\myblog\source\_posts\webpack\image-20211119155403269.png)
-
-如果改为这种防止重复的方法则共有三个打包文件,如下
-
-![image-20211119155530856](D:\devApp\myblog\source\_posts\webpack\image-20211119155530856.png)
-
-其中shared.bundle.js是打包共享模块的打包文件,另外两个明显缩小
-
-### SplitChunksPlugin
+有损压缩
 
 ```js
-entry: {
-    index: './src/index.js',
-    another: './src/another.js',
-},
+npm install imagemin-gifsicle imagemin-mozjpeg imagemin-pngquant imagemin-svgo -dev
+```
+
+## 优化代码运行性能
+
+### code split
+
+打包代码时会将所有js文件打包到一个文件中,体积太大了,如果只要渲染首页,就应该只加载首页的js文件,其他文件不应该加载
+
+代码分割主要做了两件事
+
+- 分割文件:将打包生成的文件进分割,生成多个js文件
+- 按需加载:需要哪个文件就加载哪个文件
+
+#### 多入口
+
+```js
+  entry: {
+    main: './src/index.js',
+    other: './src/other.js'
+  },
+
+  output: {
+    filename: '[name].js',  //webpack的命名方式,以自身的文件名命名
+    path: path.resolve(__dirname, '../dist'),
+    clean: true,  //用于自动清理上次打包的文件
+    assetModuleFilename: 'images/[contenthash][ext]'  //自定义资源模块打包的位置和文件名
+  },
+```
+
+#### 多入口提取公共模块
+
+如果入口文件都引用了都同一份代码,则webpack会在每个生成的打包文件中引用一次,但是想要的效果是公共的引用单独打包成一个文件,然后他们进行复用,这样只打包了一次
+
+比如两个js文件均引入了less模块:import less from ‘less’,如果普通的打包方式两个打包后的文件分别大小,分别为1.32M 和 1.2M
+
+```js
 optimization: {
     splitChunks: {
         chunks: 'all'
@@ -161,622 +519,79 @@ optimization: {
 },
 ```
 
-这样会自动抽离公共模块生成额外两个打包文件
+代码分割后会生成第三个文件,内容是公共模块的单独打包
 
-## 动态导入
+在单文件入口中一样可以直接使用
 
-通过模块的内联函数调用来分离代码.使用了async提供的import的函数
+#### 多入口按需加载(动态导入)
 
-新建一个async-module.js文件,如下
+比如刚开始不需要加载某个js文件,就让它最开始不要加载,当点击某个按钮或者进行了某些操作的时候再引入这个js文件
 
-```js
-//这样写的目的是为了让import帮助我们去抽离出一个单独的lodash文件
-function getComponent() {
-    //import 返回的是一个promise
-    return import('lodash').then(({ default: _ }) => {
-        const element = document.createElement('div')
-        element.innerHTML = _join(["hello", "webpack"], ' ')
-        return element
-    })
-}
+import动态导入会将动态导入的文件代码分割(拆分成单独模块),在需要使用的时候自动加载
 
-getComponent().then((element) => {
-    document.appendChild(element)
-})
-
-```
-
-webpack.config.js如下,仅仅使用最简单的方式打包
+ 比如在一个click操作中,这样可以自定义生成的打包文件的名称,这样math文件打包出来的名字为math.js
 
 ```js
-//入口文件
-    entry: {
-        index: './src/index.js',
-    },
-```
-
-在index.js中引入async-module.js
-
-这样打包后会单独分离出一个lodash的打包文件
-
-![image-20211122094729606](D:\devApp\myblog\source\_posts\webpack\image-20211122094729606.png)
-
-动态导入和前面的静态方法可以一起使用
-
-## 动态导入的应用
-
-### 懒加载
-
-又称为按需加载.懒加载是动态导入代码分离方法的一种应用
-
-因为有一些模块应用的很少,或者根本不会被引用.所以这些时候可以在需要的是在才对这些模块进行加载,从而得到优化
-
-新建一个math.js文件如下
-
-```js
-export function add(x, y) {
-    return x + y
-}
-
-export function sub(x, y) {
-    return x - y
+document.getElementById("btn").onclick = function(){
+	import(/*webpackChunkName:'math'*/"./math")
+		.then(res=>{
+			console.log('模块加载成功',res)
+		})
+		.catch(err=>{
+			console.log("模块加载失败",err)
+		})
 }
 ```
 
-在index.js中新增一个按钮,用来加载math.js并调用其中的方法
+但是这样打包出来单独的文件是随机命名的,并没有使用定义好的math名称,需要在ouput中进行配置chunkFilename
 
 ```js
-
-const button = document.createElement('button')
-button.textContent = "点击执行10+10"
-button.addEventListener('click', () => {
-    import('./math').then(({ add }) => {
-        console.log(add(10, 10));
-
-    })
-})
-
-//这样可以自定义生成的打包文件的名称,这样math文件打包出来的名字为math.bundle.js
-//button.addEventListener('click', () => {
-//    import(/*webpackChunkName:'math'*/'./math').then(({ add }) => {
-//        console.log(add(10, 10));
-//    })
-//})
+output: {
+    filename: 'bundle.js',  //webpack的命名方式,以自身的文件名命名
+    chunkFilename: '[name].chunk.js',
+    path: path.resolve(__dirname, '../dist'), //打包输出的其他文件命名,比如动态加载的文件
+    clean: true,  //用于自动清理上次打包的文件
+    assetModuleFilename: 'images/[hash:10][ext]'  //自定义资源模块打包的位置和文件名
+  },
 ```
-
-这样打包后会生成一个新的单独的math的打包文件,其中包含了math.js中定义的两个方法,从而在需要这个包的的时候才会去加载
-
-![image-20211122104318242](D:\devApp\myblog\source\_posts\webpack\image-20211122104318242.png)
-
-这时在浏览器中初启动时并不会请求加载math打包的相关文件
-
-![image-20211122104521719](D:\devApp\myblog\source\_posts\webpack\image-20211122104521719.png)
-
-当点击按钮后
-
-![image-20211122104640941](D:\devApp\myblog\source\_posts\webpack\image-20211122104640941.png)
-
-这时才会去请求加载math的打包文件
 
 ### 预获取和预加载
 
-预获取
+共同点:只加载,不执行.缓存起来,当用的时候进行调用
+
+预获取(兼容性较差)
 
 在下一个页面即将用到的资源可以在父页面中进行预加载,他会在父页面所有其他资源加载完毕后,在浏览器网络空闲时进行下载.
 
 ```js
-//这样可以自定义生成的打包文件的名称,这样math文件打包出来的名字为math.bundle.js
-button.addEventListener('click', () => {
-    import(/*webpackChunkName:'math',webpackPrefetch:true*/'./math').then(({ add }) => {
+button.addEventListener('click', () => { import(/*webpackChunkName:'math',webpackPrefetch:true*/'./math').then(({ add }) => {
         console.log(add(10, 10));
     })
 })
 ```
 
-预加载
 
-```
-//这样可以自定义生成的打包文件的名称,这样math文件打包出来的名字为math.bundle.js
-button.addEventListener('click', () => {
-    import(/*webpackChunkName:'math',webpackPreload:true*/'./math').then(({ add }) => {
-        console.log(add(10, 10));
-    })
-})
-```
+
+预加载(兼容性还行)
 
 在资源上添加预先加载的注释，你指明该模块需要立即被使用。**异步chunk**会和**父级chunk**并行加载。如果**父级chunk**先下载好，页面就已可显示了，同时等待**异步chunk**的下载。这能大幅提升性能。
 
-# 拆分配置文件及合并
-
-新建config文件夹
-
-新建webpack.config.common.js这里面写开发环境和生产环境公共的配置
-
-不同的是:
-
-- output中的filename:在开发环境中由于不需要浏览器的缓存功能,所以不需要每次更新打包文件都更改打包名称,所以在开发环境中固定打包名称,在生产环境中加入hash使每次更新打包文件都声称新的不同的名称,触发浏览器更新缓存
-- output中的publicPath:在开发环境中只用于测试,无需设置公共路径.但是在生产环境中需要设置公共路径localhost:8080/
-- devtool:在开发环境中需要堆代码进行调试,查找报错位置,需要devtool直接定位到错误位置
-- devServer:在开发环境中要自动生成html文件并在修改代码时是页面自动更新,即npx webpack-dev-server
-- mode:模式
-
 ```js
-/**
- * loader: 1下载 2使用(配置loader)
- * plugins: 1下载 2引入 3使用
- */
-
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { node } = require('webpack')
-
-module.exports = {
-    //入口文件
-    entry: {
-        index: './src/index.js',
-        another: './src/another.js',
-    },
-
-    output: {
-        //中间的contenthash是因为浏览器会有缓存功能,而每次更新打包后名字不变的话会浏览器会认为没有更新
-        //从而浏览及会继续使用缓存中的文件,不会进行更新
-        //使用contenthash会让每次打包的文件根据内容生成hash从而改变文件名
-        path: path.resolve(__dirname, '../dist'),    //打包后文件存储地址
-        clean: true, //是否自动删除之前旧的打包文件
-        assetModuleFilename: 'image/[contenthash][ext]',    //定义资源模块的导出位置
-    },
-
-    //插件的配置
-    plugins: [
-        //自动打包生成html文件,并
-        new HtmlWebpackPlugin({
-            template: './index.html',   //以此文件为模板从而引入入口文件打包后所有资源
-            filename: 'app.html',
-            inject: 'body'  //设置script在哪个位置插入
-        }),
-        new MiniCssExtractPlugin()
-    ],
-
-    //loader的配置
-    module: {
-        rules: [
-            //处理图片资源
-            {
-                test: /\.(png|jpg|gif)$/,   //匹配哪些文件(此处是处理后缀名为png的文件)
-                //这个type共有三种可选
-                //1.asset/resource是将图片地址转为打包的图片在打包后目录中的url
-                //2.asset/inline是将图片地址转为base64处理的地址
-                //3.asset/resource用于导出资源的源代码,一般用于text
-                type: 'asset/resource',
-                generator: {
-                    filename: 'image/[contenthash].[ext]'   //定义打包后的图片路径,优先级高于上面output中assetModuleFilename
-                }
-            },
-            //处理less样式资源
-            {
-                test: /\.less$/,  //打包样式资源
-                //要使用多个loader做处理用use,使用单个loader就能处理的话用loader就行
-                use: [
-                    //use数组中loader执行顺序:从右到左,从下到上 依次执行
-                    //创建style标签,将js中的样式资源插入进去,添加到header中生效
-                    'style-loader',
-                    //将css文件变成commonjs模块加载js中,里面内容是样式字符串
-                    'css-loader',
-                    //将less文件编译成css文件
-                    'less-loader'
-                ]
-            },
-            {
-                test: /\.css$/,  //打包样式资源
-                use: [
-                    //use数组中loader执行顺序:从右到左,从下到上 依次执行
-                    //创建style标签,将js中的样式资源插入进去,添加到header中生效
-                    'style-loader',
-                    //将css文件打包变成commonjs模块加载js中,里面内容是样式字符串
-                    'css-loader'
-                ]
-            },
-            {
-                test: /\.png$/,   //匹配哪些文件(此处是处理后缀名为png的文件)
-                type: 'asset/resource',
-                generator: {
-                    filename: 'image/[contenthash][ext]'   //定义打包后的图片路径,优先级高于上面output中assetModuleFilename
-                }
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env'],
-                        plugins: [
-                            [
-                                '@babel/plugin-transform-runtime'
-                            ]
-                        ]
-                    }
-                }
-            }
-
-        ]
-    },
-
-    optimization: {
-        splitChunks: {
-            // chunks: 'all'
-            //缓存组,上面输出中使每个文件打包后名称都进行更新
-            //但是想某些单独抽离出去的模块并不会被修改,第三方库,比如lodash
-            //这种情况下希望浏览器只加载一次,以后都用缓存的中这些模块
-            //在这里配置缓存组
-            cacheGroups: {
-                vendors: {
-                    test: '/[\\/]node_modules[\\/]/',
-                    name: 'vendors',
-                    chunks: 'all'
-                }
-            }
-        }
-    },
-
-}
-```
-
-新建webpack.config.dev.js 这里配置开发环境中需要的特有配置
-
-```js
-module.exports = {
-
-    output: {
-        filename: 'js/[name].js',  //打包后文件名称
-    },
-
-    devtool: 'inline-source-map',   //开发时报错直接定位到报错的位置
-
-    //自动化 自动编译 自动打开浏览器 自动刷洗浏览器
-    //特点 只会在内存中打包,不回有任何输出
-    //启动指令:npx webpack-dev-server
-    devServer: {
-        //启动gzip压缩
-        compress: true,
-        //端口号
-        port: 8080,
-        static: './dist',
-        open: true
-    },
-    mode: 'development',
-}
-```
-
-新建webpack.config.pro.js 这里配置生产环境中需要的特有配置
-
-```js
-module.exports = {
-
-    output: {
-        //中间的contenthash是因为浏览器会有缓存功能,而每次更新打包后名字不变的话会浏览器会认为没有更新
-        //从而浏览及会继续使用缓存中的文件,不会进行更新
-        //使用contenthash会让每次打包的文件根据内容生成hash从而改变文件名
-        filename: 'js/[name].[contenthash].js',  //打包后文件名称
-        publicPath: 'localhost:8080/',   //公共路径
-    },
-    mode: 'production',
-}
-```
-
-下载webpack-merge包用于合并配置
-
-新建webpack.config.js文件,在其中对命令进行判断,从而决定怎么合并
-
-```js
-const { merge } = require('webpack-merge')
-const commonConfig = require('./webpack.config.common')
-const productionConfig = require('./webpack.config.pro')
-const developmentConfig = require('./webpack.config.dev')
-
-module.exports = (env) => {
-    switch (true) {
-        case env.development:
-            return merge(commonConfig, developmentConfig)
-        case env.production:
-            return merge(commonConfig, productionConfig)
-        default:
-            return new Error('没有匹配到env环境')
-    }
-}
-```
-
-在package.json中
-
-```json
-"scripts": {
-    "start": "npx webpack server -c ./config/webpack.config.js --env development",
-    "build": "npx webpack -c ./config/webpack.config.js --env production"
-  },
-```
-
-# source-map
-
-webpack内置source-map,由于浏览器加载的是打包好的bundle.js文件,所以在报错定位时查看到的也是bundle文件.上面也已经用到了
-
-```js
- devtool: 'inline-source-map',   //开发时报错直接定位到报错的位置
-```
-
-source-map有好多种可选值,当不设置的时候默认为eval
-
-- eval	将每一个module封装到eval里包裹 起来执行,并且会在末尾加注释//@sourceURL
-- source-map 生成source-map 的打包文件
-
-# devServer
-
-```js
-	//自动化 自动编译 自动打开浏览器 自动刷洗浏览器
-    //特点 只会在内存中打包,不回有任何输出
-    //启动指令:npx webpack-dev-server
-    devServer: {
-        static: path.resolve(__dirname, '../dist'),
-        //启动gzip压缩(使打包文件从服务器传到浏览器是经过压缩的,提高速度)
-        compress: true,
-        //端口号
-        port: 8080,
-        open: true,
-
-        //添加响应头
-        headers: {
-            'X-Access-Token': 'abc123'
-        }
-        //配置代理
-        proxy: {
-            '/api': 'http://localhost:9000'
-        },
-        //当我们的应用是个SPA(单页面应用),当路由到/some时,此时刷新页面可能会报错
-        historyApiFallback:true
-    }
-```
-
-# 优化开发环境
-
-## 优化打包构建速度
-
-### oneOf
-
-每个文件都会被rules中的所有loader匹配处理,使用oneOf则在oneOf中的loader只会匹配一个,提高构建速度.但是注意不能有两个配置处理同一类型的文件.
-
-```js
-//loader的配置
-        module: {
-            rules: [
-                {
-                    oneOf: [
-                        //处理图片资源
-                        {
-                            test: /\.(png|jpg|gif)$/,   //匹配哪些文件(此处是处理后缀名为png的文件)
-                            //这个type共有三种可选
-                            //1.asset/resource是将图片地址转为打包的图片在打包后目录中的url
-                            //2.asset/inline是将图片地址转为base64处理的地址
-                            //3.asset/resource用于导出资源的源代码,一般用于text
-                            type: 'asset/resource',
-                            generator: {
-                                filename: 'image/[contenthash].[ext]'   //定义打包后的图片路径,优先级高于上面output中assetModuleFilename
-                            }
-                        },
-                        //处理less样式资源
-                        {
-                            test: /\.less$/,  //打包样式资源
-                            //要使用多个loader做处理用use,使用单个loader就能处理的话用loader就行
-                            use: [
-                                //use数组中loader执行顺序:从右到左,从下到上 依次执行
-                                //创建style标签,将js中的样式资源插入进去,添加到header中生效
-                                'style-loader',
-                                //将css文件变成commonjs模块加载js中,里面内容是样式字符串
-                                'css-loader',
-                                //将less文件编译成css文件
-                                'less-loader'
-                            ]
-                        },
-                        {
-                            test: /\.css$/,  //打包样式资源
-                            use: [
-                                //use数组中loader执行顺序:从右到左,从下到上 依次执行
-                                //创建style标签,将js中的样式资源插入进去,添加到header中生效
-                                // 'style-loader',
-                                //取代style-loader 作用:提取js中css成单独的文件
-                                MiniCssExtractPlugin.loader,
-                                //将css文件打包变成commonjs模块加载js中,里面内容是样式字符串
-                                'css-loader'
-                            ],
-                        },
-                        {
-                            test: /\.png$/,   //匹配哪些文件(此处是处理后缀名为png的文件)
-                            type: 'asset/resource',
-                            generator: {
-                                filename: 'image/[contenthash][ext]'   //定义打包后的图片路径,优先级高于上面output中assetModuleFilename
-                            }
-                        },
-                        {
-                            test: /\.js$/,
-                            exclude: /node_modules/,
-                            use: {
-                                loader: 'babel-loader',
-                                options: {
-                                    presets: ['@babel/preset-env'],
-                                    plugins: [
-                                        [
-                                            '@babel/plugin-transform-runtime'
-                                        ]
-                                    ]
-                                }
-                            }
-                        }
-                    ]
-                }
-
-            ]
-        },
-```
-
-# tree shaking
-
-去除无用代码,即使引用了包但是没有使用也会自动去除.但是不能百分百的tree shaking
-
-前提:必须使用ES6模块化,开启production环境
-
-```js
-mode:'production',
-optimization: {
-        usedExports: true
-    },
-```
-
-## sideEffects
-
-有些引入的包虽然没使用但是有用,而有些不是,使用sideEffects可以告诉webpack哪些包是必要的不能tree shaking.
-
-在package.json中设置sideEffects,共有三个可选值
-
-- true 我的所有代码都是有用的,不能随意去除
-- false 我所有的包都是没有用的,那么一些引入的包,但是代码中并没有使用的话就会被去除(比如引入的css)
-- [] 可以使用一个数组定义哪些有用,不能删除(如 sideEffects:["*.css"] )
-
-# 模块热替换(HMR)与热加载
-
-## 模块热替换
-
-模块热替换会在应用程序运行过程中,替换,添加或删除模块,而**无需重新加载整个页面**.开启方式只需在devServer下配置hot:true即可.
-
-比如当更改css文件的某一个背景颜色时,不开启热替换的话需要刷新页面才能显示新的页面.但是如果开启了热替换的话则无需刷新页面直接自动更新.
-
-不过js文件即使开启了热替换也不能进行自动替换,仍会刷新界面才能展示新的效果.这时需要手动进行判断并配置
-
-比如input.js如下
-
-```js
-document.querySelector('#box').innerHTML = '<input type="text" value="input1"/>'
-```
-
-在入口文件中引入input.js,进行如下配置
-
-```js
-if (module.hot) {
-    module.hot.accept('./input.js', () => {
-
+button.addEventListener('click', () => {   			import(/*webpackChunkName:'math',webpackPreload:true*/'./math').then(({ add }) => {
+        console.log(add(10, 10));
     })
-}
+})
 ```
 
-这样如果在input.js中改变value的值的话,就能进行自动热替换了.vue中已经自动帮助我们做好了
+### 渐进式网络应用程序(PWA)
 
-## 热加载
+开发的web项目,一旦处于网络离线状况,就没法访问了,我们希望给项目提供离线体验.内部通过service workers实现
 
-文件更新时自动刷新服务和页面.新版的webpack-dev-server默认已经开启了热加载的功能,他对应的参数是devServer.liveReload,默认为true.注意:如果想要关掉他,要将liveReload设置为false的同时,也要关闭hot.
-
-# 模块解析(resolve)
-
-在resolve中设置alias可以设置别名.extensions可以在当前路径中存在文件名相同,扩展名不同的文件,按照extensions配置的顺序优先解析
-
-```js
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const path = require('path')
-module.exports = {
-    mode: 'development',
-    entry: './src/app.js',
-    
-    resolve: {
-        //设置路径别名
-        alias: {
-            '@': path.resolve(__dirname, './src')
-        },
-        //如果在当前路径中存在文件名相同,扩展名不同的文件
-        //按照下面配置的顺序优先解析
-        extensions:['.json','.js','.vue']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            }
-        ]
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: './index.html'
-        })
-    ],
-    devServer: {
-        hot: true
-    }
-}
+```powershell
+npm install workbox-webpack-plugin -d
 ```
 
-# externals
-
-`externals` 配置选项提供了「从输出的 bundle 中排除依赖」的方法。
-
-# 多页面
-
-## entry配置
-
-将部分不相关的js文件打包成一个文件
-
-```js
- entry: {
-        main: ['./src/js/app.js', './src/js/app2.js'],
-        another: './src/js/another.js'
-    },
 ```
-
-这样'./src/js/app.js', './src/js/app2.js'会打包到一个main.js中,而./src/js/another.js会在另一个中.
-
-## HtmlWebpackPlugin
-
-HtmlWebpackPlugin中可以配置当前页面可以载入哪些chunk.这样打包好的html中只引入了main.js打包文件
-
-```js
-plugins: [
-        new HtmlWebpackPlugin({
-            template: './index.html',
-            inject:'body',
-            //根据上面入口中的配置选择需要载入的文件
-            chunks:['main']
-        })
-    ],
-```
-
-## 多页面环境搭建
-
-主要是配置两个htmlwebpackplugin
-
-```js
-plugins: [
-        new HtmlWebpackPlugin({
-            template: './index.html',
-            inject: 'body',
-            filename: 'chanel1/index.html',
-            //根据上面入口中的配置选择需要载入的文件
-            chunks: ['main']
-        }),
-        new HtmlWebpackPlugin({
-            template: './index2.html',
-            inject: 'body',
-            filename: 'chanel2/index2.html',
-            //根据上面入口中的配置选择需要载入的文件
-            chunks: ['another']
-        }),
-    ],
-```
-
-# 渐进式网络应用程序(PWA)
-
-共两步
-
-## 添加Workbox
-
-npm install workbox-webpack-plugin -d	安装workbox
-
-```js
 const WorkboxPlugin = require('workbox-webpack-plugin')
 
 plugins: [
@@ -792,9 +607,7 @@ plugins: [
     ],
 ```
 
-## 在浏览器中注册Service-Worker
-
-在入口文件中
+这时还不能生效,需要在js代码中注册
 
 ```js
 if ('serviceWorker' in navigator) {
@@ -810,10 +623,4 @@ if ('serviceWorker' in navigator) {
     })
 }
 ```
-
-经过这两步之后,就能实现即使服务器挂掉,静态页面仍能显示.
-
-# dll
-
-
 

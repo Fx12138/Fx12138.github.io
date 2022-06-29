@@ -18,6 +18,16 @@ div>a{
 
 只对div中的**直接后代的所有a标签**起作用
 
+### 兄弟元素选择器
+
+```css
+h1+p{
+
+}
+```
+
+**要求h1和p必须有相同的父元素**
+
 ### 伪类选择器
 
 #### :focus伪类选择器
@@ -73,7 +83,7 @@ ul>li:not(:nth-child(3)){
 
   必须结合content来使用,content可以为空
 
-## 选择器的优先级
+### 选择器的优先级
 
 优先级的规则
 
@@ -85,30 +95,6 @@ ul>li:not(:nth-child(3)){
 ​	元素选择器和伪元素，优先级1
 ​	通配*，优先级0
 ​	继承的样式，没有优先级
-
-## 长度单位
-
-长度单位
-
-### 	像素px
-
-​		像素是我们在网页中使用的最多的一个单位，一个像素就相当于我们屏幕中的一个小点，我们的屏幕实际上就是由这些像素点构成的但是这些像素点，是不能直接看见。不同显示器一个像素的大小也不相同，显示效果越好越清晰，像素就越小，反之像素越大。
-
-### 	百分比%
-
-​		也可以将单位设置为一个百比的形式，这样浏览器将会根据其父元素的样式来计算该值。使用百分比的好处是，当父元素的属性值发生变化时，子元素也会按照比例发生改变在我们创建一个自适应的页面时，经常使用百分比作为单位
-
-### 	em
-
-​	em和百分比类似，它是相对于当前元素的字体大小来计算的
-
-​	1em = 1font-size
-
-### vw
-
-视口的宽度,100vm就是整个视口的宽度.
-
-vm和百分比的区别:vm永远都相对于整个视口,而百分比参照的会随父元素的变化而改变
 
 ## 垂直外边距的重叠
 
@@ -285,37 +271,6 @@ vm和百分比的区别:vm永远都相对于整个视口,而百分比参照的�
 * 内联元素可以设置水平方向的内边距；也可以设置**垂直方向的内边距**，但是**不会影响页面的布局**，即若内联元素下方有其他元素，上方的内联元素内边距过大时会覆盖下方的元素。而块元素则会将下面的元素往下面挤。
 * 内联元素可以设置边框，但是**垂直的边框不会影响页面的布局**。
 * 内联元素可以设置外边距；**垂直方向的外边距不会影响页面的布局**。水平方向上会影响并且不会产生外边距重叠
-
-## 轮廓阴影和圆角
-
-outline属性用来设置元素的轮廓线,用法和border一样,区别是轮廓线不会影响可见框的大小,不会影响其他元素的位置
-
-box-shadow用来设置元素的阴影效果,也不会影响页面的布局
-
-​	第一个值:水平偏移量,设置阴影的水平位置,正值向右移动,负值向左移动
-
-​	第二个值:垂直偏移量,设置阴影的垂直位置,正值向下移动,负值向上移动
-
-​	第三个值:阴影的模糊半径,值越大,阴影越模糊
-
-​	第四个值,阴影的颜色
-
-border-radius属性用来设置圆角,设置圆角的半径大小,第一个值为水平方向的半径,第二个值为垂直方向的半径
-
-## 多边形
-
-```css
-height: 100px;
-	width: 100px;
-	background-color: #00FFFF;
-	/* float: left; */
-	/* 圆形 */
-	/* clip-path: circle(50% at 100% 0); */
-	/* 椭圆 */
-	/* clip-path: ellipse(50% 20%); */
-	/* 多边形 括号里面是各个顶点的位置 */
-	clip-path: polygon(100% 0,100% 100%,0 100%);
-```
 
 ## 浮动
 
@@ -517,27 +472,11 @@ position可选值:
 
 ### sticky
 
-和relative相对定位和相似,不同的是粘滞定位可以在元素到达某个位置时将其固定
+和relative相对定位和相似,不同的是粘滞定位可以在元素到达某个位置时将其固定.设置该属性的元素并不脱离文档流，仍然保留元素原本在文档流中的位置。
 
-## 文字超出显示省略号
-
-white-space 设置网页如何处理文字的空白区域
-
-可选值:
-
-- normal 正常,即如果文字需要换行的时候,一个单词盛不下会换行
-- nowrap 不换行,一行中显示所有文字,会自动撑开div的宽度
-- pre 保留空白 即文字在html中是什么样式就显示什么样式,会保留空格和回车
-
-```css
-/*文字超出显示省略号*/
-.div1{
-	white-space:nowrap;
-	overflow:hidden;
-	text-flow:ellipsis;
-}
-
-```
+该元素并不脱离文档流，仍然保留元素原本在文档流中的位置。
+ 当元素在容器中被滚动超过指定的偏移值时，元素在容器内固定在指定位置。亦即如果你设置了top: 50px，那么在sticky元素到达距离相对定位的元素顶部50px的位置时固定，不再向上移动。
+ 元素固定的相对偏移是相对于离它最近的具有滚动框的祖先元素，如果祖先元素都不可以滚动，那么是相对于viewport来计算元素的偏移量
 
 ## 弹性盒flex
 
@@ -547,209 +486,54 @@ white-space 设置网页如何处理文字的空白区域
 
 ​	display:flex;
 
-flex-direction 指定容器中弹性元素的排列方式,可选值:
+- flex-direction 指定容器中弹性元素的排列方式,可选值:
+  - row 默认值,弹性元素在容器中水平排列(左向又),主轴自左向右
+  - row-reverse 水平排列,从右向左
+  - column 纵向排列(自上向下)
+  - column-reverse 纵向自下向上
 
-- row 默认值,弹性元素在容器中水平排列(左向又),主轴自左向右
-- row-reverse 水平排列,从右向左
-- column 纵向排列(自上向下)
-- column-reverse 纵向自下向上
+- flex-wrap 设置弹性元素在容器横向装不下的时候是否自动换行
+  - nowrap 默认值 元素不会自动换行,如果设置了不自动换行的话,那么如果盒子容器一行装不下里面的item,就会自动相同程度的缩小里面的每个item使他们在一行上显示.
+  - wrap 元素沿着辅轴方向自动换行
+  - wrap-reverse 元素沿着辅轴反方向换行
 
-flex-wrap 设置弹性元素在容器横向装不下的时候是否自动换行
+- flex-flow是flex-direction和flex-wrap的缩写
+- justify-content **主轴**上的元素如何排列,主轴空白空间的分布
+  - flex-start 元素沿着主轴的起边排列,即从左开始
+  - flex-end 元素沿着主轴终边排列
+  - center 元素居中排列
+  - space-around 容器中的空白分布到元素两侧(这样会使中间的元素空隙大一些,因为中间的元素空隙为左边元素分配到的加上右边元素分配到的)
+  - space-between 第一个元素靠起点，最后一个元素靠终点，余下元素平均分配空间.两边不再有空白
+  - space-evenly 空白分布到元素单侧
 
-- nowrap 默认值 元素不会自动换行
+- align-items 元素在辅轴上如何对齐(只适用于单行,在多行下没效果)
+  - stretch 默认值将元素的长度设置成相同的值,使其填满整个容器(每一行的高度相同,第一行和第二行不一定相同.需要把里面的item的高度值去掉才能生效)
+  - flex-start 元素不会拉伸,沿着辅轴的垂直方向起边对齐
+  - flex-end元素不会拉伸,沿着辅轴的垂直方向终边对齐
+  - center
 
-  如果设置了不自动换行的话,那么如果盒子容器一行装不下里面的item,就会自动相同程度的缩小里面的每个item使他们在一行上显示.
-
-- wrap 元素沿着辅轴方向自动换行
-
-- wrap-reverse 元素沿着辅轴反方向换行
-
-flex-flow是flex-direction和flex-wrap的缩写
-
-justify-content **主轴**上的元素如何排列,主轴空白空间的分布
-
-- flex-start 元素沿着主轴的起边排列,即从左开始
-- flex-end 元素沿着主轴终边排列
-- center 元素居中排列
-- space-around 容器中的空白分布到元素两侧(这样会使中间的元素空隙大一些,因为中间的元素空隙为左边元素分配到的加上右边元素分配到的)
-- space-between 第一个元素靠起点，最后一个元素靠终点，余下元素平均分配空间.两边不再有空白
-- space-evenly 空白分布到元素单侧
-
-align-items 元素在辅轴上如何对齐(只适用于单行,在多行下没效果)
-
-- stretch 默认值将元素的长度设置成相同的值,使其填满整个容器(每一行的高度相同,第一行和第二行不一定相同.需要把里面的item的高度值去掉才能生效)
-- flex-start 元素不会拉伸,沿着辅轴的垂直方向起边对齐
-- flex-end元素不会拉伸,沿着辅轴的垂直方向终边对齐
-- center
-
-align-content 辅轴空白空间的分布(属性和justify-content相同,适用于多行,,在单行下没效果)
-
-- center 所有元素都在中间,上下空白空间相等
+- align-content 辅轴空白空间的分布(属性和justify-content相同,适用于多行,,在单行下没效果)
+  - center 所有元素都在中间,上下空白空间相等
 
 ### 弹性元素
 
-flex-grow 当父元素有多余空间时,子元素如何伸展,父元素的剩余空间会按照比例进行分配,默认是0
+- flex-grow 当父元素有多余空间时,子元素如何伸展,父元素的剩余空间会按照比例进行分配,默认是0
 
 ​	例如父元素宽度为 300,两个子元素宽度分别为100,此时父元素剩余100的宽度,为子元素分别设置flex-grow:1;和flex-grow:2;则父元素剩余的100宽度会按1:2的比例分配给两个子元素,使两个子元素盛满整个父元素
 
-flex-shrink 当父元素的空间不足以容纳所有的子元素时,如何对子元素进行收缩
+- flex-shrink 当父元素的空间不足以容纳所有的子元素时,如何对子元素进行收缩
 
-flex-basis 设置元素在主轴上的长度,优先级大于width,低于max-width
+- flex-basis 设置元素在主轴上的长度,优先级大于width,低于max-width
 
-flex 分配**剩余空间**,用flex表示占多少份数  前三个属性的缩写,顺序:增长 缩减 基础.
+- flex 分配**剩余空间**,用flex表示占多少份数  前三个属性的缩写,顺序:增长 缩减 基础 1 1 auto
 
-align-self 用来覆盖当前弹性元素上的align-items,即不再受容器中的align-items属性约束,使用自己的设置的在辅轴上的对齐方式
+- align-self 用来覆盖当前弹性元素上的align-items,即不再受容器中的align-items属性约束,使用自己的设置的在辅轴上的对齐方式
 
-order 指定弹性元素的排列顺序,传入整数数值,数值越小越靠前(默认是0)
-
-## css动画
-
-### 平移
-
-```css
-transform: translate(-100%,100%,100px);/*分别为x轴,y轴和z轴*/
-```
-
-### 缩放
-
-```css
-transform: scaleX(2);/*x轴放大为原来的2倍*/
-```
-
-### 旋转
-
-```css
-transform: rotateX(45deg);/*以x轴为轴旋转45°*/
-```
-
-### 倾斜
-
-```css
-transform: skewX(45deg);/*以x轴为轴倾斜45°,变成平行四边形*/
-```
-
-## css面试布局
-
-### 圣杯布局和双飞翼布局
-
-圣杯布局和双飞翼布局达到的效果基本相同，都是侧边两栏宽度固定，中间栏宽度自适应。 主要的不同之处就是在解决中间部分被挡住的问题时，采取的解决办法不一样，**圣杯布局是在父元素上设置了padding-left和padding-right，在给左右两边的内容设置position为relative，通过左移和右移来使得左右两边的内容得以很好的展现，而双飞翼则是在center这个div中再加了一个div来放置内容，在给这个新的div设置margin-left和margin-right** 。
-
-### 圣杯布局
-
-```css
-
-```
-
-
+- order 指定弹性元素的排列顺序,传入整数数值,数值越小越靠前(默认是0)
 
 # css权威指南
 
-## 选择器
-
-### 子选择器
-
-```css
-h1>p{
-
-}
-```
-
-选择h1的子元素中所有p元素,注意,**只是子元素,后代元素不受影响**
-
-### 兄弟元素选择器
-
-```css
-h1+p{
-
-}
-```
-
-**要求h1和p必须有相同的父元素**
-
-### 伪类选择器
-
-```css
-a:link{
-
-}
-a:visited{
-
-}
-```
-
-:link定义未访问过的锚点,而:visited定义已访问的锚点.他们是静态的,第一次显示后,他们一般不会再改变文档的样式.
-
-#### 动态伪类
-
-```css
-:focus{
-}
-:hover{
-}
-:active{
-}
-```
-
-:focus表示拥有输入焦点的元素.
-
-:hover鼠标停留的元素.
-
-:active被用户输入激活的元素,比如用户点击超链接.
-
-#### 选择第一个子元素
-
-first-child,来选择元素的第一个子元素.
-
-### 伪元素选择器
-
-#### 设置首字母样式
-
-```css
-p:first-letter{
-}
-```
-
-#### 设置第一行的样式
-
-```css
-p:first-line{
-}
-```
-
-#### 设置之前和之后元素的样式
-
-```css
-p:before{
-
-}
-p:after{
-
-}
-```
-
 ## 结构和层叠
-
-### 特殊性
-
-特殊性值表述分为4个部分,如:0,0,0,0.一个选择器的具体特殊性如下确定:
-
-- 内联样式,加1,0,0,0
-
-- 对于选择器中给定的各个ID属性值,加0,1,0,0
-- 类属性值,属性选择或伪类,加0,0,1,0
-- 各个元素和伪元素,加0,0,0,1
-- 通配符,0
-
-### 重要性
-
-在这些声明的结束分号之前插入!important来标志
-
-```css
-p.dart{
-	color:yellow !important;
-    background-color: #AAAAAA;
-}
-```
 
 ### 继承
 
@@ -812,42 +596,6 @@ h1#page-title{
 
 正是由于按这种顺序排序,才有了通常推荐的链接样式顺序,一般建议**按link-visited-hover-active(LVHA)的顺序声明链接样式**.因为这些选择器的特殊性都是一样的,都是0,0,1,0.因此与元素匹配的最后一个选择器才会胜出.正在"点击"的未访问链接可以与其中的3个规则匹配:link,hover,active.所以在这三个规则当中最后声明的一个将胜出.
 
-## 单位
-
-### 用RGB指定颜色
-
-通过组合不同的红色绿色和蓝色分量来创造颜色.有四种方式
-
-#### 函数式RGB颜色
-
-```css
-rgb(100%,100%,100%) /*黑色*/
-rgb(0%,0%,0%)	/*白色*/
-
-rgb(255,255,255)	/*黑色*/
-rgb(0,0,0)	/*白色*/
-```
-
-#### 十六进制RGB颜色
-
-#### web安全颜色
-
-![web安全颜色](image-20210802140351091.png)
-
-### 长度单位
-
-#### 相对长度单位
-
-em ex px
-
-##### em和ex
-
-1个em定义为一种给定字体的font-size值,如果一个元素的font-size为14像素,那么1em就等于14像素.
-
-另一方面,在设置字体大小时,em的值会相对于父元素的字体大小改变.
-
-与此不同,ex是指所用字体中小写x的高度.
-
 ## 水平auto
 
 要求七个值之和等于包含块的width.
@@ -874,29 +622,11 @@ em ex px
 
 如果一个块元素的margin-top或margin-bottom设置为auto,会自动计算为0.
 
-## 内边距和外边距
-
-#### 百分数和外边距
-
-外边距可以设置为百分数,百分数是相对于**父元素的width**计算的.
-
-如果外边距指定少于四个值,规则如下:
-
-- 如果缺少左外边距的值,则使用右外边距的值.
-- 如果缺少下外边距的值,则使用上外边距的值.
-- 如果缺少右外边距的值,则使用上外边距的值.
-
-总结:如果指定了三个值,那么第四个值(左外边距)会取第二个值(右外边距);如果给定了两个值,那么第四个值(左外边距)会取第二个值(右外边距),第三个值(下外边距)会取第一个值(上外边距);如果给定了一个值,那么其他三个值都取这个值.
-
-#### 百分数和内边距
-
-内边距可以设置为百分数,百分数是相对于**父元素的width**计算的.
-
 ## 颜色
 
 默认下,元素的前景色(如color:red)会应用到边框.比如设置了边框的样式为solid,但是没有设置颜色,这个时候边框的默认宽度为2px,颜色为元素的前景色.
 
-背景色background-color不能继承,其默认值是transparent.文档中有些元素没有自己的背景.那么透过所有的这些元素都能看到父元素的北京.这些元素并没有继承背景,只是能透过他们看到北京而已.
+背景色background-color不能继承,其默认值是transparent.文档中有些元素没有自己的背景.那么透过所有的这些元素都能看到父元素的背景.这些元素并没有继承背景,只是能透过他们看到背景而已.
 
 ### 背景图像
 
@@ -955,4 +685,426 @@ fixed,原图像不会随文档滚动,其次原图像的放置由可视区的大�
 ## display:none、visibility:hidden 和 opacity:0 之间的区别？
 
 <img src="D:\devApp\myblog\source\_posts\css\image-20220607155418699.png" alt="image-20220607155418699" style="zoom: 50%;" />
+
+# 本文溢出
+
+## 单行文本
+
+```css
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
+```
+
+## 多行文本
+
+```css
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 3;	//最多三行
+overflow: hidden;
+```
+
+# 使用百分比时相对于谁
+
+## padding和margin
+
+无论设置元素的横向或者纵向的padding和margin,当使用百分比时,都是相对于`父元素的width值`。
+
+实例:实现一个div 垂直水平居中，并完成 div 高度永远是宽度的一半
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+
+      .outer {
+        width: 400px;
+        height: 100%;
+        background: blue;
+        margin: 0 auto;
+
+        display: flex;
+        align-items: center;
+      }
+
+      .inner {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 50%;
+        background: red;
+      }
+
+      .box {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      <div class="inner">
+        <div class="box">hello</div>
+      </div>
+    </div>
+  </body>
+</html>
+
+```
+
+在inner中设置了高度为0,即内容区的高度为0,而设置了padding-bottom: 50%;则元素被padding撑起,高度始终为父元素的width的一半
+
+## 父相子绝的子的宽高
+
+相对于父元素的(content + padding)值, 注意不含border
+
+延伸：如果子元素不是绝对定位，那宽高设为百分比是相对于父元素的宽高，标准盒模型下是content, IE盒模型是content+padding+border。
+
+# 'display'、'position'和'float'的相互关系？
+
+```
+（1）首先我们判断display属性是否为none，如果为none，则position和float属性的值不影响元素最后的表现。
+（2）然后判断position的值是否为absolute或者fixed，如果是，则float属性失效，并且display的值应该被设置为table或者block，具体转换需要看初始转换值。
+（3）如果position的值不为absolute或者fixed，则判断float属性的值是否为none，如果不是，则display的值则按上面的规则转换。注意，如果position的值为relative并且float属性的值存在，则relative相对
+于浮动后的最终位置定位。
+（4）如果float的值为none，则判断元素是否为根元素，如果是根元素则display属性按照上面的规则转换，如果不是，则保持指定的display属性值不变。
+总的来说，可以把它看作是一个类似优先级的机制，"position:absolute"和"position:fixed"优先级最高，有它存在的时候，浮动不起作用，'display'的值也需要调整；其次，元素的'float'特性的值不是"none"的时候或者它是根元素的时候，调整'display'的值；最后，非根元素，并且非浮动元素，并且非绝对定位的元素，'display'特性值同设置值。
+```
+
+# 水平垂直居中
+
+## 定宽高
+
+### absolute+负margin
+
+### absolute+margin:auto
+
+### absolute + calc
+
+这种方式和第一种原理相同
+
+```css
+/* 定位代码 */
+.wp {
+    position: relative;
+}
+.box {
+    position: absolute;;
+    top: calc(50% - 50px);
+    left: calc(50% - 50px);
+}
+```
+
+## 不定宽高
+
+### absolute + transform
+
+### flex
+
+# 两栏布局
+
+下面的布局都相对于这个body
+
+```html
+  <body>
+    <div class="aside"></div>
+    <div class="main"></div>
+  </body>
+```
+
+(1)左float:left;右边margin-left:310px;
+
+(2) 左float:left;右BFC
+
+```css
+div {
+  height: 500px;
+}
+
+.aside {
+  width: 300px;
+  float: left;
+  background: yellow;
+}
+
+.main {
+  overflow: hidden;
+  background: aqua;
+}
+```
+
+(3) 父flex布局,左宽度固定,右flex:1
+
+(4) 左absolute,右margin-left
+
+# 三栏布局
+
+(1) 父relative,左absolute且left0,右absolute且right0,中间margin-left和margin-right
+
+(2)左右float,中间margin-left和margin-right
+
+(3) 圣杯布局
+
+dom结构
+
+```html
+<div id="header"></div>
+<div id="container">
+  <div id="center" class="column"></div>
+  <div id="left" class="column"></div>
+  <div id="right" class="column"></div>
+</div>
+<div id="footer"></div>
+```
+
+首先header和footer的width都设置为100%,并且footer设置clear:both
+
+container设置一个高度,无需设置宽度,overflow:hidden开启BFC.添加padding:0 200px为左右两栏预留空间
+
+left向左浮动,margin-left:-100%,前面说过margin相对于父元素的宽度,此时的left在container的内容区的最左边,紧邻container的左padding,此时设置relative,left:-200px从而将left移到左边的预留padding部分
+
+right向左浮动,margin-right:-200px,这样right就放到了右padding的预留区
+
+这时候还需要给页面设置一个最小宽度,左边栏+右边栏+左边栏relative的left宽度,即200+200+200,min-width:600px;
+
+整体代码如下
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>圣杯布局</title>
+  <style>
+    body {
+      min-width: 600px;
+    }
+
+    h4 {
+      margin: 0px;
+      padding: 0px;
+    }
+
+    header {
+      width: 100%;
+      height: 100px;
+      background-color: bisque;
+    }
+
+    .container {
+      height: 200px;
+      /* overflow: hidden; */
+      padding: 0 200px;
+    }
+
+    .middle {
+      width: 100%;
+      height: 200px;
+      float: left;
+      background-color: azure;
+    }
+
+    .left {
+      width: 200px;
+      height: 200px;
+      float: left;
+      margin-left: -100%;
+      position: relative;
+      right: 200px;
+      background-color: pink;
+    }
+
+    .right {
+      width: 200px;
+      height: 200px;
+      float: left;
+      margin-right: -200px;
+      background-color: black;
+    }
+
+    footer {
+      width: 100%;
+      height: 100px;
+      clear: both;
+      background-color: darkslategray;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h4>Header内容区</h4>
+  </header>
+  <div class="container">
+    <div class="middle">
+      <h4>中间弹性区</h4>
+    </div>
+    <div class="left">
+      <h4>左边栏</h4>
+    </div>
+    <div class="right">
+      <h4>右边栏</h4>
+    </div>
+  </div>
+  <footer>
+    <h4>Footer内容区</h4>
+  </footer>
+</body>
+
+</html>
+```
+
+(4)双飞翼布局
+
+dom结构
+
+```html
+<body>
+  <!-- 双飞翼布局 -->
+  <div id="header"></div>
+  <div id="container" class="column">
+    <div id="center">内容区</div>
+  </div>
+  <div id="left" class="column"></div>
+  <div id="right" class="column"></div>
+  <div id="footer"></div>
+</body>
+```
+
+
+
+和圣杯布局主要区别在于container只包裹center区,并且为center添加margin为左右侧边栏预留空间
+
+将container left 和right均设置为左浮动
+
+container宽度设置为100%,center设置一个高度,并不用设置宽度因为会自动撑满整个内容区,并设置margin为左右侧边栏预留空间
+
+left设置margin-left:-100%,和圣杯布局不同,因为这里的left的父元素是body,因此直接到达目标位置
+
+right设置margin-left:-200px;直接到达目标位置
+
+整体代码为
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>双飞翼布局</title>
+  <style>
+    body {
+      min-width: 500px;
+    }
+
+    header {
+      width: 100%;
+      height: 100px;
+      background-color: bisque;
+    }
+
+    .column {
+      float: left;
+    }
+
+    #container {
+      width: 100%;
+    }
+
+    #center {
+      height: 400px;
+      margin-left: 200px;
+      margin-right: 200px;
+      background-color: aquamarine;
+    }
+
+    #left {
+      width: 200px;
+      height: 400px;
+      margin-left: -100%;
+      background-color: bisque;
+    }
+
+    #right {
+      width: 200px;
+      height: 400px;
+      margin-left: -200px;
+      background-color: burlywood;
+    }
+
+    footer {
+      width: 100%;
+      height: 100px;
+      clear: both;
+      background-color: darkslategray;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 双飞翼布局 -->
+  <div id="header"></div>
+  <div id="container" class="column">
+    <div id="center">内容区</div>
+  </div>
+  <div id="left" class="column"></div>
+  <div id="right" class="column"></div>
+  <div id="footer"></div>
+</body>
+
+</html>
+```
+
+# 不正常的问题
+
+(1)两个display：inline-block元素放到一起会产生一段空白
+
+原因:元素被当成行内元素排版的时候，元素之间的空白符（空格、回车换行等）都会被浏览器处理，根据CSS中white-space属性的处理方式（默认是normal，合并多余空白），原来`HTML代码中的回车换行被转成一个空白符`，在字体不为0的情况下，空白符占据一定宽度，所以inline-block的元素之间就出现了空隙。
+
+解决方法:
+
+- 将子元素标签的结束符和下一个标签的开始符写在同一行或把所有子标签写在同一行
+
+- 父元素中设置font-size: 0，在子元素上重置正确的font-size
+- 为子元素设置float:left
+
+(2)扇形
+
+```css
+/* 首先把一个盒子宽高置为0 */
+width: 0px;
+/* height: 0px; */
+/* 全部利用边框的特性 */
+border: 40px solid pink;
+/* 然后把其他的边框透明化，这不有了吗 */
+border-right-color: transparent;
+border-left-color: transparent;
+border-top-color: transparent;
+/* 这个之前是一个等腰三角形 */
+ border-radius: 50%;
+```
 

@@ -747,4 +747,150 @@ person.sayName() ;  //输出  "xl"
 
 JSONP通俗点说就是：利用script的src去发送请求，将一个方法名`callback`传给后端，后端拿到这个方法名，将所需数据，通过字符串拼接成新的字符串`callback(所需数据)`，并发送到前端，前端接收到这个字符串之后，就会自动执行方法`callback(所需数据)`。
 
+示例
+
+前端代码
+
+```js
+    const jsonp = (url, params, cbName) => {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script')
+            //动态创建callback函数,获取数据成功后要删除script标签
+            window[cbName] = (data) => {
+                resolve(data)
+                document.body.removeChild(script)
+            }
+            params = { ...params, callback: cbName }
+            const arr = Object.keys(params).map(key => `${key}=${params[key]}`)
+            //拼接后的路径地址类似于:url?name='xx'&age=xx&callback='xx'
+            script.src = `${url}?${arr.join('&')}`
+            document.body.appendChild(script)
+        })
+    }
+
+    jsonp('http://127.0.0.1:8000', { name: '林三心', age: 23 }, 'callback')
+        .then(data => {
+        	console.log(data) // 林三心今年23岁啦！！！
+    	})
+```
+
+后端代码
+
+```js
+const port = 8000;
+
+http.createServer(function (req, res) {
+    const { query } = urllib.parse(req.url, true);
+    if (query && query.callback) {
+        const { name, age, callback } = query
+        const person = `${name}今年${age}岁啦！！！`
+        const str = `${callback}(${JSON.stringify(person)})` // 拼成callback(data)
+        res.end(str);
+    } else {
+        res.end(JSON.stringify('没东西啊你'));
+    }
+}).listen(port, function () {
+    console.log('server is listening on port ' + port);
+})
+```
+
+
+
 缺点:JSONP的缺点就是，需要前后端配合，并且只支持`get请求方法`
+
+## CORS跨域资源共享
+
+向服务器发送跨域请求时，浏览器自动针对普通请求和非普通请求进行区别对待，在请求头中加个Origin字段告诉服务器这个请求的源，通过服务器返回的响应头中Access-Control-Allow-Origin字段的值是不是请求中的Origin，来看服务器让不让咱请求到这资源。
+
+### 简单请求
+
+1. 请求方法是以下三种方法之一：HEAD，GET，POST
+2. HTTP的头信息不超出以下几种字段：Accept，Accept-Language，Content-Language，Last-Event-ID
+3. Content-Type只限于三个值：application/x-www-form-urlencoded、multipart/form-data、text/plain
+
+对于简单的跨域请求，浏览器自动的发出CORS请求，在请求头中，增加一个Origin字段，请求头RequestHeaders中有一个Origin字段，这个字段表示本次请求来自哪个源（协议 + 域名 + 端口）.如果请求头中的Origin字段是服务器允许的来源，那么服务器会在请求的返回头中添加Access-Control-Allow-Origin字段，并赋值为请求头中的Origin，表示允许该源请求资源。
+
+### 非简单请求
+
+当浏览器发送的请求为非简单请求时，浏览器必须首先使用 OPTIONS 方法向服务器发起一个预检请求（Rreflighted Request），从而获知服务端是否允许该跨域请求。预检请求的使用，可以避免跨域请求对服务器的用户数据产生未预期的影响。
+
+对于预检请求，响应头中有一个必须的字段：Access-Control-Request-Method，表示请求允许使用的方法，如果没有这个字段，预检请求无法通过
+
+服务器一旦通过了预检请求，以后每次浏览器正常的CORS请求都会跟简单请求一样，妥了，救活，万岁！
+
+### withCredentials
+
+默认情况下跨域请求不提供凭据（Cookie,HTTP认证以及SSL证明等），但是通过将xhr的withCredentials属性设置为true，就可以指定某个请求发送凭据。如果服务器接受带凭据的请求，会在响应头中用Access-Control-Allow-Credentials：true来响应。
+
+对于附带身份凭证的请求，服务器不得设置 Access-Control-Allow-Origin 的值为“*”，值必须为Origin 首部字段所指明的域名即允许附带凭证的源
+
+## node接口代理
+
+还是回到**同源策略**，同源策略它只是浏览器的一个策略而已，它是限制不到后端的，也就是`前端-后端`会被同源策略限制，但是`后端-后端`则不会被限制，所以可以通过Node接口代理，先访问已设置Cors的后端1，再让后端1去访问后端2获取数据到后端1，后端1再把数据传到前端
+
+<img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6acf4b23d2764688bef3919e6335fa70~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?" alt="截屏2021-10-01 下午8.46.28.png" style="zoom: 67%;" />
+
+## nginx反向代理
+
+提到代理，肯定要说一下这两个的区别。
+
+举个正向代理的例子：我打球累了走不动了，找看球的小朋友帮我去旁边的商店买瓶水。商店老板是不知道到底是谁需要喝水的，隐藏了客户端。当然，小朋友可以告诉老板就是那个打球像蔡徐坤的人要喝水。还有，VPN 就是正向代理。
+
+反向代理的例子：我打球累了，找看球的小朋友要瓶水喝（当然我肯定会给钱的：D）。我不需要知道小朋友的水是从旁边的商店还是两公里外的超市买的。隐藏了服务端。还有，我们连好了 VPN 访问谷歌的时候，浏览的那些页面，我们是不会知道具体是哪台服务器的资源。
+
+通过Nginx配置一个代理服务器域名与domain1相同，端口不同）做跳板机，反向代理访问domain2接口，并且可以顺便修改cookie中domain信息，方便当前域cookie写入，实现跨域访问。
+
+示例
+
+```js
+#proxy服务器
+server {
+    listen       81;
+    server_name  www.domain1.com;
+
+    location / {
+        proxy_pass   http://www.domain2.com:8080;  #反向代理
+        proxy_cookie_domain www.domain2.com www.domain1.com; #修改cookie里域名
+        index  index.html index.htm;
+
+        # 当用webpack-dev-server等中间件代理接口访问nignx时，此时无浏览器参与，故没有同源限制，下面的跨域配置可不启用
+        add_header Access-Control-Allow-Origin http://www.domain1.com;  #当前端只跨域不带cookie时，可为*
+        add_header Access-Control-Allow-Credentials true;
+    }
+}
+```
+
+### document.domain + iframe
+
+场景：`a.sanxin.com/index.html` 与 `b.sanxin.com/index.html`之间的通信
+
+其实上面这两个正常情况下是无法通信的，因为他们的`域名`不相同，属于跨域通信
+
+那怎么办呢？其实他们有一个共同点，那就是他们的二级域名都是`sanxin.com`，这使得他们可以通过`document.domain && iframe`的方式来通信
+
+<img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dc7f42329ca542418c3bdddda9ed431f~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?" alt="截屏2021-10-01 下午9.58.55.png" style="zoom:80%;" />
+
+```js
+// http://127.0.0.1:5500/index.html
+
+<body>
+    <iframe src="http://127.0.0.1:5555/index.html" id="frame"></iframe>
+</body>
+<script>
+    document.domain = '127.0.0.1'
+    document.getElementById('frame').onload = function () {
+        console.log(this.contentWindow.data) // 林三心今年23岁啦！！！
+    }
+</script>
+```
+
+```js
+// http://127.0.0.1:5555/index.html
+
+ <script>
+
+        document.domain = '127.0.0.1'
+        var data = '林三心今年23岁啦！！！';
+</script>
+```
+

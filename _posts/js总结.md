@@ -888,7 +888,6 @@ server {
 // http://127.0.0.1:5555/index.html
 
  <script>
-
         document.domain = '127.0.0.1'
         var data = '林三心今年23岁啦！！！';
 </script>

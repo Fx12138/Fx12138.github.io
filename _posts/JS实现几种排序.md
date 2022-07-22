@@ -77,3 +77,27 @@ tags: 算法
 时间复杂度：最好O(n)，最坏O(n²)，平均O(n²)
 使用场景：数据量小于1000
 稳定性：稳定
+
+# 选择排序
+
+首先在元素中找到最小的元素，把他放在最前边，然后再从剩下的元素中寻找最小的元素，依次放在最左边...
+
+```js
+let nums = [-14, -10, -8, -6, -3, 3, 6, 8]
+function chooseSort(nums){
+  for(let i =0;i<nums.length;i++){
+    let minIndex = i
+    for(let j = i;j<nums.length;j++){
+      if(nums[j]<nums[minIndex]){
+        minIndex = j
+      }
+    }
+    let temp = nums[i]
+    nums[i] = nums[minIndex]
+    nums[minIndex] = temp
+  }
+  return nums
+}
+   console.log(chooseSort(nums))
+```
+

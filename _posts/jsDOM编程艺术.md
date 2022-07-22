@@ -23,16 +23,6 @@ object.getAttribute()
 
 object.setAttribute()
 
-# 事件处理函数
-
-onclick
-
-window.onload,在页面加载时执行
-
-​	```window.onload = 函数名;```
-
-​	文档将被加载到一个浏览器窗口里，document对象又是 window对象的一个属性。当window对象触发onload事件时，document对象已经存在。
-
 # 文本节点
 
 ## nodeValue属性

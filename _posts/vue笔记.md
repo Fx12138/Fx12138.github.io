@@ -123,10 +123,6 @@ get什么时候被调用:
 
 组件的本质是一个名为VueComponent的构造函数,只需要写标签语法使用组件(或调用let a = Vue.extend({}),然后let b = new a(),这个b就是组件实例对象),vue解析时会帮我们创建这个组件的实例对象,即vue帮我们执行: new VueComponent(options),每一个组件都是一个新的VueComponent
 
-### this指向
-
-组件中的this指向是VueComponent实例
-
 ### 内置关系
 
 VueComponent.prototype._ _ _proto_ __ === Vue.prototype
@@ -439,17 +435,6 @@ methods:{
   ​	比如父组件传递的某一个数值在后代组件中没有使用props进行接收,那么那就会保存在this.$attrs中
 
   $listeners可以从孙子组件发送事件到父子组件中
-
-  
-
-## $nextTick
-
-当在一个方法中对vue的数据进行更改时,一个数据更改后,vue并不会立即去解析模板,而是把这个方法中的所有逻辑执行完后再解析渲染
-
-this.$nextTick(函数),会在dom节点更新之后再去执行回调.
-
-用法:当数据改变后,要基于新的dom进行的操作
-
 
 
 ## 插槽
@@ -1435,7 +1420,6 @@ const store = new Vuex.Store({
   actions:{
     updateCounter(context){
       setTimeout(()=>{
-        //这里进行对数据的更改,但是一定要通过提交mutation的方式,即commit
         context.commit('increment')
       },4000)
     }
@@ -1724,117 +1708,6 @@ var vm = new Vue({
     {{ todo.name }}
   </li>
 </template>
-```
-
-## 事件修饰符
-
-```js
-<!-- 阻止单击事件继续传播 -->
-<a @click.stop="doThis"></a>
-
-<!-- 提交事件不再重载页面 -->
-<form @submit.prevent="onSubmit"></form>
-
-<!-- 修饰符可以串联 -->
-<a @click.stop.prevent="doThat"></a>
-
-<!-- 只有修饰符 -->
-<form @submit.prevent></form>
-
-<!-- 添加事件监听器时使用事件捕获模式 -->
-<!-- 即内部元素触发的事件先在此处理，然后才交由内部元素进行处理 -->
-<div @click.capture="doThis">...</div>
-
-<!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
-<!-- 即事件不是从内部元素触发的 -->
-<div @click.self="doThat">...</div>
-```
-
-## 钩子函数(生命周期)
-
-`beforeCreate()` 在实例创建之间执行，数据未加载状态
-
-`created()` 在实例创建、数据加载后，能初始化数据，`dom`渲染之前执行
-
-`beforeMount()` 虚拟`dom`已创建完成，在数据渲染前最后一次更改数据
-
-`mounted()` 页面、数据渲染完成，真实`dom`挂载完成
-
-`beforeUpadate()` 重新渲染之前触发
-
-`updated()` 数据已经更改完成，`dom` 也重新 `render` 完成,更改数据会陷入死循环
-
-`beforeDestory()` 和 `destoryed()` 前者是销毁前执行（实例仍然完全可用），后者则是销毁后执行
-
-## 子组件向父组件发射
-
-```html
-<div id="blog-posts-events-demo">
-  <div :style="{ fontSize: postFontSize + 'em' }">
-    <blog-post
-      v-for="post in posts"
-      :key="post.id"
-      :title="post.title"
-      @enlarge-text="postFontSize += 0.1"
-    ></blog-post>
-  </div>
-</div>
-```
-
-```js
-const app = {
-  data() {
-    return {
-      posts: [
-        /* ... */
-      ],
-      postFontSize: 1
-    }
-  }
-}
-app.component('blog-post', {
-  props: ['title'],
-  template: `
-    <div class="blog-post">
-      <h4>{{ title }}</h4>
-      <button @click="$emit('enlargeText')">
-        Enlarge text
-      </button>
-    </div>
-  `
-})
-```
-
-### 使用事件抛出一个值
-
-有的时候用一个事件来抛出一个特定的值是非常有用的。例如我们可能想让 `<blog-post>` 组件决定它的文本要放大多少。这时可以使用 `$emit` 的第二个参数来提供这个值：
-
-```html
-<button @click="$emit('enlargeText', 0.1)">
-  Enlarge text
-</button>
-```
-
-然后当在父级组件监听这个事件的时候，我们可以通过 `$event` 访问到被抛出的这个值：
-
-```html
-<blog-post ... @enlarge-text="postFontSize += $event"></blog-post>
-```
-
-或者，如果这个事件处理函数是一个方法：
-
-```html
-<blog-post ... @enlarge-text="onEnlargeText"></blog-post>
-```
-
-那么这个值将会作为第一个参数传入这个方法：
-
-```js
-methods: {
-  onEnlargeText(enlargeAmount) {
-    this.postFontSize += enlargeAmount
-  }
-}
 ```
 
 ## 插槽
